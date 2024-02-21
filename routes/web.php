@@ -4,8 +4,10 @@
     use Illuminate\App\Http\Controllers\SeccionController;
     use Illuminate\App\Http\Controllers\VendedorController;
     use Illuminate\App\Http\Controllers\FrontController;
+    use Illuminate\App\Http\Controllers\ProductoController;
 
     Route::get('/', 'FrontController@index')->name('front.home');
+    Route::get('/productos', 'ProductoController@index')->name('front.productos');
 
     Auth::routes();
 
@@ -20,4 +22,12 @@
     Route::group(['middleware' => ['auth', 'isAdmin']], function() {
         Route::get('admin', 'SeccionController@index')->name('admin.index');
     });
+
+    Route::group(['middleware' => 'isCarrito'], function () {
+        Route::get('cart', 'CarritoController@index')->name('cart.index');
+        Route::get('add-to-cart/{id}', 'CarritoController@addToCart')->name('cart.addToCart');
+        Route::patch('update-cart', 'CarritoController@update')->name('cart.update');
+        Route::delete('remove-cart', 'CarritoController@remove')->name('cart.remove');
+    });
+
 
