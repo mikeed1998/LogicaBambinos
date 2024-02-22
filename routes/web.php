@@ -32,6 +32,7 @@
         Route::get('add-to-cart/{id}', 'CarritoController@addToCart')->name('cart.addToCart');
         Route::patch('update-cart', 'CarritoController@update')->name('cart.update');
         Route::delete('remove-cart', 'CarritoController@remove')->name('cart.remove');
+        Route::delete('cart/clear', 'CarritoController@clearCart')->name('cart.clear');
         Route::get('datos-envio', 'CarritoController@datosEnvio')->name('cart.datosEnvio');
     });
 

@@ -64,7 +64,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{ route('user.home') }}">
                                             My Profile
                                         </a>
                                     </li>

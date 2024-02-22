@@ -15,48 +15,48 @@ class CarritoController extends Controller
 
     // Cambia el método addToCart en ProductsController
     public function addToCart($id)
-{
-    $product = Producto::findOrFail($id);
+    {
+        $product = Producto::findOrFail($id);
 
-    $cart = session()->get('cart', []);
+        $cart = session()->get('cart', []);
 
-    if (isset($cart[$id])) {
-        $cart[$id]['quantity']++;
-    } else {
-        $cart[$id] = [
-            "product_name" => $product->nombre,
-            "photo" => $product->portada,
-            "price" => $product->precio,
-            "quantity" => 1
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                "product_name" => $product->nombre,
+                "photo" => $product->portada,
+                "price" => $product->precio,
+                "quantity" => 1
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        // Recalcular el precio y la cantidad antes de enviar la respuesta
+        $subtotal = $cart[$id]["price"] * $cart[$id]["quantity"];
+
+        // Calcular el total sumando los subtotales de todos los elementos en el carrito
+        $total = 0;
+        foreach ($cart as $item) {
+            $total += $item["price"] * $item["quantity"];
+        }
+
+        // Actualizar el total en la sesión
+        session()->put('cartTotal', $total);
+
+        $totalUnits = array_sum(array_column($cart, 'quantity'));
+
+        $response = [
+            'success' => true,
+            'message' => 'Producto added to cart successfully!',
+            'cart_count' => $totalUnits,
+            'total_units' => $totalUnits,
+            'total' => $total,
         ];
+
+        return response()->json($response);
     }
-
-    session()->put('cart', $cart);
-
-    // Recalcular el precio y la cantidad antes de enviar la respuesta
-    $subtotal = $cart[$id]["price"] * $cart[$id]["quantity"];
-
-    // Calcular el total sumando los subtotales de todos los elementos en el carrito
-    $total = 0;
-    foreach ($cart as $item) {
-        $total += $item["price"] * $item["quantity"];
-    }
-
-    // Actualizar el total en la sesión
-    session()->put('cartTotal', $total);
-
-    $totalUnits = array_sum(array_column($cart, 'quantity'));
-
-    $response = [
-        'success' => true,
-        'message' => 'Producto added to cart successfully!',
-        'cart_count' => $totalUnits,
-        'total_units' => $totalUnits,
-        'total' => $total,
-    ];
-
-    return response()->json($response);
-}
 
 
 
@@ -123,6 +123,15 @@ class CarritoController extends Controller
             return response()->json($response);
         }
     }
+
+    public function clearCart()
+    {
+        session()->forget('cart');
+        session()->forget('cartTotal'); // Opcional, si también mantienes un total en la sesión.
+
+        return response()->json(['success' => true, 'message' => 'Carrito vaciado exitosamente!']);
+    }
+
 
     public function datosEnvio() {
         $cart = session()->get('cart');

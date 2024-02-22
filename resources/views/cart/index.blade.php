@@ -62,7 +62,7 @@
 
                             </div>
                             <div class="col-4">
-                                <a href="#/" class="btn w-100 py-2 fs-5 btn-white border"><i class="bi bi-trash"></i> Vaciar carrito</a>
+                                <a href="javascript:void(0)" id="clearCartBtn" class="btn w-100 py-2 fs-5 btn-white border"><i class="bi bi-trash"></i> Vaciar carrito</a>
                             </div>
                             <div class="col-4">
                                 <a href="{{ route('cart.datosEnvio') }}" class="btn w-100 py-2 fs-5 btn-dark" id="checkoutBtn">Continuar<i class=""></i></a>
@@ -75,66 +75,6 @@
 
     </div>
 
-{{-- <div class="container">
-    <div class="row">
-        <table id="cart" class="table table-hover table-condensed">
-            <thead>
-                <tr>
-                    <th style="width:50%">Producto</th>
-                    <th style="width:10%">Precio</th>
-                    <th style="width:8%">Cantidad</th>
-                    <th style="width:22%" class="text-center">Subtotal</th>
-                    <th style="width:10%"></th>
-                </tr>
-            </thead>
-            <tbody> --}}
-                {{-- @php $total = 0 @endphp
-                @if(session('cart'))
-                    @foreach(session('cart') as $id => $details)
-                        @php
-                            $total += $details['price'] * $details['quantity']
-                        @endphp
-                        <tr data-id="{{ $id }}">
-                            <td data-th="Product">
-                                <div class="row">
-                                    <div class="col-sm-3 hidden-xs"><img src="{{ asset('img/productos') }}/{{ $details['photo'] }}" width="100" height="100" class="img-responsive"/></div>
-                                    <div class="col-sm-9">
-                                        <h4 class="nomargin">{{ $details['product_name'] }}</h4>
-                                    </div>
-                                </div>
-                            </td>
-                            <td data-th="Price">${{ $details['price'] }}</td>
-                            <td data-th="Quantity">
-                                <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity cart_update" data-row-id="{{ $id }}" min="0" />
-                            </td>
-
-                            <td data-th="Subtotal" class="text-center">
-                                <span id="subtotal_{{ $id }}" data-subtotal="{{ $details['price'] * $details['quantity'] }}">
-                                    ${{ $details['price'] * $details['quantity'] }}
-                                </span>
-                            </td>
-
-                            <td class="actions" data-th="">
-<button class="btn btn-danger btn-sm cart_remove rounded-circle"><i class="bi bi-trash"></i></button>
-                            </td>
-                        </tr>
-                    @endforeach
-                @endif --}}
-   {{--         </tbody>
-             <tfoot>
-                <tr>
-                    <td colspan="5" class="text-right"><h3><p>Total <strong id="cartTotal">${{ $total }}</strong></p></h3></td>
-                </tr>
-                <tr>
-                    <td colspan="5" class="text-right">
-                        <a href="{{ route('front.productos') }}" class="btn btn-danger"> <i class="fa fa-arrow-left"></i>Volver a la tienda</a>
-                        <a href="{{ route('cart.datosEnvio') }}" class="btn btn-success" id="checkoutBtn"><i class="fa fa-money"></i> Continuar con la compra</a>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-</div>--}}
 @endsection
 
 @section('scripts')
@@ -295,6 +235,38 @@
                 }
             });
             $(document).trigger('cartUpdated');
+        });
+
+        $("#clearCartBtn").click(function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, vaciar carrito!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '{{ route('cart.clear') }}',
+                        method: "DELETE",
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                        },
+                        success: function (response) {
+                            // Actualizar la UI según sea necesario, por ejemplo, limpiar la tabla del carrito y actualizar el total a $0
+                            toastr.success(response.message, 'Success');
+                            location.reload(); // O actualizar la vista del carrito dinámicamente sin recargar
+                        },
+                        error: function (xhr, status, error) {
+                            toastr.error('Hubo un problema al vaciar el carrito.', 'Error');
+                        }
+                    });
+                }
+            });
         });
     </script>
 @endsection
