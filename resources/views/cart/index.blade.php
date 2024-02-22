@@ -1,7 +1,81 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+
+    <div class="conatiner-fluid">
+        <div class="row">
+            <div class="col-8 mx-auto">
+                <div class="card px-0 border-0 px-0 shadow">
+                    <div class="row">
+                        <div class="col-9 py-5 mx-auto">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>PRODUCTO</th>
+                                        <th>CANTIDAD</th>
+                                        <th>PRECIO</th>
+                                        <th>PRECIO FINAL</th>
+                                        <th>SUBTOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php $total = 0 @endphp
+                                    @if(session('cart'))
+                                        @foreach(session('cart') as $id => $details)
+                                            @php
+                                                $total += $details['price'] * $details['quantity']
+                                            @endphp
+                                            <tr data-id="{{ $id }}">
+                                                <td>
+                                                    <button class="btn btn-danger btn-sm cart_remove rounded-circle"><i class="bi bi-trash"></i></button></td>
+                                                </td>
+                                                <td>
+                                                    <p>{{ $details['product_name'] }} </p>
+                                                </td>
+                                                <td>
+                                                    <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity cart_update" data-row-id="{{ $id }}" min="0" />
+                                                </td>
+                                                <td>${{ $details['price'] }}</td>
+                                                <td>${{ $details['price'] }}</td>
+                                                <td>
+                                                    <span id="subtotal_{{ $id }}" data-subtotal="{{ $details['price'] * $details['quantity'] }}">
+                                                        ${{ $details['price'] * $details['quantity'] }}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                    <tr>
+                                        <td colspan="6" class="text-end"><h3 class="fs-5"><p>Total <strong id="cartTotal">${{ $total }}</strong></p></h3></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-8 mx-auto">
+                        <div class="row">
+                            <div class="col-4">
+                                <a href="{{ route('front.productos') }}" class="btn w-100 py-2 fs-5 btn-white border"><i class=""></i>Volver a la tienda</a>
+
+                            </div>
+                            <div class="col-4">
+                                <a href="#/" class="btn w-100 py-2 fs-5 btn-white border"><i class="bi bi-trash"></i> Vaciar carrito</a>
+                            </div>
+                            <div class="col-4">
+                                <a href="{{ route('cart.datosEnvio') }}" class="btn w-100 py-2 fs-5 btn-dark" id="checkoutBtn">Continuar<i class=""></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{{-- <div class="container">
     <div class="row">
         <table id="cart" class="table table-hover table-condensed">
             <thead>
@@ -13,8 +87,8 @@
                     <th style="width:10%"></th>
                 </tr>
             </thead>
-            <tbody>
-                @php $total = 0 @endphp
+            <tbody> --}}
+                {{-- @php $total = 0 @endphp
                 @if(session('cart'))
                     @foreach(session('cart') as $id => $details)
                         @php
@@ -41,26 +115,26 @@
                             </td>
 
                             <td class="actions" data-th="">
-                                <button class="btn btn-danger btn-sm cart_remove"><i class="fa fa-trash-o"></i>Quitar</button>
+<button class="btn btn-danger btn-sm cart_remove rounded-circle"><i class="bi bi-trash"></i></button>
                             </td>
                         </tr>
                     @endforeach
-                @endif
-            </tbody>
-            <tfoot>
+                @endif --}}
+   {{--         </tbody>
+             <tfoot>
                 <tr>
                     <td colspan="5" class="text-right"><h3><p>Total <strong id="cartTotal">${{ $total }}</strong></p></h3></td>
                 </tr>
                 <tr>
                     <td colspan="5" class="text-right">
                         <a href="{{ route('front.productos') }}" class="btn btn-danger"> <i class="fa fa-arrow-left"></i>Volver a la tienda</a>
-                        <button class="btn btn-success" id="checkoutBtn"><i class="fa fa-money"></i> Continuar con la compra</button>
+                        <a href="{{ route('cart.datosEnvio') }}" class="btn btn-success" id="checkoutBtn"><i class="fa fa-money"></i> Continuar con la compra</a>
                     </td>
                 </tr>
             </tfoot>
         </table>
     </div>
-</div>
+</div>--}}
 @endsection
 
 @section('scripts')

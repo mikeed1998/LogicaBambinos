@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -32,5 +33,15 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function logout()
+    {
+        Auth::logout(); // Cerrar la sesión del usuario
+        Session::forget('cart'); // Limpiar la sesión del carrito
+        Session::forget('cartTotal');
+        Session::forget('cartTotalUnits');
+
+        return redirect('/login'); // Redirigir a la página de inicio de sesión u otra página según tus necesidades
     }
 }

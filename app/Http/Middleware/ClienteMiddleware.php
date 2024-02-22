@@ -17,7 +17,7 @@ class ClienteMiddleware
             }
             else
             {
-                return redirect('/')->with('status', '¡Acceso denegado!');
+                return redirect('/');
             }
         }
         else

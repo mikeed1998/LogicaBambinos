@@ -17,7 +17,7 @@ class VendedorMiddleware
             }
             else
             {
-                return redirect('/')->with('status', '¡Acceso denegado!');
+                return redirect('/');
             }
         }
         else

@@ -15,10 +15,18 @@ class CreateProductosTable extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->text('descripcion');
-            $table->string('portada');
-            $table->decimal("precio", 6, 2);
+            $table->unsignedBigInteger('categoria')->nullable();
+            $table->unsignedBigInteger('subcategoria')->nullable();
+            $table->string('nombre')->nullable();
+            $table->text('descripcion')->nullable();
+            $table->string('frente')->nullable();
+            $table->string('fondo')->nullable();
+            $table->string('alto')->nullable();
+            $table->text('portada')->nullable();
+            $table->decimal("precio", 6, 2)->default(0.00);
+            $table->decimal("anticipo", 6, 2)->default(0.00);
+            $table->foreign('categoria')->references('id')->on('categorias')->onDelete('cascade');
+            $table->foreign('subcategoria')->references('id')->on('subcategorias')->onDelete('cascade');
             $table->timestamps();
         });
     }
