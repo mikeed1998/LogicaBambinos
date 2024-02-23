@@ -34,16 +34,13 @@ class CarritoController extends Controller
         }
 
         session()->put('cart', $cart);
-
         // Recalcular el precio y la cantidad antes de enviar la respuesta
         $subtotal = $cart[$id]["price"] * $cart[$id]["quantity"];
-
         // Calcular el total sumando los subtotales de todos los elementos en el carrito
         $total = 0;
         foreach ($cart as $item) {
             $total += $item["price"] * $item["quantity"];
         }
-
         // Actualizar el total en la sesión
         session()->put('cartTotal', $total);
 
@@ -69,10 +66,8 @@ class CarritoController extends Controller
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
             session()->flash('success', 'Cart successfully updated!');
-
             // Recalcular el precio y la cantidad antes de enviar la respuesta
             $subtotal = $cart[$request->id]["price"] * $request->quantity;
-
             // Calcular el total sumando los subtotales de todos los elementos en el carrito
             $total = 0;
             foreach ($cart as $item) {
@@ -102,13 +97,10 @@ class CarritoController extends Controller
             if (isset($cart[$request->id])) {
                 // Restar el subtotal del producto eliminado al total
                 $total = session('cartTotal', 0) - ($cart[$request->id]['price'] * $cart[$request->id]['quantity']);
-
                 // Eliminar el producto del carrito
                 unset($cart[$request->id]);
-
                 // Actualizar el total en la sesión
                 session()->put('cartTotal', $total);
-
                 // Actualizar la variable de sesión 'cart'
                 session()->put('cart', $cart);
             }
@@ -129,7 +121,7 @@ class CarritoController extends Controller
     public function clearCart()
     {
         session()->forget('cart');
-        session()->forget('cartTotal'); // Opcional, si también mantienes un total en la sesión.
+        session()->forget('cartTotal');
 
         return response()->json(['success' => true, 'message' => 'Carrito vaciado exitosamente!']);
     }
@@ -140,7 +132,6 @@ class CarritoController extends Controller
         $total = session()->get('cartTotal');
         $userId = Auth::id();
         $usuario = User::find($userId);
-        // dd($cart, $total);
 
         if($total == 0.0) {
             return redirect()->back()->with('error', 'El carrito esta vacio, no puedes continuar.');
