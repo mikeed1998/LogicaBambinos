@@ -7,6 +7,7 @@
     use Illuminate\App\Http\Controllers\ProductoController;
     use Illuminate\App\Http\Controllers\PasarelaPagoCLIPController;
     use Illuminate\App\Http\Controllers\LoginController;
+    use Illuminate\App\Http\Controllers\PdfController;
 
 
     Route::get('/', 'FrontController@index')->name('front.home');
@@ -44,5 +45,7 @@
     Route::prefix('varios')->name('func.')->group(function(){
         Route::post('editarajax','FuncGenController@editajax')->name('editajax');
     });
+
+    Route::get('/pdf', 'PdfController@generatePdf');
 
 
