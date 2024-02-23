@@ -40,4 +40,9 @@
         Route::get('pasarela-clip', 'PasarelaPagoCLIPController@index')->name('clip.index');
     });
 
+    // rutas funciones generales
+    Route::prefix('varios')->name('func.')->group(function(){
+        Route::post('editarajax','FuncGenController@editajax')->name('editajax');
+    });
+
 

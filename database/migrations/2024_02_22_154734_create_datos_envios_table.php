@@ -15,6 +15,17 @@ class CreateDatosEnviosTable extends Migration
     {
         Schema::create('datos_envios', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('telefono')->nullable();
+            $table->string('RFC')->nullable();
+            $table->text('calle')->nullable();
+            $table->text('numero_exterior')->nullable();
+            $table->text('numero_interior')->nullable();
+            $table->string('pais')->nullable();
+            $table->string('estado')->nullable();
+            $table->string('pais')->nullable();
+            $table->string('colonia')->nullable();
+            $table->string('codigo_postal')->nullable();
+            $table->text('aux')->nullable();
             $table->timestamps();
         });
     }

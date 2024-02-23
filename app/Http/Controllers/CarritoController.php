@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Producto;
+use Auth;
+use App\User;
 
 class CarritoController extends Controller
 {
@@ -135,8 +137,17 @@ class CarritoController extends Controller
 
     public function datosEnvio() {
         $cart = session()->get('cart');
-        // dd($cart);
-        return view('cart.envio', compact('cart'));
+        $total = session()->get('cartTotal');
+        $userId = Auth::id();
+        $usuario = User::find($userId);
+        // dd($cart, $total);
+
+        if($total == 0.0) {
+            return redirect()->back()->with('error', 'El carrito esta vacio, no puedes continuar.');
+        } else {
+            \Toastr::success('Operation successful!');
+            return view('cart.envio', compact('cart', 'total', 'usuario'));
+        }
     }
 }
 

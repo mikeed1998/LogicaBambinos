@@ -1,11 +1,82 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        .carta-producto {
+            border-top-left-radius: 2rem;
+            border-top-right-radius: 2rem;
+        }
 
-    <div class="conatiner-fluid">
+        .imagen-producto {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            border-top-left-radius: 2rem;
+            border-top-right-radius: 2rem;
+            width: 100%;
+            height: 20rem;
+        }
+
+        @media(min-width: 1800px) {
+            .carta-tabla {
+                border-radius: 2rem;
+            }
+        }
+
+        @media(min-width: 1400px) and (max-width: 1799px) {
+            .carta-tabla {
+                border-radius: 2rem;
+            }
+        }
+
+        @media(min-width: 1200px) and (max-width: 1399px) {
+            .carta-tabla {
+                border-radius: 2rem;
+            }
+        }
+
+        @media(min-width: 992px) and (max-width: 1199px) {
+            .carta-tabla {
+                border-radius: 2rem;
+            }
+        }
+
+        @media(min-width: 768px) and (max-width: 991px) {
+            .carta-tabla {
+                border-radius: 2rem;
+            }
+        }
+
+        @media(min-width: 576px) and (max-width: 767px) {
+            .carta-tabla {
+                border-radius: 0;
+            }
+        }
+
+        @media(min-width: 480px) and (max-width: 575px) {
+            .carta-tabla {
+                border-radius: 0;
+            }
+        }
+
+        @media(min-width: 320px) and (max-width: 479px) {
+            .carta-tabla {
+                border-radius: 0;
+            }
+        }
+
+        @media(min-width: 0px) and (max-width: 319px) {
+            .carta-tabla {
+                border-radius: 0;
+            }
+        }
+
+    </style>
+
+    <div class="conatiner-fluid mb-5">
         <div class="row">
-            <div class="col-8 mx-auto">
-                <div class="card px-0 border-0 px-0 shadow">
+            <div class="col-md-8 col-12 mx-auto">
+                <div class="card carta-tabla px-0 border-0 shadow">
                     <div class="row">
                         <div class="col-9 py-5 mx-auto">
                             <table class="table table-striped">
@@ -55,16 +126,15 @@
                     </div>
                 </div>
                 <div class="row mt-5">
-                    <div class="col-8 mx-auto">
+                    <div class="col-md-8 col-11 mx-auto">
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-md-4 col-12">
                                 <a href="{{ route('front.productos') }}" class="btn w-100 py-2 fs-5 btn-white border"><i class=""></i>Volver a la tienda</a>
-
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4 col-12">
                                 <a href="javascript:void(0)" id="clearCartBtn" class="btn w-100 py-2 fs-5 btn-white border"><i class="bi bi-trash"></i> Vaciar carrito</a>
                             </div>
-                            <div class="col-4">
+                            <div class="col-md-4 col-12">
                                 <a href="{{ route('cart.datosEnvio') }}" class="btn w-100 py-2 fs-5 btn-dark" id="checkoutBtn">Continuar<i class=""></i></a>
                             </div>
                         </div>
@@ -72,12 +142,43 @@
                 </div>
             </div>
         </div>
-
+        <div class="row mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-3 col-12 text-center mx-auto fs-1 py-3">
+                    Tus productos
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9 col-11 mx-auto">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        @if(session('cart'))
+                            @foreach(session('cart') as $id => $details)
+                                <div class="col-md-3 col-12">
+                                    <div class="card carta-producto">
+                                        <div class="imagen-producto" style="
+                                            background-image: url('{{ asset('img/productos/20231229160623.png') }}');
+                                        "></div>
+                                        <div class="card-body">
+                                            {{ $details['product_name'] }}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 @endsection
 
 @section('scripts')
+    <script>
+        @if(session('error'))
+            toastr.error('{{ session('error') }}');
+        @endif
+    </script>
     <script type="text/javascript">
         $(".cart_update").change(function (e) {
             e.preventDefault();
