@@ -102,7 +102,6 @@ img.vertical-shake {
         margin-left: -1rem;
         margin-top: -0.05rem;
         font-size: 1rem;
-        background-color: var(--blanco);
         text-align: center;
     }
 
@@ -213,7 +212,6 @@ img.vertical-shake {
         padding-bottom: 0.15rem;
         font-size: 0.90rem;
         margin-left: -0.5rem;
-        background-color: var(--blanco);
         text-align: center;
     }
 

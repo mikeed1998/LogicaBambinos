@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('titulo', 'Home')
+
 @section('content')
     @if (session('status'))
         <div class="alert alert-success" role="alert">
@@ -14,3 +16,8 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    
+@endsection
+

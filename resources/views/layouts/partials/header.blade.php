@@ -10,22 +10,12 @@ div {
     font-family: 'Mairy Bold';
 }
 
-/* Estilos para el encabezado fijo */
-.header {
-        width: 100%;
-        background-color: #fff; /* Fondo blanco para cubrir el contenido al hacer scroll */
-        transition: top 0.3s; /* Agrega una transición suave al cambio de posición */
-        z-index: 1000; /* Asegura que el encabezado esté por encima de otros elementos */
-    }
+/* header {
+    position: sticky; 
+    top: 0; 
+    z-index: 99;
+} */
 
-    /* Clase adicional para el encabezado fijo */
-    .header.fixed {
-        position: fixed;
-        top: 0;
-    }
-
-    /* Contenido de ejemplo debajo del encabezado */
-    
 </style>
 
 {{-- <header class="container-fluid">
@@ -146,8 +136,8 @@ div {
 </header> --}}
 
 
-<header class="container-fluid">
-    <div class="row">
+<header class="container-fluid" style="position: sticky; top: 0; z-index: 9999;">
+    <div class="row" style="z-index: 9999;">
         <div class="cola col position-relative">
             <div class="row">
                 <div class="cola col py-2 mx-auto borde-col text-md-end text-center cont-iconos">
@@ -189,9 +179,32 @@ div {
                         </div>
                         <div class="cola col-xxl-2 col-xl-2 header-lg borde-col fw-bolder">
                             <div class="cola col-11 text-center borde-col position-relative text-white cont-sesion">
-                                <a href="{{ route('login') }}" class="link-sesion">
-                                    INICIAR SESIÓN
-                                </a> 
+                                
+                                @if (Auth::check())
+                                    @if (Auth::user()->role_as == 0) {{-- Middleware para redirigir al panel de cliente --}}
+                                        <div class="row">
+                                            <div class="col">
+                                                <a href="{{ route('user.home') }}" class="link-sesion">
+                                                    Mi cuenta
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @elseif (Auth::user()->role_as == 2) {{-- Middleware para redirigir al panel de vendedor --}}
+                                        <div class="row">
+                                            <div class="col">
+                                                <a href="{{ route('vendedor.home') }}" class="link-sesion">
+                                                    Mi cuenta
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @else
+                                    @endif
+                                @else
+                                    <a href="{{ route('login') }}" class="link-sesion">
+                                        INICIAR SESIÓN
+                                    </a> 
+                                @endif
+                                
                             </div>
                         </div>
                         <div class="cola col-xxl-1 col-xl-1 header-lg borde-col">
@@ -200,7 +213,7 @@ div {
                                     <a href="{{ route('cart.index') }}" class="link-carrito">
                                         <img src="{{ asset('img/header/carrito.png') }}" alt="" class="img-fluid borde-icon img-carrito vertical-shake">
                                     </a>
-                                    <div class="cola col-6 text-center position-absolute top-0 start-100 translate-middle-y cont-carrito ">
+                                    <div class="cola col-6 text-center position-absolute top-0 start-100 translate-middle-y cont-carrito">
                                         <span class="badge badge-pill badge-danger fs-5">
                                             {{ array_sum(array_column((array) session('cart'), 'quantity')) }}
                                         </span>
@@ -224,271 +237,348 @@ div {
            
         </div>
     </div>
+    <!-- Modal lg -->
+    <div class="col-6 menu-modal_lg position-absolute top-0 end-0" style="z-index: 99999; background-color: var(--morado-fondo); pointer-events: auto; overflow-y: auto; height: 100vh;">
+        <div class="col-11 mb-5 mx-auto">
+            <div class="row mt-5">
+                <div class="col-11 mx-auto text-end">
+                    <p class="p-0 m-0" style="line-height: 1;" onclick="cerrarModalLG()">
+                        <i class="bi bi-x-lg p-0 btn-cerrar_modal" style="line-height: 1;" ></i>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11 mx-auto">
+                    <div class="row">
+                        <div class="col-xxl-9 col-xl-11 mx-auto">
+                            <div class="row">
+                                <div class="col-4">
+                                    @if (Auth::check())
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="col-12">
+                                                    <a class="btn btn-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                        {{ __('Cerrar sesión') }}
+                                                    </a>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="cola col-xxl-5 col-xl-4 header-lg borde-col fw-bolder">
+                                    <div class="cola col-11 text-center borde-col position-relative text-white cont-sesion_modal">
+                                        @if (Auth::check())
+                                            @if (Auth::user()->role_as == 0)
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <a href="{{ route('user.home') }}" class="link-sesion">
+                                                            Mi cuenta
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            @elseif (Auth::user()->role_as == 2)
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <a href="{{ route('vendedor.home') }}" class="link-sesion">
+                                                            Mi cuenta
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            @else
+                                            @endif
+                                        @else
+                                            <a href="{{ route('login') }}" class="link-sesion">
+                                                INICIAR SESIÓN
+                                            </a> 
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="cola col-xxl-3 col-xl-3 header-lg borde-col">
+                                    <div class="row">
+                                        <div class="cola col-xxl-9 col-xl-9 position-relative contenedor-carrito_modal">
+                                            <a href="{{ route('cart.index') }}" class="link-carrito">
+                                                <img src="{{ asset('img/header/carrito.png') }}" alt="" class="img-fluid borde-icon img-carrito_modal vertical-shake">
+                                            </a>
+                                            <div class="cola col-6 text-center position-absolute top-0 start-100 translate-middle cont-carrito">
+                                                <span class="badge badge-pill badge-danger fs-5">
+                                                    {{ array_sum(array_column((array) session('cart'), 'quantity')) }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col mt-5">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="#/" class="link-menu_modal">Home</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="#/" class="link-menu_modal">Catálogo</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="#/" class="link-menu_modal">Compra segura</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="#/" class="link-menu_modal">El negocio</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="#/" class="link-menu_modal">Contacto</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5 text-white">
+                        <div class="col mt-5">
+                            <div class="row">
+                                <div class="col-6"></div>
+                                <div class="col-6 text-end">
+                                    <div class="col-12 texto-modal">
+                                        Bosque La Primavera 13 Col. Puerta del Boscque, Zapopan, Jalisco.
+                                    </div>
+                                    <div class="col-12 texto-modal">
+                                        CP. 45066
+                                    </div>
+                                    <div class="col-12 texto-modal">
+                                        Telefonos de contacto:
+                                    </div>
+                                    <div class="col-12 texto-modal">
+                                        3336134420 / 3336580465
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <a href="#/">
+                                            <i class="borde-icon bi bi-whatsapp text-white icono-modal px-1"></i>
+                                        </a>
+                                        <a href="#/">
+                                            <i class="borde-icon bi bi-instagram text-white icono-modal px-1"></i>
+                                        </a>
+                                        <a href="#/">
+                                            <i class="borde-icon bi bi-facebook text-white icono-modal px-1"></i>
+                                        </a>
+                                        <a href="#/">
+                                            <i class="borde-icon bi bi-tiktok text-white icono-modal px-1"></i>
+                                        </a>
+                                        <a href="#/">
+                                            <i class="borde-icon bi bi-youtube text-white icono-modal px-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-xxl-5 col-xl-4"></div>
+                                <div class="col-xxl-7 col-xl-8">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a href="#/" class="link-menu_modal--2">
+                                                Aviso de privacidad
+                                            </a>
+                                        </div>
+                                        <div class="col-3">
+                                            <a href="#/" class="link-menu_modal--2">
+                                                Políticas
+                                            </a>
+                                        </div>
+                                        <div class="col-3">
+                                            <a href="#/" class="link-menu_modal--2">
+                                                FAQS
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <!-- Modal sm -->
+    <div class="col-12 menu-modal_sm position-absolute top-0 end-0 py-5" style="z-index: 9999; background-color: var(--morado-fondo); pointer-events: auto; overflow-y: auto; height: 100vh;">
+        <div class="col-11 mb-5 mx-auto">
+            <div class="row mt-5">
+                <div class="col-11 mx-auto text-end">
+                    <p class="p-0 m-0" style="line-height: 1;" onclick="cerrarModalSM()">
+                        <i class="bi bi-x-lg p-0 btn-cerrar_modal" style="line-height: 1;" ></i>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11 mx-auto">
+                    <div class="row">
+                        <div class="col-lg-11 col-md-11 col-sm-11 col-11 mx-auto">
+                            <div class="row">
+                                <div class="col-12 text-center pb-3">
+                                    @if (Auth::check())
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="col-12">
+                                                    <a class="btn btn-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                        {{ __('Cerrar sesión') }}
+                                                    </a>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div> 
+                                <div class="cola col-lg-4 col-md-4 col-sm-4 col-6 mx-auto header-sm borde-col fw-bolder">
+                                    <div class="cola col-11 text-center borde-col position-relative text-white cont-sesion_modal">
+                                        @if (Auth::check())
+                                            @if (Auth::user()->role_as == 0)
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <a href="{{ route('user.home') }}" class="link-sesion">
+                                                            Mi cuenta
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            @elseif (Auth::user()->role_as == 2)
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <a href="{{ route('vendedor.home') }}" class="link-sesion">
+                                                            Mi cuenta
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            @else
+                                            @endif
+                                        @else
+                                            <a href="{{ route('login') }}" class="link-sesion">
+                                                INICIAR SESIÓN
+                                            </a> 
+                                        @endif 
+                                    </div>
+                                </div>
+                                <div class="cola col-lg-2 col-md-2 col-sm-3 col-4 mx-auto header-sm borde-col">
+                                    <div class="row">
+                                        <div class="cola col-lg-9 col-md-9 col-sm-9 col-9 position-relative contenedor-carrito_modal">
+                                            <a href="{{ route('cart.index') }}" class="link-carrito">
+                                                <img src="{{ asset('img/header/carrito.png') }}" alt="" class="img-fluid borde-icon img-carrito_modal vertical-shake">
+                                            </a>
+                                            <div class="cola col-6 text-center position-absolute top-0 start-100 translate-middle cont-carrito">
+                                                <span class="badge badge-pill badge-danger fs-5">
+                                                    {{ array_sum(array_column((array) session('cart'), 'quantity')) }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col mt-5">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="#/" class="link-menu_modal">Home</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="#/" class="link-menu_modal">Catálogo</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="#/" class="link-menu_modal">Compra segura</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="#/" class="link-menu_modal">El negocio</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a href="#/" class="link-menu_modal">Contacto</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5 text-white">
+                        <div class="col mt-5">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-3 col-11"></div>
+                                <div class="col-lg-6 col-md-6 col-sm-9 col-11 text-end">
+                                    <div class="col-12 texto-modal">
+                                        Bosque La Primavera 13 Col. Puerta del Boscque, Zapopan, Jalisco.
+                                    </div>
+                                    <div class="col-12 texto-modal">
+                                        CP. 45066
+                                    </div>
+                                    <div class="col-12 texto-modal">
+                                        Telefonos de contacto:
+                                    </div>
+                                    <div class="col-12 texto-modal">
+                                        3336134420 / 3336580465
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <a href="#/">
+                                            <i class="borde-icon bi bi-whatsapp text-white icono-modal px-1"></i>
+                                        </a>
+                                        <a href="#/">
+                                            <i class="borde-icon bi bi-instagram text-white icono-modal px-1"></i>
+                                        </a>
+                                        <a href="#/">
+                                            <i class="borde-icon bi bi-facebook text-white icono-modal px-1"></i>
+                                        </a>
+                                        <a href="#/">
+                                            <i class="borde-icon bi bi-tiktok text-white icono-modal px-1"></i>
+                                        </a>
+                                        <a href="#/">
+                                            <i class="borde-icon bi bi-youtube text-white icono-modal px-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12"></div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <a href="#/" class="link-menu_modal--2">
+                                                Aviso de privacidad
+                                            </a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="#/" class="link-menu_modal--2">
+                                                Políticas
+                                            </a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="#/" class="link-menu_modal--2">
+                                                FAQS
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 
-<!-- Modal lg -->
-<div class="col-6 menu-modal_lg position-absolute top-0 end-0 z-3" style="background-color: rgba(2, 4, 3, 0.5);">
-    <div class="col-11 mb-5 mx-auto">
-        <div class="row mt-5">
-            <div class="col-11 mx-auto text-end">
-                <p class="p-0 m-0" style="line-height: 1;" onclick="cerrarModalLG()">
-                    <i class="bi bi-x-lg p-0 btn-cerrar_modal" style="line-height: 1;" ></i>
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-11 mx-auto">
-                <div class="row">
-                    <div class="col-xxl-9 col-xl-11 mx-auto">
-                        <div class="row">
-                            <div class="col-4"></div>
-                            <div class="cola col-xxl-5 col-xl-4 header-lg borde-col fw-bolder">
-                                <div class="cola col-11 text-center borde-col position-relative text-white cont-sesion_modal">
-                                    <a href="{{ route('login') }}" class="link-sesion_modal">
-                                        INICIAR SESIÓN
-                                    </a> 
-                                </div>
-                            </div>
-                            <div class="cola col-xxl-3 col-xl-3 header-lg borde-col">
-                                <div class="row">
-                                    <div class="cola col-xxl-9 col-xl-9 position-relative contenedor-carrito_modal">
-                                        <a href="#/" class="link-carrito">
-                                            <img src="{{ asset('img/header/carrito.png') }}" alt="" class="img-fluid borde-icon img-carrito_modal vertical-shake">
-                                        </a>
-                                        <div class="cola col-6 position-absolute top-0 start-100 translate-middle-y cont-carrito_modal skew-shake-x">
-                                            <small>+9</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="col mt-5">
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="#/" class="link-menu_modal">Home</a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="#/" class="link-menu_modal">Catálogo</a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="#/" class="link-menu_modal">Compra segura</a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="#/" class="link-menu_modal">El negocio</a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="#/" class="link-menu_modal">Contacto</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-5 text-white">
-                    <div class="col mt-5">
-                        <div class="row">
-                            <div class="col-6"></div>
-                            <div class="col-6 text-end">
-                                <div class="col-12 texto-modal">
-                                    Bosque La Primavera 13 Col. Puerta del Boscque, Zapopan, Jalisco.
-                                </div>
-                                <div class="col-12 texto-modal">
-                                    CP. 45066
-                                </div>
-                                <div class="col-12 texto-modal">
-                                    Telefonos de contacto:
-                                </div>
-                                <div class="col-12 texto-modal">
-                                    3336134420 / 3336580465
-                                </div>
-                                <div class="col-12 mt-3">
-                                    <a href="#/">
-                                        <i class="borde-icon bi bi-whatsapp text-white icono-modal px-1"></i>
-                                    </a>
-                                    <a href="#/">
-                                        <i class="borde-icon bi bi-instagram text-white icono-modal px-1"></i>
-                                    </a>
-                                    <a href="#/">
-                                        <i class="borde-icon bi bi-facebook text-white icono-modal px-1"></i>
-                                    </a>
-                                    <a href="#/">
-                                        <i class="borde-icon bi bi-tiktok text-white icono-modal px-1"></i>
-                                    </a>
-                                    <a href="#/">
-                                        <i class="borde-icon bi bi-youtube text-white icono-modal px-1"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-xxl-5 col-xl-4"></div>
-                            <div class="col-xxl-7 col-xl-8">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <a href="#/" class="link-menu_modal--2">
-                                            Aviso de privacidad
-                                        </a>
-                                    </div>
-                                    <div class="col-3">
-                                        <a href="#/" class="link-menu_modal--2">
-                                            Políticas
-                                        </a>
-                                    </div>
-                                    <div class="col-3">
-                                        <a href="#/" class="link-menu_modal--2">
-                                            FAQS
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> 
 
-<!-- Modal sm -->
-<div class="col-12 menu-modal_sm position-absolute top-0 end-0 z-3 py-5" style="background-color: rgba(2, 4, 3, 0.5);">
-    <div class="col-11 mb-5 mx-auto">
-        <div class="row mt-5">
-            <div class="col-11 mx-auto text-end">
-                <p class="p-0 m-0" style="line-height: 1;" onclick="cerrarModalSM()">
-                    <i class="bi bi-x-lg p-0 btn-cerrar_modal" style="line-height: 1;" ></i>
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-11 mx-auto">
-                <div class="row">
-                    <div class="col-lg-11 col-md-11 col-sm-11 col-11 mx-auto">
-                        <div class="row">
-                            <!-- <div class="col-4"></div> -->
-                            <div class="cola col-lg-4 col-md-4 col-sm-4 col-6 mx-auto header-sm borde-col fw-bolder">
-                                <div class="cola col-11 text-center borde-col position-relative text-white cont-sesion_modal">
-                                    <a href="{{ route('login') }}" class="link-sesion_modal">
-                                        INICIAR SESIÓN
-                                    </a> 
-                                </div>
-                            </div>
-                            <div class="cola col-lg-2 col-md-2 col-sm-3 col-4 mx-auto header-sm borde-col">
-                                <div class="row">
-                                    <div class="cola col-lg-9 col-md-9 col-sm-9 col-9 position-relative contenedor-carrito_modal">
-                                        <a href="#/" class="link-carrito">
-                                            <img src="{{ asset('img/header/carrito.png') }}" alt="" class="img-fluid borde-icon img-carrito_modal vertical-shake">
-                                        </a>
-                                        <div class="cola col-6 position-absolute top-0 start-100 translate-middle-y cont-carrito_modal skew-shake-x">
-                                            <small>+9</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="col mt-5">
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="#/" class="link-menu_modal">Home</a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="#/" class="link-menu_modal">Catálogo</a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="#/" class="link-menu_modal">Compra segura</a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="#/" class="link-menu_modal">El negocio</a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="#/" class="link-menu_modal">Contacto</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-5 text-white">
-                    <div class="col mt-5">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-3 col-11"></div>
-                            <div class="col-lg-6 col-md-6 col-sm-9 col-11 text-end">
-                                <div class="col-12 texto-modal">
-                                    Bosque La Primavera 13 Col. Puerta del Boscque, Zapopan, Jalisco.
-                                </div>
-                                <div class="col-12 texto-modal">
-                                    CP. 45066
-                                </div>
-                                <div class="col-12 texto-modal">
-                                    Telefonos de contacto:
-                                </div>
-                                <div class="col-12 texto-modal">
-                                    3336134420 / 3336580465
-                                </div>
-                                <div class="col-12 mt-3">
-                                    <a href="#/">
-                                        <i class="borde-icon bi bi-whatsapp text-white icono-modal px-1"></i>
-                                    </a>
-                                    <a href="#/">
-                                        <i class="borde-icon bi bi-instagram text-white icono-modal px-1"></i>
-                                    </a>
-                                    <a href="#/">
-                                        <i class="borde-icon bi bi-facebook text-white icono-modal px-1"></i>
-                                    </a>
-                                    <a href="#/">
-                                        <i class="borde-icon bi bi-tiktok text-white icono-modal px-1"></i>
-                                    </a>
-                                    <a href="#/">
-                                        <i class="borde-icon bi bi-youtube text-white icono-modal px-1"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-12"></div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <a href="#/" class="link-menu_modal--2">
-                                            Aviso de privacidad
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="#/" class="link-menu_modal--2">
-                                            Políticas
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="#/" class="link-menu_modal--2">
-                                            FAQS
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

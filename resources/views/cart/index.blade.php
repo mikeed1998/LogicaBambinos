@@ -73,7 +73,7 @@
 
     </style>
 
-    <div class="conatiner-fluid mb-5">
+    <div class="container-fluid z-0 mb-5">
         <div class="row">
             <div class="col-md-8 col-12 mx-auto">
                 <div class="card carta-tabla px-0 border-0 shadow">
@@ -369,5 +369,6 @@
                 }
             });
         });
+
     </script>
 @endsection

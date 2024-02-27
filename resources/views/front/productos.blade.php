@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
+@section('titulo', 'Productos')
+
 @section('content')
 
-    <div class="container py-5">
+    <div class="container py-5 z-0">
         <div class="row">
             @foreach($productos as $product)
                 <div class="col-xs-18 col-sm-6 col-md-4">
