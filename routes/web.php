@@ -15,6 +15,8 @@
     Route::get('/contacto', 'FrontController@contact')->name('front.contact');
     // Rutas publicas para productos
     Route::get('/productos', 'ProductoController@index')->name('front.productos');
+    // Login cutomizado para el admin, redirigir en caso de estar logeado con privilegios de admin
+    Route::get('/admin', 'FrontController@admin')->name('front.admin')->middleware('checkAdminAccess');
 
     // Rutas de sesión de ususarios
     Auth::routes();
@@ -32,7 +34,13 @@
 
     // Rutas exclusivas del administrador / aquí van los subrutas autoadministrables
     Route::group(['middleware' => ['auth', 'isAdmin']], function() {
-        Route::get('admin', 'SeccionController@index')->name('admin.index');
+        Route::get('homeA', 'SeccionController@index')->name('admin.index');
+        Route::get('contacto', 'SeccionController@contacto')->name('admin.contacto');
+        Route::post('textglobalseccion','SeccionController@textglobalseccion')->name('textglobalseccion');
+        Route::prefix('secciones')->name('seccion.')->group(function(){
+            Route::get('/','SeccionController@index')->name('index');
+			Route::get('/{slug}','SeccionController@show')->name('show');
+        });
     });
 
     // Rutas para el acceso y manipulación del carrito de compras

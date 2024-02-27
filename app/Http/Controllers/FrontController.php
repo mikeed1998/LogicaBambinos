@@ -27,8 +27,13 @@ class FrontController extends Controller
         return view('front.index');
     }
 
+	public function admin()
+    {
+        return view('front.admin');
+    }
+
     public function mailcontact(Request $request){
-	
+
 		$validate = Validator::make($request->all(),[
 			"tipoForm" => "required",
 			'nombre' => 'required',
@@ -60,7 +65,7 @@ class FrontController extends Controller
 		$config = Configuracion::first();
 
 		$mail = new PHPMailer;
-		
+
 		try {
 			$mail->isSMTP();
 			// $mail->SMTPDebug = SMTP::DEBUG_SERVER;
@@ -79,13 +84,13 @@ class FrontController extends Controller
 			if (!empty($config->destinatario2)) {
 				$mail->AddBCC($config->destinatario2,'PepeFester Contacto');
 			}
-			
+
 			if($data['tipoForm'] == 'contacto') {
 				$mail->Subject = $data['asunto'];
 			} else {
 				$mail->Subject = 'Mensaje';
 			}
-			
+
 			$mail->msgHTML($html);
 			// $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 

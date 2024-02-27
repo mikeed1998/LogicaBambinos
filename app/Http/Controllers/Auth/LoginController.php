@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -14,11 +15,17 @@ class LoginController extends Controller
 
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    protected function authenticated()
+    protected function authenticated(Request $request)
     {
+        // dd($request);
         if(Auth::user()->role_as == '1')    // Administrador general
         {
-            return redirect('admin')->with('status', 'Bienvenido al panel de administrador');
+            if ($request->from == 0) {
+                Auth::logout();
+                return redirect('/')->with('error', 'Esta no es la ruta para acceder al administrador');
+            } else {
+                return redirect('/homeA')->with('status', 'Has iniciado sesión como administrador');
+            }
         }
         elseif(Auth::user()->role_as == '2')    // Vendedor
         {
@@ -42,6 +49,6 @@ class LoginController extends Controller
         Session::forget('cartTotal');
         Session::forget('cartTotalUnits');
 
-        return redirect('/login'); // Redirigir a la página de inicio de sesión u otra página según tus necesidades
+        return redirect('/'); // Redirigir a la página de inicio de sesión u otra página según tus necesidades
     }
 }

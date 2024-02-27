@@ -13,6 +13,6 @@ class PasarelaPagoMiddleware
             return $next($request);
         }
 
-        return redirect('/login')->with('status', '¡Acceso denegado! Tienes que iniciar sesión');
+        return redirect('/login')->with('status', '¡Acceso denegado! Tienes que iniciar sesión3');
     }
 }

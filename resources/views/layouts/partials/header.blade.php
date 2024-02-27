@@ -11,8 +11,8 @@ div {
 }
 
 /* header {
-    position: sticky; 
-    top: 0; 
+    position: sticky;
+    top: 0;
     z-index: 99;
 } */
 
@@ -34,17 +34,17 @@ div {
                             <img src="{{ asset('img/header/logo.png') }}" alt="img-logo" class="img-fluid w-25">
                         </a>
                     @endauth
-                    
+
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-            
+
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-            
+
                         </ul>
-            
+
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
                             <!-- Authentication Links -->
@@ -92,8 +92,8 @@ div {
                                                 {{ array_sum(array_column((array) session('cart'), 'quantity')) }}
                                             </span>
                                         </a>
-                    
-                                                            
+
+
                                         <div class="dropdown-menu">
                                             <div class="row total-header-section">
                                                 @php $total = 0 @endphp
@@ -128,7 +128,7 @@ div {
                             </div>
                         @endif
                     @endauth
-                    
+
                 </div>
             </nav>
         </div>
@@ -179,7 +179,7 @@ div {
                         </div>
                         <div class="cola col-xxl-2 col-xl-2 header-lg borde-col fw-bolder">
                             <div class="cola col-11 text-center borde-col position-relative text-white cont-sesion">
-                                
+
                                 @if (Auth::check())
                                     @if (Auth::user()->role_as == 0) {{-- Middleware para redirigir al panel de cliente --}}
                                         <div class="row">
@@ -202,22 +202,27 @@ div {
                                 @else
                                     <a href="{{ route('login') }}" class="link-sesion">
                                         INICIAR SESIÓN
-                                    </a> 
+                                    </a>
                                 @endif
-                                
+
                             </div>
                         </div>
                         <div class="cola col-xxl-1 col-xl-1 header-lg borde-col">
                             <div class="row">
                                 <div class="cola col-xxl-8 col-xl-9 position-relative contenedor-carrito">
-                                    <a href="{{ route('cart.index') }}" class="link-carrito">
-                                        <img src="{{ asset('img/header/carrito.png') }}" alt="" class="img-fluid borde-icon img-carrito vertical-shake">
-                                    </a>
-                                    <div class="cola col-6 text-center position-absolute top-0 start-100 translate-middle-y cont-carrito">
-                                        <span class="badge badge-pill badge-danger fs-5">
-                                            {{ array_sum(array_column((array) session('cart'), 'quantity')) }}
-                                        </span>
-                                    </div>
+                                    @if (Auth::check())
+                                        @if (Auth::user()->role_as == 0)
+                                        <a href="{{ route('cart.index') }}" class="link-carrito">
+                                            <img src="{{ asset('img/header/carrito.png') }}" alt="" class="img-fluid borde-icon img-carrito vertical-shake">
+                                        </a>
+                                        <div class="cola col-6 text-center position-absolute top-0 start-100 translate-middle-y cont-carrito">
+                                            <span class="badge badge-pill badge-danger fs-5">
+                                                {{ array_sum(array_column((array) session('cart'), 'quantity')) }}
+                                            </span>
+                                        </div>
+                                        @endif
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
@@ -233,8 +238,8 @@ div {
                     </div>
                 </div>
             </div>
-            
-           
+
+
         </div>
     </div>
     <!-- Modal lg -->
@@ -292,7 +297,7 @@ div {
                                         @else
                                             <a href="{{ route('login') }}" class="link-sesion">
                                                 INICIAR SESIÓN
-                                            </a> 
+                                            </a>
                                         @endif
                                     </div>
                                 </div>
@@ -405,7 +410,7 @@ div {
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
     <!-- Modal sm -->
     <div class="col-12 menu-modal_sm position-absolute top-0 end-0 py-5" style="z-index: 9999; background-color: var(--morado-fondo); pointer-events: auto; overflow-y: auto; height: 100vh;">
         <div class="col-11 mb-5 mx-auto">
@@ -436,7 +441,7 @@ div {
                                             </div>
                                         </div>
                                     @endif
-                                </div> 
+                                </div>
                                 <div class="cola col-lg-4 col-md-4 col-sm-4 col-6 mx-auto header-sm borde-col fw-bolder">
                                     <div class="cola col-11 text-center borde-col position-relative text-white cont-sesion_modal">
                                         @if (Auth::check())
@@ -461,8 +466,8 @@ div {
                                         @else
                                             <a href="{{ route('login') }}" class="link-sesion">
                                                 INICIAR SESIÓN
-                                            </a> 
-                                        @endif 
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="cola col-lg-2 col-md-2 col-sm-3 col-4 mx-auto header-sm borde-col">
