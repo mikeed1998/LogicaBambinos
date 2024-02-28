@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Elemento extends Model
 {
-    protected $guarded = [
-        'id'
-    ];
+    protected $fillable = [
+		'elemento','texto','imagen','url','activo','orden','seccion',
+	];
 }

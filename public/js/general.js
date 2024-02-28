@@ -6,7 +6,7 @@ $('.editar_text_seccion_global').change(function(e) {
     var campo = $(this).attr("data-campo");
     var valor = ($(this).val() === '') ? null : $(this).val();
     var tcsrf = $('meta[name="csrf-token"]').attr('content');
-    // var url = $(this).attr("data-url");
+    var url = $(this).attr("data-url");
 
     console.log(id);
     console.log(tabla);
@@ -17,7 +17,7 @@ $('.editar_text_seccion_global').change(function(e) {
 
     $.ajax({
         // url: '/advanced/varios/editarajax',
-        url: '/varios/editarajax',
+        url: url,
         type: 'post',
         dataType: 'json',
         data: {

@@ -8,6 +8,9 @@
     use Illuminate\App\Http\Controllers\PasarelaPagoCLIPController;
     use Illuminate\App\Http\Controllers\LoginController;
     use Illuminate\App\Http\Controllers\PdfController;
+    use Illuminate\App\Http\Controllers\CorreosController;
+    use Illuminate\App\Http\Controllers\FuncionGeneralController;
+
 
     // Rutas del front general / Sin restricciones de middleware
     Route::get('/', 'FrontController@home')->name('front.home');
@@ -30,6 +33,7 @@
     // Rutas exclusivas del usuario tipo vendedor
     Route::group(['middleware' => ['auth', 'isSeller']], function() {
         Route::get('homeV', 'VendedorController@index')->name('vendedor.home');
+        Route::get('crearOrden', 'VendedorController@create')->name('vendedor.create');
     });
 
     // Rutas exclusivas del administrador / aquí van los subrutas autoadministrables
@@ -43,7 +47,7 @@
         });
     });
 
-    // Rutas para el acceso y manipulación del carrito de compras
+    // Rutas para el acceso y manipulación del carrito de compras, ruta exclusiva para clientes
     Route::group(['middleware' => 'isCarrito'], function () {
         Route::get('cart', 'CarritoController@index')->name('cart.index');
         Route::get('add-to-cart/{id}', 'CarritoController@addToCart')->name('cart.addToCart');
@@ -53,17 +57,20 @@
         Route::get('datos-envio', 'CarritoController@datosEnvio')->name('cart.datosEnvio');
     });
 
-    // Pasarela de pago CLIP
+    // Pasarela de pago CLIP, ruta exclusiva para clientes
     Route::group(['middleware' => 'isPasarelaPago'], function () {
         Route::get('pasarela-clip', 'PasarelaPagoCLIPController@index')->name('clip.index');
     });
 
     // rutas funciones generales AJAX
     Route::prefix('varios')->name('func.')->group(function(){
-        Route::post('editarajax','FuncGenController@editajax')->name('editajax');
+        Route::post('editarajax','FuncionGeneralController@editajax')->name('editajax');
     });
 
     // Genear facturas
     Route::get('/pdf', 'PdfController@generatePdf');
+
+   /** rutas de los formularios de contacto */
+    Route::post('/correo', 'CorreosController@correo')->name('correo');
 
 

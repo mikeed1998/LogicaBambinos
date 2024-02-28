@@ -6,8 +6,8 @@
     src: url('vendor/fonts/Mairy_Bold.otf') format('opentype');
 }
 
-div {
-    font-family: 'Mairy Bold';
+header > div {
+
 }
 
 /* header {
@@ -136,7 +136,7 @@ div {
 </header> --}}
 
 
-<header class="container-fluid" style="position: sticky; top: 0; z-index: 9999;">
+<header class="container-fluid" style="position: sticky; top: 0; z-index: 9999; font-family: 'Mairy Bold';">
     <div class="row" style="z-index: 9999;">
         <div class="cola col position-relative">
             <div class="row">

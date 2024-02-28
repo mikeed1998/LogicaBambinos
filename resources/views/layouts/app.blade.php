@@ -27,6 +27,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <script src="{{ asset('js/general.js') }}"></script>
 </head>
 <body>
     @include('layouts.partials.header')
@@ -47,6 +49,8 @@
             @yield('content')
         </main>
     </div>
+
+    {!! Toastr::message() !!}
 
     @yield('scripts')
 </body>

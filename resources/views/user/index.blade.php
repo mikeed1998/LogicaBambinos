@@ -14,6 +14,11 @@
                         </div>
                     @endif
 
+                    <div class="row">
+                        <div class="col-3">
+                            <img src="{{ ($usuario->imagen == '') ? asset('img/photos/usuarios/default.png') : asset('img/photos/usuarios/'.$usuario->imagen) }}" alt="" class="img-fluid">
+                        </div>
+                    </div>
                     Datos de usuario
 
                     <div class="row">
