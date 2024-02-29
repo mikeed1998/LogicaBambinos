@@ -7,6 +7,7 @@ use App\Seccion;
 use App\Elemento;
 use App\User;
 use Auth;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -19,7 +20,8 @@ class HomeController extends Controller
     {
         $userId = Auth::user()->id;
         $usuario = User::find($userId);
+        $fechaActual = Carbon::now()->toDateString();
 
-        return view('user.index', compact('usuario'));
+        return view('user.index', compact('usuario', 'fechaActual'));
     }
 }

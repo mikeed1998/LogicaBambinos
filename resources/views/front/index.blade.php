@@ -2,29 +2,15 @@
 
 @section('titulo', 'Home')
 
+@section('styleExtras')
+@endsection
+
 @section('content')
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <h1>PAGINA FRONT PUBLICO</h1>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col">
-                Formulario
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <form action="{{ route('correo') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="tipoCorreo" value="FormularioContacto">
-                    <input type="submit" value="Testear">
-                </form>
+            <div class="col text-center fs-1">
+                Página principal
             </div>
         </div>
     </div>
@@ -32,6 +18,5 @@
 @endsection
 
 @section('scripts')
-
 @endsection
 

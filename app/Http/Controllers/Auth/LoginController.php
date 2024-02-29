@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 
 class LoginController extends Controller
 {
@@ -22,18 +23,22 @@ class LoginController extends Controller
         {
             if ($request->from == 0) {
                 Auth::logout();
-                return redirect('/')->with('error', 'Esta no es la ruta para acceder al administrador');
+                \Toastr::error('Esta no es la ruta para acceder al administrador');
+                return redirect('/');
             } else {
-                return redirect('/homeA')->with('status', 'Has iniciado sesión como administrador');
+                \Toastr::success('Has iniciado sesión como administrador');
+                return redirect('/homeA');
             }
         }
         elseif(Auth::user()->role_as == '2')    // Vendedor
         {
-            return redirect('/homeV')->with('status', 'Has iniciado sesión con privilegios de vendedor');
+            \Toastr::success('Has iniciado sesión con privilegios de vendedor');
+            return redirect('/homeV');
         }
         elseif(Auth::user()->role_as == '0')    // Usuario normal
         {
-            return redirect('/home')->with('status', 'Has iniciado sesión');
+            \Toastr::success('Has iniciado sesión');
+            return redirect('/home');
         }
     }
 
@@ -48,7 +53,7 @@ class LoginController extends Controller
         Session::forget('cart'); // Limpiar la sesión del carrito
         Session::forget('cartTotal');
         Session::forget('cartTotalUnits');
-
+        \Toastr::success('Has salido de tu cuenta');
         return redirect('/'); // Redirigir a la página de inicio de sesión u otra página según tus necesidades
     }
 }

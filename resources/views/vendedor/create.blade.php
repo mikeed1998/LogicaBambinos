@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col mt-2">
-                                            <input type="submit" class="btn w-100 btn-success fs-5" value="Generar cuenta">
+                                            <input type="submit" class="btn w-100 btn-success fs-5" value="Seleccionar cuenta">
                                         </div>
                                     </div>
                                 </div>

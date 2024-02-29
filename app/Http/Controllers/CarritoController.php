@@ -136,7 +136,7 @@ class CarritoController extends Controller
         if($total == 0.0) {
             return redirect()->back()->with('error', 'El carrito esta vacio, no puedes continuar.');
         } else {
-            \Toastr::success('Operation successful!');
+            // \Toastr::success('Operation successful!');
             return view('cart.envio', compact('cart', 'total', 'usuario'));
         }
     }
