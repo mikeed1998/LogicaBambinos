@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col border">
-                                        <div class="row">
+                                        <div class="row mt-md-0 mt-5">
                                             <div class="col-md-6 py-2 col-12 border border-dark fs-5">
                                                 Orden
                                             </div>
@@ -163,7 +163,7 @@
                                             </div>
                                         </div>
                                         <div class="row align-items-center">
-                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5">FKJ3H34J3KJ43J43H4J3</div>
+                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5 fw-bolder">FKJ3H34J3KJ43J43H4J3</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">{{ $fechaActual }}</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5 px-0"><a href="#/" class="nav-link h-100 h-100 w-100 text-center text-dark rounded-0 boton-pendiente">Pendiente</a></div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">
@@ -186,8 +186,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5">FKJ3H34J3KJ43J43H4J3</div>
+                                        <div class="row mt-md-0 mt-5">
+                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5 fw-bolder">FKJ3H34J3KJ43J43H4J3</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">{{ $fechaActual }}</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5 text-center boton-confirmado px-0">Confirmado</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">
@@ -210,8 +210,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5">FKJ3H34J3KJ43J43H4J3</div>
+                                        <div class="row mt-md-0 mt-5">
+                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5 fw-bolder">FKJ3H34J3KJ43J43H4J3</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">{{ $fechaActual }}</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5 px-0"><a href="#/" class="nav-link h-100 w-100 text-center text-dark rounded-0 boton-procesado">Procesado</a></div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">
@@ -234,8 +234,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5">FKJ3H34J3KJ43J43H4J3</div>
+                                        <div class="row mt-md-0 mt-5">
+                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5 fw-bolder">FKJ3H34J3KJ43J43H4J3</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">{{ $fechaActual }}</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5 px-0"><a href="#/" class="nav-link h-100 w-100 text-center text-dark rounded-0 boton-enviado">Enviado</a></div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">
@@ -258,8 +258,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5">FKJ3H34J3KJ43J43H4J3</div>
+                                        <div class="row mt-md-0 mt-5">
+                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5 fw-bolder">FKJ3H34J3KJ43J43H4J3</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">{{ $fechaActual }}</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5 px-0"><a href="#/" class="nav-link h-100 w-100 text-center text-dark rounded-0 boton-entregado">Entregado</a></div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">
@@ -282,8 +282,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5">FKJ3H34J3KJ43J43H4J3</div>
+                                        <div class="row mt-md-0 mt-5">
+                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5 fw-bolder">FKJ3H34J3KJ43J43H4J3</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">{{ $fechaActual }}</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5 px-0"><a href="#/" class="nav-link h-100 w-100 text-center text-dark rounded-0 boton-cancelado">Cancelado</a></div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">
@@ -306,8 +306,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5">FKJ3H34J3KJ43J43H4J3</div>
+                                        <div class="row mt-md-0 mt-5">
+                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5 fw-bolder">FKJ3H34J3KJ43J43H4J3</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">{{ $fechaActual }}</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5 px-0"><a href="#/" class="nav-link h-100 w-100 text-center text-dark rounded-0 boton-devuelto">Devuelto</a></div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">
@@ -330,8 +330,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5">FKJ3H34J3KJ43J43H4J3</div>
+                                        <div class="row mt-md-0 mt-5">
+                                            <div class="col-md-6 py-2 col-12 border border-dark fs-5 fw-bolder">FKJ3H34J3KJ43J43H4J3</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">{{ $fechaActual }}</div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5 px-0"><a href="#/" class="nav-link h-100 w-100 text-center text-dark rounded-0 boton-reembolsado">Reembolsado</a></div>
                                             <div class="col-md-2 py-2 col-12 border border-dark fs-5">
