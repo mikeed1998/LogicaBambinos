@@ -2,16 +2,24 @@
 
 @section('content')
 
-
+    <style>
+        body {
+            background-color: var(--morado-fondo);
+        }
+    </style>
 
     <div class="container-fluid">
         <div class="row">
             <div class="col-9 mx-auto py-3">
-                <a href="{{ route('vendedor.home') }}" class="btn btn-secondary rounded">Volver a mi panel</a>
+                <div class="row">
+                    <div class="col-4">
+                        <a href="{{ route('vendedor.home') }}" class="btn btn-danger w-100 rounded">Volver a mi panel</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-9 py-5 mx-auto border">
+            <div class="col-9 py-5 mx-auto border bg-white rounded">
                 <div class="row">
                     <div class="col-9 mx-auto text-center fs-1">
                         Nueva orden
@@ -103,8 +111,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6 mx-auto">
-                                <label for="producto_cliente_orden" class="form-control-label">Producto que deseas cotizar a tu cliente</label>
+                            <div class="col-6 py-2 mx-auto">
+                                <label for="producto_cliente_orden" class="form-control-label py-2">Producto que deseas cotizar a tu cliente</label>
                                 <select name="producto_cliente_orden" id="producto_cliente_orden" class="form-select">
                                     @foreach ($productos as $p)
                                         <option value="producto-{{ $p->id }}">{{ $p->nombre }}</option>
@@ -125,15 +133,21 @@
             const radioNoTieneCuenta = document.getElementById('ra2');
             const selectUsuarioOrden = document.getElementById('usuario_orden');
             const inputsNoTieneCuenta = document.querySelectorAll('.no-tiene-cuenta input');
+            const btnSeleccionarCuenta = document.querySelector('.tiene-cuenta input[type="submit"]');
+            const btnGenerarCuenta = document.querySelector('.no-tiene-cuenta input[type="submit"]');
 
             // Función para habilitar o deshabilitar elementos según la selección del radio
             function gestionarEstadoElementos() {
                 if (radioTieneCuenta.checked) {
                     selectUsuarioOrden.disabled = false;
                     inputsNoTieneCuenta.forEach(input => input.disabled = true);
+                    btnSeleccionarCuenta.disabled = false;
+                    btnGenerarCuenta.disabled = true;
                 } else if (radioNoTieneCuenta.checked) {
                     selectUsuarioOrden.disabled = true;
                     inputsNoTieneCuenta.forEach(input => input.disabled = false);
+                    btnSeleccionarCuenta.disabled = true;
+                    btnGenerarCuenta.disabled = false;
                 }
             }
 
