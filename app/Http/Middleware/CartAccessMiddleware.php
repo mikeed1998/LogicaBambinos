@@ -15,6 +15,7 @@ class CartAccessMiddleware
 
         session()->put('cartTotal', 0);
         session()->put('cartTotalUnits', 0);
+        session()->put('cartIVA', 0);
 
         return redirect('/login')->with('status', '¡Acceso denegado! Tienes que iniciar sesión');
     }
