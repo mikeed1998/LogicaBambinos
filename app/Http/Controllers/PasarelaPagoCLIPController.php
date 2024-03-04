@@ -18,14 +18,14 @@ class PasarelaPagoCLIPController extends Controller
         $response = $cliente->request('POST', 'https://api-gw.payclip.com/checkout', [
             'body' => '
             {
-                "amount": 1.50,
+                "amount": 1.0,
                 "currency":"MXN",
                 "purchase_description":"ejemplo de compra laravel",
                 "redirection_url":
                 {
-                    "success":"/",
-                    "error":"/home",
-                    "default":"/"
+                    "success":"'.url('clip_success').'",
+                    "error":"'.url('clip_error').'",
+                    "default":"/home"
                 },
                 "expires_at":"",
                 "metadata":{
@@ -68,4 +68,25 @@ class PasarelaPagoCLIPController extends Controller
 
         return view('pagos.CLIP.index', compact('paymentRequestId', 'totalCompra'));
     }
+
+    public function clip_success() {
+        // Logic to handle successful payment (optional)
+        $tipo = 'success';
+        $titulo = '¡Pago exitoso!';
+        $mensaje = 'Tu pago se ha realizado con éxito.';
+        $rutaRedireccion = '/home';
+
+        return view('pagos.CLIP.success', compact('tipo', 'titulo', 'mensaje', 'rutaRedireccion'));
+    }
+
+    public function clip_error() {
+         // Logic to handle payment error (optional)
+        $tipo = 'error';
+        $titulo = '¡Error en el pago!';
+        $mensaje = 'Ocurrió un error al procesar tu pago. Intenta nuevamente.';
+        $rutaRedireccion = '/cart';
+
+        return view('pagos.CLIP.error', compact('tipo', 'titulo', 'mensaje', 'rutaRedireccion'));
+    }
+
 }

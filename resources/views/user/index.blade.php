@@ -60,6 +60,12 @@
         .modal-pedido_close:hover {
             color: black;
         }
+
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
     </style>
 
     <div class="container-fluid">
@@ -209,7 +215,7 @@
                                             <div class="row mt-md-0 mt-5">
                                                 <div class="col-md-6 py-2 col-12 border border-dark fs-5 fw-bolder">FKJ3H34J3KJ43J43H4J3</div>
                                                 <div class="col-md-2 py-2 col-12 border border-dark fs-5">{{ $fechaActual }}</div>
-                                                <div class="col-md-2 py-2 col-12 border border-dark fs-5 text-center boton-{{ $status_list[$i] }} px-0">{{ $status_list[$i] }}</div>
+                                                <div class="col-md-2 py-2 col-12 border border-dark fs-5 no-select text-center text-white fw-bolder text-uppercase boton-{{ $status_list[$i] }} px-0">{{ $status_list[$i] }}</div>
                                                 <div class="col-md-2 py-2 col-12 border border-dark fs-5">
                                                     <div class="row">
                                                         <div class="col-4 text-center">

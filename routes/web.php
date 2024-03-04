@@ -10,6 +10,7 @@
     use Illuminate\App\Http\Controllers\PdfController;
     use Illuminate\App\Http\Controllers\CorreosController;
     use Illuminate\App\Http\Controllers\FuncionGeneralController;
+    use Illuminate\App\Http\Controllers\PedidosController;
 
 
     // Rutas del front general / Sin restricciones de middleware
@@ -34,6 +35,8 @@
     Route::group(['middleware' => ['auth', 'isSeller']], function() {
         Route::get('homeV', 'VendedorController@index')->name('vendedor.home');
         Route::get('crearOrden', 'VendedorController@create')->name('vendedor.create');
+        Route::post('storeCliente', 'VendedorController@storeCliente')->name('storeCliente');
+        Route::post('storeCotizacion', 'VendedorController@storeCotizacion')->name('storeCotizacion');
     });
 
     // Rutas exclusivas del administrador / aquí van los subrutas autoadministrables
@@ -60,6 +63,8 @@
     // Pasarela de pago CLIP, ruta exclusiva para clientes
     Route::group(['middleware' => 'isPasarelaPago'], function () {
         Route::get('pasarela-clip', 'PasarelaPagoCLIPController@index')->name('clip.index');
+        Route::get('clip_success', 'PasarelaPagoCLIPController@clip_success')->name('clip.clip_success');
+        Route::get('clip_error', 'PasarelaPagoCLIPController@clip_error')->name('clip.clip_error');
     });
 
     // rutas funciones generales AJAX

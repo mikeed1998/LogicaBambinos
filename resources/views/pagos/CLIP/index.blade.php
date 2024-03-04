@@ -5,7 +5,7 @@
         header {
             display: none;
         }
-		
+
 		.imagen-clip {
 			position: relative;
 		}
@@ -57,11 +57,10 @@
 								<img src="{{ asset('img/clip/clip_hover.png') }}" alt="Clip al pasar el ratón" class="imagen-hover">
 							</div>
 						</button>
-						<button id="clipCheckoutButton" class="clipCheckoutButton"></button>		
+						<button id="clipCheckoutButton" class="clipCheckoutButton"></button>
 					</div>
 				</div>
-				
-				
+
             </div>
         </div>
     </div>
@@ -90,11 +89,15 @@
 
           if (paymentStatus === 'APPROVED') {
             // Pago exitoso, mostrar mensaje de confirmación
+            console.log("Transacción finalizada con exito");
             alert('Pago exitoso!');
-            // Redireccionar a la página de agradecimiento (opcional)
-            // window.location.href = '/gracias';
+            // Redirect to payment success page after a short delay
+            setTimeout(() => {
+              window.location.href = "{{ route('user.home') }}";
+            }, 2000); // Adjust delay as needed (in milliseconds)
           } else if (paymentStatus === 'DECLINED') {
             // Pago fallido, mostrar mensaje de error
+            console.log("La transaccion ha fallado");
             alert('El pago ha sido rechazado.');
           }
         });

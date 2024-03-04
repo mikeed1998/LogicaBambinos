@@ -73,29 +73,38 @@
                                 <div class="col-9 mx-auto">
                                     <div class="row">
                                         <div class="col fs-4">
-                                            <div class="form-group row">
-                                                <div class="col">
-                                                    <label for="nombre_cliente_orden" class="form-control-label fs-5">Crea el correo para el cliente</label>
-                                                    <input type="text" class="form-control fs-5">
+                                            <form action="{{ route('storeCliente') }}" method="POST">
+                                                @csrf
+                                                <div class="form-group row">
+                                                    <div class="col">
+                                                        <label for="nombre_cliente_orden" class="form-control-label fs-5">Nombre del cliente</label>
+                                                        <input required type="text" id="nombre_cliente_orden" name="nombre_cliente_orden" class="form-control fs-5">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col">
-                                                    <label for="telefono_cliente_orden" class="form-control-label fs-5">Ingresa el teléfono del cliente</label>
-                                                    <input type="text" class="form-control fs-5">
+                                                <div class="form-group row">
+                                                    <div class="col">
+                                                        <label for="email_cliente_orden" class="form-control-label fs-5">Correo del cliente</label>
+                                                        <input required type="email" id="email_cliente_orden" name="email_cliente_orden" class="form-control fs-5">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col">
-                                                    <label for="password_cliente_orden" class="form-control-label fs-5">Contraseña del cliente <br> (si lo dejas vacio, el télefono se usará como contraseña)</label>
-                                                    <input type="text" class="form-control fs-5">
+                                                <div class="form-group row">
+                                                    <div class="col">
+                                                        <label for="telefono_cliente_orden" class="form-control-label fs-5">Ingresa el teléfono del cliente</label>
+                                                        <input required type="text" id="telefono_cliente_orden" name="telefono_cliente_orden" class="form-control fs-5">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col mt-2">
-                                                    <input type="submit" class="btn w-100 btn-success fs-5" value="Generar cuenta">
+                                                <div class="form-group row">
+                                                    <div class="col">
+                                                        <label for="password_cliente_orden" class="form-control-label fs-5">Contraseña del cliente <br> (si lo dejas vacio, el télefono se usará como contraseña)</label>
+                                                        <input type="text" id="password_cliente_orden" name="password_cliente_orden" class="form-control fs-5" value="">
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                <div class="form-group row">
+                                                    <div class="col mt-2">
+                                                        <input type="submit" class="btn w-100 btn-success fs-5" value="Generar cuenta">
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -104,9 +113,9 @@
                     </div>
                 </div>
                 <div class="row my-5">
-                    <div class="col text-center">
+                    <div class="col">
                         <div class="row">
-                            <div class="col fs-1">
+                            <div class="col text-center fs-1">
                                 Asignar producto al cliente
                             </div>
                         </div>
@@ -118,6 +127,16 @@
                                         <option value="producto-{{ $p->id }}">{{ $p->nombre }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="cantidad_cotizacion" class="form-control-label text-start">Cantidad</label>
+                                <input type="number" id="cantidad_cotizacion" name="cantidad_cotizacion" class="form-control">
+                            </div>
+                            <div class="col-4">
+                            </div>
+                            <div class="col-4">
                             </div>
                         </div>
                     </div>
