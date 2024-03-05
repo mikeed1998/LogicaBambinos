@@ -126,18 +126,29 @@ class CarritoController extends Controller
         return response()->json(['success' => true, 'message' => 'Carrito vaciado exitosamente!']);
     }
 
-
     public function datosEnvio() {
         $cart = session()->get('cart');
         $total = session()->get('cartTotal');
+
+        session(['cartEnvio' => 100.00]);
+        $envio = session()->get('cartEnvio');
+
+        session(['cartIVA' => ($total * 0.16)]);
+        $IVA = session()->get('cartIVA');
+
+        session(['cartTotalGNRL' => ($total + $IVA + $envio)]);
+        $totalGNRL = session()->get('cartTotalGNRL');
+
         $userId = Auth::id();
         $usuario = User::find($userId);
+
+        // dd($cart, $total, $IVA, $envio, $totalGNRL);
 
         if($total == 0.0) {
             return redirect()->back()->with('error', 'El carrito esta vacio, no puedes continuar.');
         } else {
             // \Toastr::success('Operation successful!');
-            return view('cart.envio', compact('cart', 'total', 'usuario'));
+            return view('cart.envio', compact('cart', 'total', 'IVA', 'envio', 'totalGNRL', 'usuario'));
         }
     }
 }

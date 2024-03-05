@@ -11,6 +11,10 @@ class PasarelaPagoCLIPController extends Controller
     {
         $cart = session()->get('cart');
         $totalCompra = session()->get('cartTotal');
+        $cantidad_productos = session()->get('cartTotalUnits');
+        $iva = session()->get('cartIVA');
+        $totalGRNL = session()->get('cartTotalGNRL');
+        $envio = session()->get('cartEnvio');
         $cliente = new Client();
 
         // "amount": '.$totalCompra.',
@@ -66,7 +70,7 @@ class PasarelaPagoCLIPController extends Controller
 
         // dd($cart, $T);
 
-        return view('pagos.CLIP.index', compact('paymentRequestId', 'totalCompra'));
+        return view('pagos.CLIP.index', compact('paymentRequestId', 'totalCompra', 'cantidad_productos', 'iva', 'totalGRNL', 'envio'));
     }
 
     public function clip_success() {
