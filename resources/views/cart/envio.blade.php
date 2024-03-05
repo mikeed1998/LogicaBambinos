@@ -107,10 +107,10 @@
 
     </style>
 
-    <div class="container">
+    <div class="container py-5">
         <div class="row mt-2">
             <div class="col text-center">
-                <h3>Revise que todos los datos sean correctos</h3>
+                <div class="display-5 fw-bold">Revise que todos los datos sean correctos</div>
                 {{-- <a href="{{ route('clip.index') }}" class="btn btn-success">Proceder con el pago</a> --}}
                 <div class="row mt-5">
                     <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12 bg-white text-dark shadow carta-blanca">

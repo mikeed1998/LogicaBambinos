@@ -43,7 +43,7 @@
     Route::group(['middleware' => ['auth', 'isAdmin']], function() {
         Route::get('homeA', 'SeccionController@index')->name('admin.index');
         Route::get('contacto', 'SeccionController@contacto')->name('admin.contacto');
-        Route::post('textglobalseccion','SeccionController@textglobalseccion')->name('textglobalseccion');
+
         Route::prefix('secciones')->name('seccion.')->group(function(){
             Route::get('/','SeccionController@index')->name('index');
 			Route::get('/{slug}','SeccionController@show')->name('show');
@@ -68,9 +68,8 @@
     });
 
     // rutas funciones generales AJAX
-    Route::prefix('varios')->name('func.')->group(function(){
         Route::post('editarajax','FuncionGeneralController@editajax')->name('editajax');
-    });
+
 
     // Genear facturas
     Route::get('/pdf', 'PdfController@generatePdf');
@@ -79,4 +78,4 @@
     Route::post('/correo', 'CorreosController@correo')->name('correo');
 
 
-
+    Route::post('textglobalseccion','SeccionController@textglobalseccion')->name('textglobalseccion');

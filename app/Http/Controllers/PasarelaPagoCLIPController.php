@@ -4,6 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\Categoria;
+use App\Subcategoria;
+use App\Producto;
+use App\ProductoCaracteristica;
+use App\ProductoGaleria;
+use Auth;
+use App\User;
+use App\Domicilio;
+use App\DatosEnvio;
+use App\Pedido;
 
 class PasarelaPagoCLIPController extends Controller
 {
@@ -74,17 +84,20 @@ class PasarelaPagoCLIPController extends Controller
     }
 
     public function clip_success() {
-        // Logic to handle successful payment (optional)
+        // El pago funciono
         $tipo = 'success';
         $titulo = '¡Pago exitoso!';
         $mensaje = 'Tu pago se ha realizado con éxito.';
         $rutaRedireccion = '/home';
 
+        // Crear pedido
+
+
         return view('pagos.CLIP.success', compact('tipo', 'titulo', 'mensaje', 'rutaRedireccion'));
     }
 
     public function clip_error() {
-         // Logic to handle payment error (optional)
+         // Lógica opcional, CLIP por defecto solo te pide volver a intentar el pago en lugar de utilizar una vista de error
         $tipo = 'error';
         $titulo = '¡Error en el pago!';
         $mensaje = 'Ocurrió un error al procesar tu pago. Intenta nuevamente.';

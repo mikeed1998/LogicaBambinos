@@ -1,12 +1,14 @@
 
 
 $('.editar_text_seccion_global').change(function(e) {
+
+
     var id = $(this).attr("data-id");
     var tabla = $(this).attr("data-table");
     var campo = $(this).attr("data-campo");
     var valor = ($(this).val() === '') ? null : $(this).val();
     var tcsrf = $('meta[name="csrf-token"]').attr('content');
-    // var url = $(this).attr("data-url");
+    var url = $(this).attr("data-url");
 
     console.log(id);
     console.log(tabla);
@@ -17,7 +19,7 @@ $('.editar_text_seccion_global').change(function(e) {
 
     $.ajax({
         // url: '/advanced/varios/editarajax',
-        url: '/varios/editarajax',
+        url: url,
         type: 'post',
         dataType: 'json',
         data: {
@@ -43,6 +45,7 @@ $('.editar_text_seccion_global').change(function(e) {
 
 });
 
+
 $('.editarajax').change(function(e) {
     var id = $(this).attr("data-id");
     var tabla = $(this).attr("data-table");
@@ -58,7 +61,7 @@ $('.editarajax').change(function(e) {
 
     $.ajax({
         // url: '/advanced/varios/editarajax',
-         url: '/varios/editarajax',
+         url: '/editarajax',
         //url: 'https://proyectoswozial.com/PepeFester/varios/editarajax',
         type: 'post',
         dataType: 'json',
@@ -73,11 +76,11 @@ $('.editarajax').change(function(e) {
     })
     .done(function(msg) {
         console.log(msg);
-        // if (msg.success) {
-        // 	toastr["success"]("Guardado Exitosamente");
-        // }else {
-        // 	toastr["error"]("Error al actualizar");
-        // }
+        if (msg.success) {
+        	toastr["success"]("Guardado Exitosamente");
+        }else {
+        	toastr["error"]("Error al actualizar");
+        }
     })
     .fail(function(msg) {
         console.log("error:");

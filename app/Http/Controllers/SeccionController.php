@@ -43,7 +43,8 @@ class SeccionController extends Controller
     }
 
     public function contacto() {
-        $config = Configuracion::find(1);
+        $config = Configuracion::first();
+        // dd($config);
 
 		return view('config.general.contacto', compact('config'));
     }

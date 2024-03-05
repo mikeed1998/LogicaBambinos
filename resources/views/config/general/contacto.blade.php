@@ -17,21 +17,21 @@
 /* mas estilisado */
 </style>
 @section('content')
-	<div class="row mt-5 py-5 mb-2 px-2">
+	<div class="row mt-5 py-5  px-2">
 		<a href="{{ route('admin.index') }}" class="col col-md-2 btn btn-sm btn-dark mr-auto"><i class="fa fa-reply"></i> Regresar</a>
 	</div>
-	<div class="row justify-content-center">
+	<div class="row justify-content-center p-4">
 		<div class="col-12 col-md-4 p-2">
 			<div class=" h-100 card" style="border-radius: 16px; box-shadow: none;">
 				<div class="card-body">
 					<h5 class="card-title text-center">Teléfonos</h5>
 					<div class="form-group">
 						<label for="telefono"> Teléfono fijo</label>
-						<input type="text" class="form-control editar_text_seccion_global editarajax" data-url="{{route('textglobalseccion')}}" id="telefono" name="telefono" data-id="{{$config->id}}" data-table="configuracion" data-campo="telefono"  value="{{ $config->telefono }}">
-					</div>
+						<input type="text" class="form-control editar_text_seccion_global editarajax" data-url="{{route('textglobalseccion')}}" id="telefono" name="telefono" data-table="configuracions" data-campo="telefono" data-id="{{$config->id}}"  value="{{ $config->telefono }}">
+                    </div>
 					<div class="form-group">
 						<label for="whatsapp"> Whatsapp </label>
-						<input type="text" class="form-control editar_text_seccion_global editarajax" data-url="{{route('textglobalseccion')}}" id="whatsapp" name="whatsapp" data-id="{{$config->id}}" data-table="configuracion" data-campo="whatsapp"  value="{{ $config->whatsapp }}">
+						<input type="text" class="form-control editar_text_seccion_global editarajax" data-url="{{route('textglobalseccion')}}" id="whatsapp" name="whatsapp" data-table="configuracion" data-campo="whatsapp" data-id="{{$config->id}}"  value="{{ $config->whatsapp }}">
 					</div>
 					{{-- <div class="form-group">
 						<label for="whatsapp2"> Whatsapp 2</label>
@@ -126,7 +126,97 @@
 @endsection
 
 @section('jsLibExtras2')
-<script type="text/javascript">
+<script>
+
+
+$('.editar_text_seccion_global').change(function(e) {
+    var id = $(this).attr("data-id");
+    var tabla = $(this).attr("data-table");
+    var campo = $(this).attr("data-campo");
+    var valor = ($(this).val() === '') ? null : $(this).val();
+    var tcsrf = $('meta[name="csrf-token"]').attr('content');
+    // var url = $(this).attr("data-url");
+    console.log("Valor antes de la llamada AJAX: " + valor);
+    console.log(id);
+    console.log(tabla);
+    console.log(campo);
+    console.log(valor);
+    console.log(tcsrf);
+    console.log(url);
+
+    $.ajax({
+        // url: '/advanced/varios/editarajax',
+        url: '/varios/editarajax',
+        type: 'post',
+        dataType: 'json',
+        data: {
+            "id": id,
+            "_method": 'post',
+            "_token": tcsrf,
+            "tabla": tabla,
+            "campo": campo,
+            "valor": valor
+        }
+    })
+    .done(function(msg) {
+        if (msg.success) {
+            toastr["success"]("Guardado Exitosamente");
+        }else {
+            toastr["error"]("Error al actualizar");
+        }
+    })
+    .fail(function(msg) {
+        console.log("error:");
+        console.log(msg);
+    });
+
+});
+
+$('.editarajax').change(function(e) {
+    var id = $(this).attr("data-id");
+    var tabla = $(this).attr("data-table");
+    var campo = $(this).attr("data-campo");
+    var valor = ($(this).val() === '') ? null : $(this).val();
+    var tcsrf = $('meta[name="csrf-token"]').attr('content');
+
+    console.log(id);
+    console.log(tabla);
+    console.log(campo);
+    console.log(valor);
+    console.log(tcsrf);
+
+    $.ajax({
+        // url: '/advanced/varios/editarajax',
+         url: '/varios/editarajax',
+        //url: 'https://proyectoswozial.com/PepeFester/varios/editarajax',
+        type: 'post',
+        dataType: 'json',
+        data: {
+            "id": id,
+            "_method": 'post',
+            "_token": tcsrf,
+            "tabla": tabla,
+            "campo": campo,
+            "valor": valor
+        }
+    })
+    .done(function(msg) {
+        console.log(msg);
+        if (msg.success) {
+        	toastr["success"]("Guardado Exitosamente");
+        }else {
+        	toastr["error"]("Error al actualizar");
+        }
+    })
+    .fail(function(msg) {
+        console.log("error:");
+        console.log(msg);
+    });
+    // .always(function(msg) {
+    // 	console.log("complete");
+    // 	// console.log(msg);
+    // });
+});
 
 </script>
 @endsection
