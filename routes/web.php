@@ -22,7 +22,7 @@
     // Login cutomizado para el admin, redirigir en caso de estar logeado con privilegios de admin
     Route::get('/admin', 'FrontController@admin')->name('front.admin')->middleware('checkAdminAccess');
 
-    // Rutas de sesión de ususarios
+    // Rutas de sesión de usuarios
     Auth::routes();
     Route::get('/logout', 'LoginController@logout')->name('logout');
 
@@ -77,5 +77,6 @@
 
    /** rutas de los formularios de contacto */
     Route::post('/correo', 'CorreosController@correo')->name('correo');
+
 
 

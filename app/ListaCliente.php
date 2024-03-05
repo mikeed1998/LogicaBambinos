@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PedidoDetalle extends Model
+class ListaCliente extends Model
 {
     protected $guarded = [
         'id',

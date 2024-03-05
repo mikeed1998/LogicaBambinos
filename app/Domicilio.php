@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Domicilio extends Model
 {
-    //
+    protected $guarded = [
+        'id',
+    ];
 }

@@ -15,8 +15,9 @@ class CreatePedidosTable extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('domicilio')->nullable();
-            $table->integer('usuario')->nullable();
+            $table->unsignedBigInteger('domicilio')->nullable();
+            $table->unsignedBigInteger('usuario')->nullable();
+            $table->unsignedBigInteger('vendedor')->nullable();
             $table->string('uid')->nullable();
             $table->integer('estatus')->default(0);
             $table->string('guia')->nullable();
@@ -34,6 +35,7 @@ class CreatePedidosTable extends Migration
             $table->text('envia_resp')->nullable();
             $table->foreign('domicilio')->references('id')->on('domicilios')->onDelete('cascade');
             $table->foreign('usuario')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('vendedor')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

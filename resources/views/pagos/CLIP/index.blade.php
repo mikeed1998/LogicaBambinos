@@ -82,8 +82,8 @@
                                             <td>${{ $envio }}</td>
                                         </tr>
                                         <tr>
-                                            <th>TOTAL</th>
-                                            <td>${{ $totalGRNL }}</td>
+                                            <th class="fs-5 fw-bold">TOTAL</th>
+                                            <td class="fs-5 fw-bold">${{ $totalGRNL }}</td>
                                         </tr>
                                     </table>
                                 </div>

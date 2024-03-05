@@ -15,7 +15,7 @@ class CreateDomiciliosTable extends Migration
     {
         Schema::create('domicilios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('usuario')->nullable();
+            $table->unsignedBigInteger('usuario')->nullable();
             $table->text('alias')->nullable();
             $table->text('calle')->nullable();
             $table->text('numero_exterior')->nullable();

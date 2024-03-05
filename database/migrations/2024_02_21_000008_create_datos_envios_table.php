@@ -22,7 +22,6 @@ class CreateDatosEnviosTable extends Migration
             $table->text('numero_interior')->nullable();
             $table->string('pais')->nullable();
             $table->string('estado')->nullable();
-            $table->string('pais')->nullable();
             $table->string('colonia')->nullable();
             $table->string('codigo_postal')->nullable();
             $table->text('aux')->nullable();

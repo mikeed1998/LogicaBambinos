@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('role_as')->default('0');
             $table->date('fecha_nacimiento')->nullable();
             $table->integer('telefono')->nullable();
+            $table->string('RFC')->nullable();
+            $table->string('asesorado')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
