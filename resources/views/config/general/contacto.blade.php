@@ -96,11 +96,11 @@
 					<h5 class="card-title text-center">Mapa</h5>
 					<div class="form-group">
 						<label for="mapa">  URL de Mapa </label>
-						<input type="text" class="form-control editarajax" id="mapa" name="mapa" data-id="{{$config->id}}" data-table="configuracion" data-campo="mapa"  value="{{ $config->mapa }}">
+						<input type="text" class="form-control editarajax" id="mapa" name="mapa" data-model="Configuracion" data-field="mapa" data-id="{{$config->id}}"  value="{{ $config->mapa }}">
 					</div>
 					<div class="form-group">
 						<label for="direccion">  Dirección </label>
-						<textarea rows="3" style="resize:none;" class="form-control editarajax" id="direccion" name="direccion" data-id="{{$config->id}}" data-table="configuracion" data-campo="direccion">{{ $config->direccion }}</textarea>
+						<textarea rows="3" style="resize:none;" class="form-control editarajax" id="direccion" name="direccion" data-model="Configuracion" data-field="direccion" data-id="{{$config->id}}">{{ $config->direccion }}</textarea>
 					</div>
 				</div>
 			</div>

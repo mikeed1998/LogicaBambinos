@@ -1,5 +1,4 @@
 <?php
-
     use Illuminate\App\Http\Controllers\HomeController;
     use Illuminate\App\Http\Controllers\SeccionController;
     use Illuminate\App\Http\Controllers\VendedorController;
@@ -25,25 +24,24 @@
     // Login cutomizado para el admin, redirigir en caso de estar logeado con privilegios de admin
     Route::get('/admin', 'FrontController@admin')->name('front.admin')->middleware('checkAdminAccess');
 
-
     // Rutas de sesión de usuarios
     Auth::routes();
     Route::get('/logout', 'LoginController@logout')->name('logout');
 
     // Rutas exclusivas del ususario tipo cliente
     Route::group(['middleware' => ['auth', 'isClient']], function() {
-        Route::get('home', 'HomeController@index')->name('user.home');
+        Route::get('home', 'HomeController@index')->name('user.home');  // Dashboard cliente
     });
 
-    // Rutas exclusivas del usuario tipo vendedor
+    // Rutas exclusivas del usuario tipo asesor/vendedor
     Route::group(['middleware' => ['auth', 'isSeller']], function() {
-        Route::get('homeV', 'VendedorController@index')->name('vendedor.home');
+        Route::get('homeV', 'VendedorController@index')->name('vendedor.home');     // Dashboard vendedor/asesor
         Route::get('crearOrden', 'VendedorController@create')->name('vendedor.create');
         Route::post('storeCliente', 'VendedorController@storeCliente')->name('storeCliente');
         Route::post('storeCotizacion', 'VendedorController@storeCotizacion')->name('storeCotizacion');
     });
 
-    // Rutas exclusivas del administrador / aquí van los subrutas autoadministrables
+    // Rutas exclusivas del administrador / aquí van los subrutas auto administrables
     Route::group(['middleware' => ['auth', 'isAdmin']], function() {
         Route::get('homeA', 'SeccionController@index')->name('admin.index');
 
@@ -81,17 +79,20 @@
 
     // Pasarela de pago CLIP, ruta exclusiva para clientes
     Route::group(['middleware' => 'isPasarelaPago'], function () {
+        // PayCLIP
         Route::get('pasarela-clip', 'PasarelaPagoCLIPController@index')->name('clip.index');
         Route::get('clip_success', 'PasarelaPagoCLIPController@clip_success')->name('clip.clip_success');
         Route::get('clip_error', 'PasarelaPagoCLIPController@clip_error')->name('clip.clip_error');
+        // Conekta
+        // OpenPay
+        // PayPal
+        // Stripe
     });
 
-    // Editar inputs y textarea con AJAX
+    // Rutas para editar usando AJAX
     Route::patch('/editarajax', 'AJAXController@editarajax');
-
     // Genear facturas
     Route::get('/pdf', 'PdfController@generatePdf');
-
    /** rutas de los formularios de contacto */
     Route::post('/correo', 'CorreosController@correo')->name('correo');
 
