@@ -8,6 +8,7 @@ use App\Elemento;
 use App\User;
 use Auth;
 use Carbon\Carbon;
+use App\Domicilio;
 
 class HomeController extends Controller
 {
@@ -21,7 +22,8 @@ class HomeController extends Controller
         $userId = Auth::user()->id;
         $usuario = User::find($userId);
         $fechaActual = Carbon::now()->toDateString();
+        $domicilio = Domicilio::where('usuario', $userId)->first();
 
-        return view('user.index', compact('usuario', 'fechaActual'));
+        return view('user.index', compact('usuario', 'fechaActual', 'domicilio'));
     }
 }

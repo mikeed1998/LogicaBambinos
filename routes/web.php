@@ -91,6 +91,7 @@
 
     // Rutas para editar usando AJAX
     Route::patch('/editarajax', 'AJAXController@editarajax');
+    Route::post('cambiar_imagen', 'AJAXController@cambiar_imagen')->name('cambiar_imagen');
     // Genear facturas
     Route::get('/pdf', 'PdfController@generatePdf');
    /** rutas de los formularios de contacto */

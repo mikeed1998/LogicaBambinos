@@ -45,7 +45,8 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            // 'root' => storage_path('app'), // guardar en la carpeta storage
+            'root' => public_path(),  // guardar en la carpeta publica
         ],
 
         'public' => [
