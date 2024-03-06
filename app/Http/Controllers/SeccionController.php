@@ -30,6 +30,7 @@ class SeccionController extends Controller
         $elementos = Elemento::where('seccion',$seccion->id)->get();
         $elem_general = Elemento::all();
         $faqs = Faq::all();
+        $politicas = Politica::all();
 
         if($seccion->seccion == 'configuracion') {
             $ruta = 'config.general.contacto';
@@ -41,7 +42,7 @@ class SeccionController extends Controller
             $ruta = 'config.secciones.'.$seccion->seccion;
         }
 
-        return view($ruta, compact('seccion', 'config', 'elem_general', 'faqs'));
+        return view($ruta, compact('seccion', 'config', 'elem_general', 'faqs', 'politicas'));
     }
 
 }

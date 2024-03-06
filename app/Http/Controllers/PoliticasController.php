@@ -13,7 +13,7 @@ class PoliticasController extends Controller
     }
 
     public function create() {
-        return view('config.polititcas.create');
+
     }
 
     public function store(Request $request) {
@@ -30,7 +30,10 @@ class PoliticasController extends Controller
     }
 
     public function update(Request $request, $id) {
-        //
+        $politica = Politica::find($id);
+        $politica->descripcion = $request->descripcion;
+        $politica->update();
+        return redirect()->back();
     }
 
     public function destroy($id) {

@@ -46,7 +46,12 @@
     // Rutas exclusivas del administrador / aquí van los subrutas autoadministrables
     Route::group(['middleware' => ['auth', 'isAdmin']], function() {
         Route::get('homeA', 'SeccionController@index')->name('admin.index');
-        Route::resource('/politicas', PoliticasController::class);
+
+        Route::prefix('politicas')->name('politicas.')->group(function(){
+            Route::get('/','PoliticasController@index')->name('index');
+            Route::get('/edit/{id}','PoliticasController@edit')->name('edit');
+            Route::put('/update/{id}','PoliticasController@update')->name('update');
+        });
 
         Route::prefix('faqs')->name('faqs.')->group(function(){
             Route::get('/','FAQController@index')->name('index');
