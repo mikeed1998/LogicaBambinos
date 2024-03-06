@@ -34,7 +34,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <script src="{{ asset('js/general.js') }}"></script>
+    <script src="{{ asset('js/ajax.js') }}"></script>
     @yield('styleExtras')
 </head>
 <body>

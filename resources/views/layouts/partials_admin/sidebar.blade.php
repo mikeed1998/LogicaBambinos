@@ -1,34 +1,49 @@
+<style>
+    .link-sider-admin {
+        text-decoration: none;
+        color: #FFFFFF;
+    }
 
-<div id="" class="side-nav fixed p-0 pt-3" style="background: none; box-shadow: none;">
-    <div class="mt-5 pb-5" style="background: black; border-radius: 16px;  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.291);">
-        <ul class="custom-scrollbar" style="">
-            <li class="logo-sn waves-effect py-3">
-                <div class="text-center">
-                    <a href="{{ url('admin') }}">
-                        <img class="img-fluid" src="{{asset('img/design/logo_woz.png')}}">
-                    </a>
-                </div>
-            </li>
-            <li>
-                <ul class="collapsible collapsible-accordion">
-                    <li class="p-2">
-                        <a href="{{ route('admin.contacto') }}" class="collapsible-header waves-effect text-white fs-5 {{ (request()->is('contacto')) ? 'active' : '' }}" style="border-radius: 16px; text-decoration: none; "><i class="bi bi-gear-fill"></i> Configuración</a>
-                    </li>
-                    <li class="p-2">
-                        <a href="{{ route('seccion.show', ['slug' => 'home'])}}" class="text-white fs-5" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-house-door-fill"></i> Adm. Home</a>
-                    </li>
-                    <li class="p-2">
-                        <a href="{{ route('seccion.show', ['slug' => 'nosotros'])}}" class="text-white fs-5" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-house-door-fill"></i> Adm. Nosotros</a>
-                    </li>
-                    <li class="p-2">
-                        <a href="{{ route('seccion.show', ['slug' => 'contacto'])}}" class="text-white fs-5" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-house-door-fill"></i> Adm. Contacto</a>
-                    </li>
-                    {{-- <li class="p-2"> --}}
-                        {{-- <a href="{{ url('admin/config/') }}" class="collapsible-header waves-effect {{ (request()->is('admin/config')) ? 'active' : '' }}" style="border-radius: 16px; text-decoration: none; "><i class="w-fa fas fa-cog"></i>Configuración</a> --}}
-                        {{-- <a href="{{ route('vacante.index') }}" class="collapsible-header waves-effect {{ (request()->is('admin/vacantes')) ? 'active' : '' }}" style="border-radius: 16px; text-decoration: none; "><i class="w-fa fas fa-search"></i>Vacantes</a>
-                    </li> --}}
-                </ul>
-            </li>
-        </ul>
+    .link-sider-admin:hover {
+        text-decoration: underline;
+        color: #FFFFFF;
+    }
+
+</style>
+
+<div class="row sidebar">
+    <div class="col-10 mx-auto" style="background: black; border-radius: 16px; margin-top: 5rem;">
+        <div class="row">
+            <div class="col py-3 text-center">
+                <a href="{{ url('admin') }}">
+                    <img src="{{ asset('img/design/logo_woz.png') }}" class="img-fluid">
+                </a>
+            </div>
+        </div>
+        <div class="row pt-3 pb-5">
+            <div class="col-9 py-2 mx-auto">
+                <a href="{{ route('seccion.show', ['slug' => 'configuracion'])}}" class="link-sider-admin" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-gear-fill"></i> Configuración</a>
+            </div>
+            <div class="col-9 py-2 mx-auto">
+                <a href="{{ route('seccion.show', ['slug' => 'politicas'])}}" class="link-sider-admin" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-shield-fill-exclamation"></i> Políticas</a>
+            </div>
+            <div class="col-9 py-2 mx-auto">
+                <a href="{{ route('seccion.show', ['slug' => 'faqs'])}}" class="link-sider-admin" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-question-circle-fill"></i> FAQS</a>
+            </div>
+            <div class="col-9 py-2 mx-auto">
+                <a href="{{ route('seccion.show', ['slug' => 'home'])}}" class="link-sider-admin" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-house-door-fill"></i> Home</a>
+            </div>
+            <div class="col-9 py-2 mx-auto">
+                <a href="{{ route('seccion.show', ['slug' => 'nosotros'])}}" class="link-sider-admin" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-postcard-fill"></i> Nosotros</a>
+            </div>
+            <div class="col-9 py-2 mx-auto">
+                <a href="{{ route('seccion.show', ['slug' => 'contacto'])}}" class="link-sider-admin" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-send-fill"></i> Contacto</a>
+            </div>
+            <div class="col-9 py-2 mx-auto">
+                <a href="{{ route('seccion.show', ['slug' => 'catalogo'])}}" class="link-sider-admin" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-shop"></i> Catalogo</a>
+            </div>
+        </div>
     </div>
 </div>
+
+

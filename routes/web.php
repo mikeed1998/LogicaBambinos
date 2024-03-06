@@ -11,6 +11,9 @@
     use Illuminate\App\Http\Controllers\CorreosController;
     use Illuminate\App\Http\Controllers\FuncionGeneralController;
     use Illuminate\App\Http\Controllers\PedidosController;
+    use Illuminate\App\Http\Controllers\AJAXController;
+    use Illuminate\App\Http\Controllers\PoliticasController;
+    use Illuminate\App\Http\Controllers\FAQController;
 
 
     // Rutas del front general / Sin restricciones de middleware
@@ -21,6 +24,7 @@
     Route::get('/productos', 'ProductoController@index')->name('front.productos');
     // Login cutomizado para el admin, redirigir en caso de estar logeado con privilegios de admin
     Route::get('/admin', 'FrontController@admin')->name('front.admin')->middleware('checkAdminAccess');
+
 
     // Rutas de sesión de usuarios
     Auth::routes();
@@ -42,7 +46,17 @@
     // Rutas exclusivas del administrador / aquí van los subrutas autoadministrables
     Route::group(['middleware' => ['auth', 'isAdmin']], function() {
         Route::get('homeA', 'SeccionController@index')->name('admin.index');
-        Route::get('contacto', 'SeccionController@contacto')->name('admin.contacto');
+        Route::resource('/politicas', PoliticasController::class);
+
+        Route::prefix('faqs')->name('faqs.')->group(function(){
+            Route::get('/','FAQController@index')->name('index');
+            Route::get('/create','FAQController@create')->name('create');
+            Route::post('/store','FAQController@store')->name('store');
+            Route::get('/show/{id}','FAQController@show')->name('show');
+            Route::get('/edit/{id}','FAQController@edit')->name('edit');
+            Route::put('/update/{id}','FAQController@update')->name('update');
+            Route::delete('/destoy','FAQController@destroy')->name('destroy');
+        });
 
         Route::prefix('secciones')->name('seccion.')->group(function(){
             Route::get('/','SeccionController@index')->name('index');
@@ -67,9 +81,8 @@
         Route::get('clip_error', 'PasarelaPagoCLIPController@clip_error')->name('clip.clip_error');
     });
 
-    // rutas funciones generales AJAX
-        Route::post('editarajax','FuncionGeneralController@editajax')->name('editajax');
-
+    // Editar inputs y textarea con AJAX
+    Route::patch('/editarajax', 'AJAXController@editarajax');
 
     // Genear facturas
     Route::get('/pdf', 'PdfController@generatePdf');
@@ -77,5 +90,3 @@
    /** rutas de los formularios de contacto */
     Route::post('/correo', 'CorreosController@correo')->name('correo');
 
-
-    Route::post('textglobalseccion','SeccionController@textglobalseccion')->name('textglobalseccion');

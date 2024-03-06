@@ -28,7 +28,9 @@
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ asset('js/ajax.js') }}"></script>
+
+    @yield('extraCSS')
 </head>
 <body>
 
@@ -38,7 +40,11 @@
                 @include('layouts.partials_admin.header')
             </div>
             <div class="col-10">
-                @yield('content')
+                <div class="row">
+                    <div class="col-11 mx-auto">
+                        @yield('content')
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -48,6 +54,6 @@
         </main>
     </div> --}}
 
-    @yield('scripts')
+    @yield('extraJS')
 </body>
 </html>

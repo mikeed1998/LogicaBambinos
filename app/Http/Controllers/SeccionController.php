@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Seccion;
 use App\Elemento;
 use App\Configuracion;
+use App\Faq;
+use App\Politica;
 
 class SeccionController extends Controller
 {
@@ -18,67 +20,31 @@ class SeccionController extends Controller
     {
         $seccion = Seccion::all();
 
-        // foreach ($seccion as $sec) {
-        //     $sec->elements = $sec->elementos()->count();
-        // }
-
         return view('config.secciones.index',compact('seccion'));
     }
 
     public function show($seccion) {
-        $config = Configuracion::all();
-        $seccion_nom = $seccion;
+        $config = Configuracion::first();
 
 		$seccion = Seccion::where('slug',$seccion)->first();
-
         $elementos = Elemento::where('seccion',$seccion->id)->get();
-
         $elem_general = Elemento::all();
+        $faqs = Faq::all();
 
-		// $elements = $seccion->elementos()->get();
-
-        $ruta = 'config.secciones.'.$seccion->seccion;
-
-		return view($ruta, compact('seccion', 'config', 'elem_general'));
-    }
-
-    public function contacto() {
-        $config = Configuracion::first();
-        // dd($config);
-
-		return view('config.general.contacto', compact('config'));
-    }
-
-    public function textglobalseccion(Request $request){
-        if (empty($request->tabla)) {
-            return response()->json(['success'=>false, 'mensaje'=>'Cambio Exitoso']);
+        if($seccion->seccion == 'configuracion') {
+            $ruta = 'config.general.contacto';
+        } else if($seccion->seccion == 'politicas') {
+            $ruta = 'config.politicas.index';
+        } else if($seccion->seccion == 'faqs') {
+            $ruta = 'config.faqs.index';
+        } else {
+            $ruta = 'config.secciones.'.$seccion->seccion;
         }
 
-        $nameSpace = '\\App\\';
-        $model = $nameSpace . ucfirst($request->tabla);
-
-        $field = $request->campo;
-        $val = $request->valor;
-
-        $send = $model::find($request->id);
-        $send->$field = $val;
-
-        if ($send->save()) {
-            if(isset($request->form)){
-                \Toastr::success('Guardado');
-                return redirect()->back();
-            }else{
-                return response()->json(['success'=>true, 'mensaje'=>'Cambio Exitoso']);
-            }
-
-        }else {
-            if(isset($request->form)){
-                \Toastr::error('Error al guardar');
-                return redirect()->back();
-            }else{
-            return response()->json(['success'=>false, 'mensaje'=>'Error al actualizar']);
-            }
-        }
+        return view($ruta, compact('seccion', 'config', 'elem_general', 'faqs'));
     }
 
 }
+
+
+

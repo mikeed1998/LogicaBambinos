@@ -5,22 +5,20 @@
 			color: #222;
 		}
 	</style>
-	<nav class="navbar fixed-top navbar-expand-lg scrolling-navbar mx-3 mt-1" style="box-shadow: none; background: black; color: #222; box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.291); border-radius: 16px; height: 50px;">
+	<nav class="navbar py-2 row fixed-top navbar-expand-lg scrolling-navbar mx-3 mt-1" style="box-shadow: none; background: black; color: #222; box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.291); border-radius: 16px; height: 50px;">
 
-		<!-- Breadcrumb -->
-		<div class="breadcrumb-dn">
-			<div class="p-3 mx-4 fs-5" style="border-radius: 16px; box-shadow: none; color: white;">
-				Administrador - Brincolines Bambinos
-			</div>
-		</div>
-
-        <div class="col-9 text-white text-end">
-            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="bi bi-escape"></i> {{ __('Salir del administrador') }}
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
+        <div class="row px-5">
+            <div class="col-md-6 col-12 text-white text-start">
+                Administrador - Brincolines Bambinos
+            </div>
+            <div class="col-md-6 col-12 text-white text-end">
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="bi bi-escape"></i> {{ __('Salir del administrador') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
         </div>
 
 	</nav>
@@ -82,8 +80,6 @@
                             @endguest
                         </ul>
                     </div>
-
-
                 </div>
             </nav>
         </div>

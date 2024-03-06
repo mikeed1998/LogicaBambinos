@@ -5,40 +5,40 @@
 @section('jsLibExtras')
 
 @endsection
-@section('styleExtras')
-<style>
-	@font-face {
-        font-family: 'Neusharp Bold';
-        font-style: normal;
-        font-weight: normal;
-        src: local('Neusharp Bold'), url({{ asset('fonts/Neusharp-Bold/NeusharpBold-7B8RV.woff') }}) format('woff');
-    }
-	/* mas estilisado */
-	body{
-		background-color: #e5e8eb  !important;
-	}
-	.card-header {
-		background-color: #b0c1d1  !important;
-	}
-	.black-skin .btn-primary {
-		background-color: #b0c1d1  !important;
-	}
-	.btn {
-		box-shadow: none;
-		border-radius: 15px;
-	}
-/* mas estilisado */
-.card1:hover{
-		background: rgb(28, 115, 255);
-		color: white;
-		transition: all 0.5s;
-	}
-	.card1:hover .icon_c{
-		color: white;
-		transition: all 0.5s;
-	}
-</style>
+@section('extraCSS')
+    <style>
+        @font-face {
+            font-family: 'Neusharp Bold';
+            font-style: normal;
+            font-weight: normal;
+            src: local('Neusharp Bold'), url({{ asset('fonts/Neusharp-Bold/NeusharpBold-7B8RV.woff') }}) format('woff');
+        }
+
+        body { background-color: #e5e8eb  !important; }
+
+        .card-header { background-color: #b0c1d1  !important; }
+
+        .black-skin
+        .btn-primary { background-color: #b0c1d1  !important; }
+
+        .btn {
+            box-shadow: none;
+            border-radius: 15px;
+        }
+
+        .card1:hover{
+            background: rgb(28, 115, 255);
+            color: white;
+            transition: all 0.5s;
+        }
+
+        .card1:hover .icon_c{
+            color: white;
+            transition: all 0.5s;
+        }
+    </style>
 @endsection
+
 @section('content')
 
 	<div class="row mt-5 pt-5 justify-content-center">
@@ -49,7 +49,7 @@
     @endif
 		@foreach ($seccion as $card)
 
-			<div class="col-6 col-lg-2 p-2">
+			<div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-4 col-6 p-2">
 				<a href="{{route('seccion.show',$card->slug)}}"  class="card h-100 card1" style="box-shadow: none; border-radius: 16px;">
 					<span class="card-body text-muted text-center">
 						<i class="{{$card->portada}} mb-3 fs-1"></i> <br>
@@ -61,9 +61,7 @@
 		@endforeach
 	</div>
 @endsection
-@section('jsLibExtras2')
 
-@endsection
-@section('jqueryExtra')
+@section('extraJS')
 
 @endsection
