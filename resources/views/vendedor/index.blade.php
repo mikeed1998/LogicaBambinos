@@ -53,6 +53,45 @@
     }
 </style>
 
+<style>
+    .file-upload input[type="file"], .file-upload2 input[type="file"] {
+        position: absolute;
+        left: -9999px;
+    }
+
+    .file-upload label, .file-upload2 label {
+        display: inline-block;
+        background-color: #00000031;
+        color: #fff;
+        padding: 6px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-weight: normal;
+        opacity: 0%;
+    }
+
+    .file-upload input[type="file"] + label:before, .file-upload2 input[type="file"] + label:before {
+        content: "\f07b";
+        font-family: "Font Awesome 5 Free";
+        font-size: 16px;
+        margin-right: 5px;
+        transition: all 0.5s;
+    }
+
+    .file-upload input[type="file"] + label, .file-upload2 input[type="file"] + label {
+        transition: all 0.5s;
+    }
+
+    .file-upload input[type="file"]:focus + label, .file-upload2 input[type="file"]:focus + label,
+    .file-upload input[type="file"] + label:hover, .file-upload2 input[type="file"] + label:hover {
+        backdrop-filter: blur(5px);
+        background-color: #41464a37;
+        opacity: 100%;
+        transition: all 0.5s;
+    }
+</style>
+
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-11 card border mx-auto mt-5">
@@ -65,10 +104,21 @@
                             </div>
                         @endif
                         <a class="list-group-item list-group-item-action fs-4 text-center disabled" aria-disabled="true">Vendedor - {{ $usuario->name }}</a>
-                        <a class="list-group-item list-group-item-action fs-5 text-center disabled" aria-disabled="true">
-                            <img src="{{ ($usuario->imagen == '') ? asset('img/photos/usuarios/default.png') : asset('img/photos/usuarios/'.$usuario->imagen) }}" alt="" class="img-fluid p-5">
-                            <button class="btn btn-dark">Cambiar imagen</button>
-                        </a>
+                        <div class="list-group-item list-group-item-action fs-5 text-center ">
+                            <img src="{{ asset('img/photos/usuarios/'.$usuario->imagen) }}" alt="" class="img-fluid p-5">
+                            <form id="form_img_perfil" action="cambiar_imagen" method="POST" class="file-upload" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="id_imagen" value="{{ $usuario->id }}">
+                                <input type="hidden" name="tipo_imagen" value="perfil_usuario">
+                                <input id="img_perfil" class="m-0 p-0" type="file" name="archivo">
+                                <label class="col-12 m-0 px-2 d-flex justify-content-center align-items-center" for="img_perfil" style=" height: 100%; opacity: 100%; border-radius: 20px;">Actualizar Imagen</label>
+                            </form>
+                            <script>
+                                $('#img_perfil').change(function(e) {
+                                    $('#form_img_perfil').trigger('submit');
+                                });
+                            </script>
+                        </div>
                         <a href="#" id="link-mi-cuenta" class="list-group-item list-group-item-action fs-5">Mi cuenta</a>
                         <a href="#" id="link-mis-cotizaciones" class="list-group-item list-group-item-action fs-5">Cotizaciones</a>
                         <a href="#" id="link-mis-pedidos" class="list-group-item list-group-item-action fs-5">
@@ -145,7 +195,7 @@
                                         @for ($i = 1; $i < 5; $i++)
                                             <div class="row border border-dark">
                                                 <div class="col-md-5 col-12 fs-5 py-1">Cotización {{ $i }}</div>
-                                                <div class="col-md-3 col-12 boder-end border-start border-dark fs-5">mikeed1998@gmail.com</div>        
+                                                <div class="col-md-3 col-12 boder-end border-start border-dark fs-5">mikeed1998@gmail.com</div>
                                                 <div id="contadorBtn-{{ $i }}" class="col-md-2 col-12 border-start border-end border-dark contadorBtn boton-pendiente text-center text-uppercase text-white fs-5" onclick="cambiarEstado('contadorBtn-{{ $i }}')">
                                                     pendiente
                                                 </div>
@@ -197,7 +247,7 @@
 
 
 
-    
+
 @endsection
 
 @section('jqueryExtra')
