@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
+use App\CarritoPersistente;
 
 class LoginController extends Controller
 {
@@ -37,6 +38,23 @@ class LoginController extends Controller
         }
         elseif(Auth::user()->role_as == '0')    // Usuario normal
         {
+            // dd(Auth::user());
+            // recuperar carrito persistente para el usuario que esta iniciando sesión
+            $carritoPersistente = CarritoPersistente::where('usuario', Auth::id())->first();
+            // dd($carritoPersistente);
+
+            if ($carritoPersistente) {
+                // Si existe el carrito persistente, inicializar la sesión del carrito con esos valores
+                $cart = json_decode($carritoPersistente->carrito, true);
+                // dd($cart);
+            } else {
+                // Si no existe carrito persistente, inicializar la sesión del carrito como vacía
+                $cart = [];
+            }
+
+            // Inicializar la sesión del carrito con los valores obtenidos
+            session()->put('cart', $cart);
+
             \Toastr::success('Has iniciado sesión');
             return redirect('/home');
         }

@@ -140,27 +140,27 @@
                             <div class="row mt-2">
                                 <div class="col-md-6 col-12 py-2">
                                     <label for="dash_nombre_usuario" class="fs-5">Nombre(s)</label>
-                                    <input type="text" name="dash_nombre_usuario" id="dash_nombre_usuario" class="form-control fs-5">
+                                    <input type="text" name="dash_nombre_usuario" id="dash_nombre_usuario" class="form-control fs-5 editarajax" data-model="User" data-field="name" data-id="{{$usuario->id}}"  value="{{ $usuario->name }}">
                                 </div>
                                 <div class="col-md-6 col-12 py-2">
                                     <label for="dash_apellidos_usuario" class="fs-5">Apellido(s)</label>
-                                    <input type="text" name="dash_apellidos_usuario" id="dash_apellidos_usuario" class="form-control fs-5">
+                                    <input type="text" name="dash_apellidos_usuario" id="dash_apellidos_usuario" class="form-control fs-5 editarajax" data-model="User" data-field="lastname" data-id="{{$usuario->id}}"  value="{{ $usuario->lastname }}">
                                 </div>
-                                <div class="col-md-6 col-12 py-2">
+                                {{-- <div class="col-md-6 col-12 py-2">
                                     <label for="dash_usuario_usuario" class="fs-5">Nombre de usuario</label>
-                                    <input type="text" name="dash_usuario_usuario" id="dash_usuario_usuario" class="form-control fs-5">
-                                </div>
+                                    <input type="text" name="dash_usuario_usuario" id="dash_usuario_usuario" class="form-control fs-5 editarajax" data-model="User" data-field="name" data-id="{{$usuario->id}}"  value="{{ $usuario->name }}">
+                                </div> --}}
                                 <div class="col-md-6 col-12 py-2">
                                     <label for="dash_telefono_usuario" class="fs-5">Telefono</label>
-                                    <input type="text" name="dash_telefono_usuario" id="dash_telefono_usuario" class="form-control fs-5">
+                                    <input type="text" name="dash_telefono_usuario" id="dash_telefono_usuario" class="form-control fs-5 editarajax" data-model="User" data-field="telefono" data-id="{{$usuario->id}}"  value="{{ $usuario->telefono }}">
                                 </div>
                                 <div class="col-md-6 col-12 py-2">
                                     <label for="dash_fecha_nacimiento_usuario" class="fs-5">Fecha de nacimiento</label>
-                                    <input type="date" name="dash_fecha_nacimiento_usuario" id="dash_fecha_nacimiento_usuario" class="form-control fs-5">
+                                    <input type="date" name="dash_fecha_nacimiento_usuario" id="dash_fecha_nacimiento_usuario" class="form-control fs-5 editarajax" data-model="User" data-field="fecha_nacimiento" data-id="{{$usuario->id}}"  value="{{ $usuario->fecha_nacimiento }}">
                                 </div>
                                 <div class="col-md-6 col-12 py-2">
                                     <label for="dash_rfc_usuario" class="fs-5">RFC</label>
-                                    <input type="text" name="dash_rfc_usuario" id="dash_rfc_usuario" class="form-control fs-5">
+                                    <input type="text" name="dash_rfc_usuario" id="dash_rfc_usuario" class="form-control fs-5 editarajax" data-model="User" data-field="RFC" data-id="{{$usuario->id}}"  value="{{ $usuario->RFC }}">
                                 </div>
                             </div>
                         </div>

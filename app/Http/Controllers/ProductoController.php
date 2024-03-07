@@ -9,7 +9,7 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        $productos = Producto::all();
+        $productos = Producto::where('activo', 1)->where('visible', 1)->get();
         return view('front.productos', compact('productos'));
     }
 }

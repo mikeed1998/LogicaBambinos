@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\User;
+use App\Producto;
 
 class AJAXController extends Controller
 {
@@ -61,6 +62,87 @@ class AJAXController extends Controller
             return redirect()->back();
         } else {
             dd('no llego');
+        }
+    }
+
+    public function switch_inicio(Request $request){
+        $producto = Producto::find($request->id);
+        $producto_des = Producto::where('inicio',1)->count();
+
+        if($producto_des == 4){
+            if($request->valor == 'true'){
+                return response()->json(['success'=>false, 'mensaje'=>'No puedes agregar mas de 4 productos destacados']);
+            }
+        }
+
+        if($request->valor == 1){
+            $producto->inicio = 1;
+            if($producto->save()){
+                return response()->json(['success'=>true, 'mensaje'=>'Se agrego a destacados']);
+            }else{
+                return response()->json(['success'=>false, 'mensaje'=>'Error al agregar']);
+            }
+        }else{
+            $producto->inicio = 0;
+            if($producto->save()){
+                return response()->json(['success'=>true, 'mensaje'=>'Se removio de destacados']);
+            }else{
+                return response()->json(['success'=>false, 'mensaje'=>'Error al remover']);
+            }
+        }
+    }
+
+    public function switch_ocultar(Request $request){
+        $producto = Producto::find($request->id);
+        $producto_des = Producto::where('visible',1)->count();
+
+        if($producto_des == 4){
+            if($request->valor == 'true'){
+                return response()->json(['success'=>false, 'mensaje'=>'No puedes agregar mas de 4 productos destacados']);
+            }
+        }
+
+        if($request->valor == 1){
+            $producto->visible = 1;
+            if($producto->save()){
+                return response()->json(['success'=>true, 'mensaje'=>'Se agrego a destacados']);
+            }else{
+                return response()->json(['success'=>false, 'mensaje'=>'Error al agregar']);
+            }
+        }else{
+            $producto->visible = 0;
+            if($producto->save()){
+                return response()->json(['success'=>true, 'mensaje'=>'Se removio de destacados']);
+            }else{
+                return response()->json(['success'=>false, 'mensaje'=>'Error al remover']);
+            }
+        }
+    }
+
+    public function switch_eliminar(Request $request){
+        $producto = Producto::find($request->id);
+        $producto_des = Producto::where('activo',1)->count();
+
+        if($producto_des == 4){
+            if($request->valor == 'true'){
+                return response()->json(['success'=>false, 'mensaje'=>'No puedes agregar mas de 4 productos destacados']);
+            }
+        }
+
+        if($request->valor == 1){
+            $producto->activo = 1;
+            if($producto->save()){
+                return response()->json(['success'=>true, 'mensaje'=>'Se agrego a destacados']);
+            }else{
+                return response()->json(['success'=>false, 'mensaje'=>'Error al agregar']);
+            }
+        }else{
+            $producto->activo = 0;
+            if($producto->save()){
+                return response()->json(['success'=>true, 'mensaje'=>'Se removio de destacados']);
+            }else{
+                return response()->json(['success'=>false, 'mensaje'=>'Error al remover']);
+            }
         }
     }
 

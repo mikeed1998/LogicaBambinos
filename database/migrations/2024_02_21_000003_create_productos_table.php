@@ -25,6 +25,9 @@ class CreateProductosTable extends Migration
             $table->text('portada')->nullable();
             $table->decimal("precio", 6, 2)->default(0.00);
             $table->decimal("anticipo", 6, 2)->default(0.00);
+            $table->integer("activo")->default(1);
+            $table->integer("visible")->default(1);
+            $table->integer("orden")->nullable();
             $table->foreign('categoria')->references('id')->on('categorias')->onDelete('cascade');
             $table->foreign('subcategoria')->references('id')->on('subcategorias')->onDelete('cascade');
             $table->timestamps();

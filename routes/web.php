@@ -44,6 +44,7 @@
     // Rutas exclusivas del administrador / aquí van los subrutas auto administrables
     Route::group(['middleware' => ['auth', 'isAdmin']], function() {
         Route::get('homeA', 'SeccionController@index')->name('admin.index');
+        Route::get('catalogo_detalle/{producto}', 'SeccionController@catalogo_detalle')->name('admin.catalogo_detalle');
 
         Route::prefix('politicas')->name('politicas.')->group(function(){
             Route::get('/','PoliticasController@index')->name('index');
@@ -75,6 +76,7 @@
         Route::delete('remove-cart', 'CarritoController@remove')->name('cart.remove');
         Route::delete('cart/clear', 'CarritoController@clearCart')->name('cart.clear');
         Route::get('datos-envio', 'CarritoController@datosEnvio')->name('cart.datosEnvio');
+        Route::post('/guardar-carrito-persistente', 'CarritoController@guardarCarritoPersistente')->name('guardar.carrito.persistente');
     });
 
     // Pasarela de pago CLIP, ruta exclusiva para clientes
@@ -92,6 +94,9 @@
     // Rutas para editar usando AJAX
     Route::patch('/editarajax', 'AJAXController@editarajax');
     Route::post('cambiar_imagen', 'AJAXController@cambiar_imagen')->name('cambiar_imagen');
+    Route::post('/switch_inicio', 'AJAXController@switch_inicio')->name('ajax.switch_inicio');
+    Route::post('/switch_ocultar', 'AJAXController@switch_ocultar')->name('ajax.switch_ocultar');
+    Route::post('/switch_eliminar', 'AJAXController@switch_eliminar')->name('ajax.switch_eliminar');
     // Genear facturas
     Route::get('/pdf', 'PdfController@generatePdf');
    /** rutas de los formularios de contacto */

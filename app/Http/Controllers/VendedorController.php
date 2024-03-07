@@ -42,7 +42,7 @@ class VendedorController extends Controller
     }
 
     public function storeCliente(Request $request) {
-        // dd($request);
+        // dd('usuario');
         $usuarios = User::all();
         $contra = '';
 
@@ -120,7 +120,60 @@ class VendedorController extends Controller
     }
 
     public function storeCotizacion(Request $request) {
+        dd($request);
 
+        $usuario = User::find($request->usuario_orden);
+        $contra = '';
+
+        $data = array(
+			'tipoForm' => 'VendedorCreaCliente',
+			'nombre' => $usuario->nombre_cliente_orden,
+			'correo' => $usuario->email_cliente_orden,
+			'telefono' => $usuario->telefono_cliente_orden,
+			'asunto' => 'Tu cotización esta lista',
+			'mensaje' => 'Para finalizar tu comra debes ingresar a tu cuenta y realizar el pago',
+			'hoy' => Carbon::now()->format('d-m-Y')
+		);
+
+        $html = view('correos.vendedor_genera_cliente', compact('data'));
+
+        $config = Configuracion::first();
+
+		$mail = new PHPMailer;
+
+		try {
+			$mail->isSMTP();
+			// $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+			// $mail->SMTPDebug = 2;
+			$mail->Host = $config->remitentehost;
+			$mail->SMTPAuth = true;
+			$mail->Username = $config->remitente;
+			$mail->Password = $config->remitentepass;
+			$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+			$mail->Port = $config->remitenteport;
+
+			$mail->SetFrom($config->remitente, 'Brincolines Bambinos - Cotización');
+			$mail->isHTML(true);
+
+			$mail->addAddress($request->email_cliente_orden,'Cotización asignada');
+
+			$mail->msgHTML($html);
+
+			if($mail->send()){
+			    \Toastr::success('¡El cliente ya fue notificado!');
+				return redirect()->back();
+			}else{
+				\Toastr::error('Error al enviar el correo');
+				return redirect()->back();
+			}
+
+		} catch (phpmailerException $e) {
+			\Toastr::error($e->errorMessage());
+			return redirect()->back();
+		} catch (Exception $e) {
+			\Toastr::error($e->getMessage());
+			return redirect()->back();
+		}
     }
 
 }

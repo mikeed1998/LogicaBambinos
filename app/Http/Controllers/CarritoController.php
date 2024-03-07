@@ -6,13 +6,34 @@ use Illuminate\Http\Request;
 use App\Producto;
 use Auth;
 use App\User;
+use App\CarritoPersistente;
 
 class CarritoController extends Controller
 {
     public function index()
     {
         $cart = session()->get('cart');
+        $userId = Auth::id();
+
+        $this->guardarCarritoPersistente($userId, $cart);
+
         return view('cart.index');
+    }
+
+    private function guardarCarritoPersistente($userId, $cart)
+    {
+        $carritoPersistente = CarritoPersistente::where('usuario', $userId)->first();
+
+        if ($carritoPersistente) {
+            // Si el carrito persistente ya existe, actualizarlo
+            $carritoPersistente->update(['carrito' => json_encode($cart)]);
+        } else {
+            // Si el carrito persistente no existe, crearlo
+            CarritoPersistente::create([
+                'usuario' => $userId,
+                'carrito' => json_encode($cart),
+            ]);
+        }
     }
 
     // Cambia el método addToCart en ProductsController
