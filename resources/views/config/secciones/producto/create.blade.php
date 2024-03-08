@@ -113,15 +113,15 @@
                         </div>
                         <div class="col-4 py-1">
                             <label for="precio">Precio</label>
-                            <input required type="text" id="precio" name="precio" class="form-control shadow-none">
+                            <input required type="number" step="0.01" min="0.00" placeholder="0.00" id="precio" name="precio" class="form-control shadow-none">
                         </div>
                         <div class="col-4 py-1">
                             <label for="stock">Cantidad en inventario</label>
-                            <input required type="text" id="stock" name="stock" class="form-control shadow-none">
+                            <input required type="number" min="0" id="stock" name="stock" class="form-control shadow-none">
                         </div>
                         <div class="col-4 py-1">
                             <label for="alto">Promoción (Opcional) (ej. 15% = 0.15)</label>
-                            <input required type="text" id="alto" name="alto" class="form-control shadow-none">
+                            <input type="number" step="0.01" min="0.00" max="1.00" placeholder="0.00" id="alto" name="alto" class="form-control shadow-none">
                         </div>
                     </div>
                     <div class="row">

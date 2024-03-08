@@ -4,6 +4,7 @@
     use Illuminate\App\Http\Controllers\VendedorController;
     use Illuminate\App\Http\Controllers\FrontController;
     use Illuminate\App\Http\Controllers\ProductoController;
+    use Illuminate\App\Http\Controllers\ProductoGaleriaController;
     use Illuminate\App\Http\Controllers\PasarelaPagoCLIPController;
     use Illuminate\App\Http\Controllers\LoginController;
     use Illuminate\App\Http\Controllers\PdfController;
@@ -50,6 +51,11 @@
             Route::get('/show/{producto}','ProductoController@show')->name('show');
             Route::get('/create','ProductoController@create')->name('create');
             Route::post('/store','ProductoController@store')->name('store');
+        });
+
+        Route::prefix('galeria')->name('galeria.')->group(function(){
+            Route::post('/store','ProductoGaleriaController@store')->name('store');
+            Route::post('/eliminar-galeria/{id}', 'TuControProductoGaleriaControllerlador@destroy');
         });
 
         Route::prefix('politicas')->name('politicas.')->group(function(){

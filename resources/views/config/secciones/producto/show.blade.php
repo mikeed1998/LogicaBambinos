@@ -180,41 +180,58 @@
     <div class="container-fluid mt-3 py-3 rounded">
         <div class="row">
             <div class="slider-galeria">
-                @for ($i = 0; $i < 10; $i++)
+                @foreach ($galeria as $g)
                     <div class="col-3 px-2 position-relative">
                         <div class="card">
                             <div class="img-galeria" style="
-                                background-image: url('{{ asset('img/productos/'.$producto->portada) }}');
+                                background-image: url('{{ asset('img/productos/galeria/'.$g->imagen) }}');
                             "></div>
                         </div>
                         <div class="position-absolute top-0 end-0 translate-middle-x">
-                            <button type="button" class="btn btn-outline" id="eliminarGaleria-{{ $i }}">
+                            <button type="button" class="btn btn-outline eliminarGaleriaBtn" data-id="{{ $g->id }}">
                                 <i class="bi bi-x-circle-fill fs-1 fw-bold" style="color: red;"></i>
                             </button>
                             <script>
-                                document.getElementById('eliminarGaleria-{{ $i }}').addEventListener('click', function() {
-                                    Swal.fire({
-                                        title: "¿Eliminar foto?",
-                                        text: "¿Estás seguro de que deseas continuar?",
-                                        icon: "warning",
-                                        showCancelButton: true,
-                                        confirmButtonColor: "#d33",
-                                        cancelButtonColor: "#3085d6",
-                                        confirmButtonText: "Eliminar",
-                                        cancelButtonText: "Cancelar"
-                                    })
-                                    .then((result) => {
-                                        if (result.isConfirmed) {
-                                            Swal.fire("¡La foto ha sido eliminado!", "", "success");
-                                        } else {
-                                            // Swal.fire("La eliminación ha sido cancelada.", "", "info");
-                                        }
+                                $(document).ready(function () {
+                                    $('.eliminarGaleriaBtn').click(function () {
+                                        var id = $(this).data('id');
+                                        eliminarGaleria(id);
                                     });
+
+                                    function eliminarGaleria(id) {
+                                        Swal.fire({
+                                            title: "¿Eliminar foto?",
+                                            text: "¿Estás seguro de que deseas continuar?",
+                                            icon: "warning",
+                                            showCancelButton: true,
+                                            confirmButtonColor: "#d33",
+                                            cancelButtonColor: "#3085d6",
+                                            confirmButtonText: "Eliminar",
+                                            cancelButtonText: "Cancelar"
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                // Enviar la petición AJAX al controlador para eliminar la imagen
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: '/eliminar-galeria/' + id,
+                                                    data: {_token: '{{ csrf_token() }}'},
+                                                    success: function (data) {
+                                                        // Actualizar la interfaz después de eliminar la imagen
+                                                        // Puedes recargar la página o realizar otras acciones necesarias
+                                                        location.reload();
+                                                    },
+                                                    error: function (error) {
+                                                        console.log(error);
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
                                 });
                             </script>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>
@@ -285,12 +302,20 @@
                     <h1 class="modal-title fs-3" id="galeriaModalLabel">Agregar imágen a la galeria del producto</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="row py-3">
-                        <div class="col">
-                            <label for="producto-imagen-galeria">Selecciona una imágen (Formatos admitidos: JPG, PNG, JPEG)</label>
-                            <input type="file" id="producto-imagen-galeria" name="producto-imagen-galeria" class="form-control" placeholder="Imágen" accept=".png, .jpg, .jpeg">
-                        </div>
+                <div class="modal-body bg-secondary py-3">
+                    <div class="row">
+                        <form id="form_img_galeria" action="{{ route('galeria.store') }}" method="POST" class="file-upload" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="id_producto" value="{{ $producto->id }}">
+                            <input type="hidden" name="tipo_imagen" value="imagen_galeria">
+                            <input id="img_galeria" class="m-0 p-0" type="file" name="archivo">
+                            <label class="col-12 m-0 px-2 d-flex justify-content-center align-items-center" for="img_galeria" style=" height: 100%; opacity: 100%; border-radius: 0px;">Agregar imágen</label>
+                        </form>
+                        <script>
+                            $('#img_galeria').change(function(e) {
+                                $('#form_img_galeria').trigger('submit');
+                            });
+                        </script>
                     </div>
                 </div>
                 <div class="modal-footer">

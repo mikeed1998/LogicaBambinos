@@ -53,6 +53,8 @@
         </div>
     </div>
 
+    {!! Toastr::message() !!}
+
     @yield('extraJS')
 
 </body>

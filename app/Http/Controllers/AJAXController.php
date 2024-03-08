@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\User;
 use App\Producto;
+use ProductoGaleria;
 
 class AJAXController extends Controller
 {

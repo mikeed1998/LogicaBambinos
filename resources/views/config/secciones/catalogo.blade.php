@@ -14,6 +14,14 @@
             box-shadow: none;
             border-radius: 15px;
         }
+
+        .img-catalogo {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 100%;
+            height: 9rem;
+        }
     </style>
     <style>
         .switch-color-inicio {
@@ -69,17 +77,19 @@
         </div>
         <div class="row py-3">
             <div class="col">
-                <input type="text" class="form-control shadow-none" placeholder="Buscar producto por nombre">
+                <input class="form-control shadow-none" id="filtro_palabras" type="text" placeholder="Filtrar por nombre">
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <div class="row">
+                <div class="row" id="filtro">
                     @foreach($productos as $producto)
-                        <div class="col-xxl-12 col-xl-12 col-lg-5 col-md-9 col-sm-12 col-12 mx-auto mt-md-0 mt-5">
+                        <div class="col-xxl-12 col-xl-12 col-lg-5 col-md-9 col-sm-12 col-12 mx-auto mt-md-0 mt-5 columna">
                             <div class="row px-0 border bg-white">
                                 <div class="col-xxl-2 col-xl-2 col-lg-12 col-md-12 col-sm-12 col-12 px-0">
-                                    <img src="{{ asset('img/productos/'.$producto->portada) }}" alt="" class="img-fluid h-100">
+                                    <div class="img-catalogo" style="
+                                        background-image: url('{{ asset('img/productos/'.$producto->portada) }}');
+                                    "></div>
                                 </div>
                                 <div class="col-xxl-6 col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="row align-items-center justify-content-center h-100">
@@ -277,9 +287,20 @@
         </div>
     </div>
 
+
+
 @endsection
 
 @section('extraJS')
-
+    <script>
+        $(document).ready(function(){
+            $("#filtro_palabras").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#filtro .columna").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 @endsection
 
