@@ -19,8 +19,7 @@
     Route::get('/', 'FrontController@home')->name('front.home');
     Route::get('/nosotros', 'FrontController@aboutus')->name('front.aboutus');
     Route::get('/contacto', 'FrontController@contact')->name('front.contact');
-    // Rutas publicas para productos
-    Route::get('/productos', 'ProductoController@index')->name('front.productos');
+    Route::get('/productos', 'FrontController@catalogo')->name('front.catalogo');
     // Login cutomizado para el admin, redirigir en caso de estar logeado con privilegios de admin
     Route::get('/admin', 'FrontController@admin')->name('front.admin')->middleware('checkAdminAccess');
 
@@ -44,7 +43,14 @@
     // Rutas exclusivas del administrador / aquí van los subrutas auto administrables
     Route::group(['middleware' => ['auth', 'isAdmin']], function() {
         Route::get('homeA', 'SeccionController@index')->name('admin.index');
-        Route::get('catalogo_detalle/{producto}', 'SeccionController@catalogo_detalle')->name('admin.catalogo_detalle');
+        // Route::get('catalogo_detalle/{producto}', 'SeccionController@catalogo_detalle')->name('admin.catalogo_detalle');
+
+        Route::prefix('productos')->name('productos.')->group(function(){
+            Route::get('/','ProductoController@index')->name('index');
+            Route::get('/show/{producto}','ProductoController@show')->name('show');
+            Route::get('/create','ProductoController@create')->name('create');
+            Route::post('/store','ProductoController@store')->name('store');
+        });
 
         Route::prefix('politicas')->name('politicas.')->group(function(){
             Route::get('/','PoliticasController@index')->name('index');

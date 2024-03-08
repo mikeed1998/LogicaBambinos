@@ -129,7 +129,7 @@
                     <div class="col-md-8 col-11 mx-auto">
                         <div class="row">
                             <div class="col-md-4 col-12">
-                                <a href="{{ route('front.productos') }}" class="btn w-100 py-2 fs-5 btn-white border"><i class=""></i>Volver a la tienda</a>
+                                <a href="{{ route('front.catalogo') }}" class="btn w-100 py-2 fs-5 btn-white border"><i class=""></i>Volver a la tienda</a>
                             </div>
                             <div class="col-md-4 col-12">
                                 <a href="javascript:void(0)" id="clearCartBtn" class="btn w-100 py-2 fs-5 btn-white border"><i class="bi bi-trash"></i> Vaciar carrito</a>

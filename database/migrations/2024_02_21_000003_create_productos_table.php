@@ -24,6 +24,8 @@ class CreateProductosTable extends Migration
             $table->string('alto')->nullable();
             $table->text('portada')->nullable();
             $table->decimal("precio", 6, 2)->default(0.00);
+            $table->integer("stock")->default(0);
+            $table->decimal("promocion", 6, 2)->default(0.00);
             $table->decimal("anticipo", 6, 2)->default(0.00);
             $table->integer("activo")->default(1);
             $table->integer("visible")->default(1);

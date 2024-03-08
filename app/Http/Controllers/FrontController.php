@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Configuracion;
 use App\Seccion;
 use App\Elemento;
+use App\Producto;
 
 class FrontController extends Controller
 {
@@ -27,6 +28,11 @@ class FrontController extends Controller
     public function contact()
     {
         return view('front.index');
+    }
+
+    public function catalogo() {
+        $productos = Producto::where('activo', 1)->where('visible', 1)->get();
+        return view('front.productos', compact('productos'));
     }
 
 	public function admin()

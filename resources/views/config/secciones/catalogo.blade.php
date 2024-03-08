@@ -56,13 +56,20 @@
 
     <div class="container-fluid">
         <div class="row py-3">
-            <div class="col text-center fs-1">
-                Catalogo de productos
+            <div class="col mx-auto text-center fs-1">
+                Catálogo de productos
+            </div>
+        </div>
+        <div class="row py-3">
+            <div class="col text-center mx-auto">
+                <a href="{{ route('productos.create') }}" class="btn btn-dark rounded-0">
+                    Agregar nuevo producto
+                </a>
             </div>
         </div>
         <div class="row py-3">
             <div class="col">
-                <input type="text" class="form-control" placeholder="Bucar producto">
+                <input type="text" class="form-control shadow-none" placeholder="Buscar producto por nombre">
             </div>
         </div>
         <div class="row">
@@ -118,7 +125,7 @@
                                             .done(function(msg) {
                                                 console.log(msg);
                                                 if (msg.success) {
-                                                    toastr["success"](msg.mensaje);
+                                                    toastr["info"](msg.mensaje);
                                                     if (msg.mensaje.valor == 1) {
                                                         checkbox.prop('checked', true);
                                                     } else if (msg.mensaje.valor == 2) {
@@ -167,7 +174,7 @@
                                             .done(function(msg) {
                                                 console.log(msg);
                                                 if (msg.success) {
-                                                    toastr["success"](msg.mensaje);
+                                                    toastr["info"](msg.mensaje);
                                                     if (msg.mensaje.valor == 1) {
                                                         checkbox.prop('checked', true);
                                                     } else if (msg.mensaje.valor == 2) {
@@ -190,51 +197,70 @@
                                         $('#switch_eliminar-'+{{$producto->id}}).change(function (e){
                                             var checkbox = $(this);
                                             console.log('switch-'+{{$producto->id}});
-                                            var check = 0;
-                                            if (checkbox.prop('checked')) {
-                                                check = 1;
-                                            } else {
-                                                check = 2;
-                                            }
+                                            var check = checkbox.prop('checked') ? 1 : 2;
                                             console.log(check);
                                             var id = checkbox.attr("data-id");
-                                            var tcsrf = $('meta[name="csrf-token"]').attr('content');
-                                            var valor = check;
-                                            var URL = "{{ route('ajax.switch_eliminar') }}";
-                                            console.log("valor: " + valor);
-                                            $.ajax({
-                                                url: URL,
-                                                type: 'post',
-                                                dataType: 'json',
-                                                data: {
-                                                    "_method": 'post',
-                                                    "_token": tcsrf,
-                                                    "id": id,
-                                                    "valor": valor
-                                                }
+
+                                            Swal.fire({
+                                                title:
+                                                    (check == 1) ?
+                                                        "¿Deseas deshabilitar el producto?"
+                                                    :
+                                                        "¿Deseas habilitar el producto?",
+                                                text:
+                                                    (check == 1) ?
+                                                        "Esta acción eliminará parcialmente el producto. Los usuarios cuyos carritos hayan guardado este producto lo perderán, esta acción se puede revertir en el futuro"
+                                                    :
+                                                        "El producto volverá a estar disponible en la tienda.",
+                                                icon: "warning",
+                                                showCancelButton: true,
+                                                confirmButtonColor: "#d33",
+                                                cancelButtonColor: "#3085d6",
+                                                confirmButtonText: "Aceptar"
                                             })
-                                            .done(function(msg) {
-                                                console.log(msg);
-                                                if (msg.success) {
-                                                    toastr["success"](msg.mensaje);
-                                                    if (msg.mensaje.valor == 1) {
-                                                        checkbox.prop('checked', true);
-                                                    } else if (msg.mensaje.valor == 2) {
-                                                        checkbox.prop('checked', false);
-                                                    }
+                                            .then((result) => {
+                                                if (result.isConfirmed) {
+                                                    var tcsrf = $('meta[name="csrf-token"]').attr('content');
+                                                    var valor = check;
+                                                    var URL = "{{ route('ajax.switch_eliminar') }}";
+                                                    console.log("valor: " + valor);
+                                                    $.ajax({
+                                                        url: URL,
+                                                        type: 'post',
+                                                        dataType: 'json',
+                                                        data: {
+                                                            "_method": 'post',
+                                                            "_token": tcsrf,
+                                                            "id": id,
+                                                            "valor": valor
+                                                        }
+                                                    })
+                                                    .done(function(msg) {
+                                                        console.log(msg);
+                                                        if (msg.success) {
+                                                            toastr["info"](msg.mensaje);
+                                                            if (msg.mensaje.valor == 1) {
+                                                                checkbox.prop('checked', true);
+                                                            } else if (msg.mensaje.valor == 2) {
+                                                                checkbox.prop('checked', false);
+                                                            }
+                                                        } else {
+                                                            toastr["error"](msg.mensaje);
+                                                        }
+                                                    })
+                                                    .fail(function(msg) {
+                                                        toastr["error"]('Error al agregar el producto al inicio');
+                                                    });
                                                 } else {
-                                                    toastr["error"](msg.mensaje);
+                                                    checkbox.prop('checked', !checkbox.prop('checked'));
                                                 }
-                                            })
-                                            .fail(function(msg) {
-                                                toastr["error"]('Error al agregar el producto al inicio');
                                             });
                                         });
                                     </script>
                                 </div>
                                 <div class="col-xxl-1 col-xl-1 col-lg-12 col-md-12 col-sm-12 col-12 text-center py-md-0 py-3">
                                     <div class="row align-items-center justify-content-center h-100">
-                                        <a href="{{ route('admin.catalogo_detalle', ['producto' => $producto->id]) }}" class="btn">
+                                        <a href="{{ route('productos.show', ['producto' => $producto->id]) }}" class="btn">
                                             <div class="col">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#dc3545" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>

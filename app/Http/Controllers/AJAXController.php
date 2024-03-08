@@ -31,7 +31,7 @@ class AJAXController extends Controller
         $field = $request->input('field');
         $value = $request->input('value');
 
-        // Validación y sanitización aquí
+        // Validación y sanitización
 
         $model->$field = $value;
         $model->save();
@@ -69,26 +69,22 @@ class AJAXController extends Controller
         $producto = Producto::find($request->id);
         $producto_des = Producto::where('inicio',1)->count();
 
-        if($producto_des == 4){
-            if($request->valor == 'true'){
+        if($producto_des == 4)
+            if($request->valor == 'true')
                 return response()->json(['success'=>false, 'mensaje'=>'No puedes agregar mas de 4 productos destacados']);
-            }
-        }
 
-        if($request->valor == 1){
+        if($request->valor == 1) {
             $producto->inicio = 1;
-            if($producto->save()){
+            if($producto->save())
                 return response()->json(['success'=>true, 'mensaje'=>'Se agrego a destacados']);
-            }else{
+            else
                 return response()->json(['success'=>false, 'mensaje'=>'Error al agregar']);
-            }
-        }else{
+        } else {
             $producto->inicio = 0;
-            if($producto->save()){
+            if($producto->save())
                 return response()->json(['success'=>true, 'mensaje'=>'Se removio de destacados']);
-            }else{
+            else
                 return response()->json(['success'=>false, 'mensaje'=>'Error al remover']);
-            }
         }
     }
 
@@ -96,26 +92,18 @@ class AJAXController extends Controller
         $producto = Producto::find($request->id);
         $producto_des = Producto::where('visible',1)->count();
 
-        if($producto_des == 4){
-            if($request->valor == 'true'){
-                return response()->json(['success'=>false, 'mensaje'=>'No puedes agregar mas de 4 productos destacados']);
-            }
-        }
-
-        if($request->valor == 1){
+        if($request->valor == 1) {
             $producto->visible = 1;
-            if($producto->save()){
-                return response()->json(['success'=>true, 'mensaje'=>'Se agrego a destacados']);
-            }else{
-                return response()->json(['success'=>false, 'mensaje'=>'Error al agregar']);
-            }
-        }else{
+            if($producto->save())
+                return response()->json(['success'=>true, 'mensaje'=>'Vuelve a ser visible en la tienda']);
+            else
+                return response()->json(['success'=>false, 'mensaje'=>'Error al mostrar']);
+        } else {
             $producto->visible = 0;
-            if($producto->save()){
-                return response()->json(['success'=>true, 'mensaje'=>'Se removio de destacados']);
-            }else{
-                return response()->json(['success'=>false, 'mensaje'=>'Error al remover']);
-            }
+            if($producto->save())
+                return response()->json(['success'=>true, 'mensaje'=>'Se ha ocultado de la tienda']);
+            else
+                return response()->json(['success'=>false, 'mensaje'=>'Error al ocultar']);
         }
     }
 
@@ -123,27 +111,23 @@ class AJAXController extends Controller
         $producto = Producto::find($request->id);
         $producto_des = Producto::where('activo',1)->count();
 
-        if($producto_des == 4){
-            if($request->valor == 'true'){
-                return response()->json(['success'=>false, 'mensaje'=>'No puedes agregar mas de 4 productos destacados']);
-            }
-        }
-
-        if($request->valor == 1){
+        if($request->valor == 1) {
             $producto->activo = 1;
-            if($producto->save()){
-                return response()->json(['success'=>true, 'mensaje'=>'Se agrego a destacados']);
-            }else{
-                return response()->json(['success'=>false, 'mensaje'=>'Error al agregar']);
-            }
-        }else{
-            $producto->activo = 0;
-            if($producto->save()){
-                return response()->json(['success'=>true, 'mensaje'=>'Se removio de destacados']);
-            }else{
+            if($producto->save())
+                return response()->json(['success'=>true, 'mensaje'=>'Se ha deshabilitado de la tienda']);
+            else
                 return response()->json(['success'=>false, 'mensaje'=>'Error al remover']);
-            }
+        } else {
+            $producto->activo = 0;
+            if($producto->save())
+                return response()->json(['success'=>true, 'mensaje'=>'Ha sido habilitado']);
+            else
+                return response()->json(['success'=>false, 'mensaje'=>'Error al habilitar']);
         }
     }
 
 }
+
+
+
+

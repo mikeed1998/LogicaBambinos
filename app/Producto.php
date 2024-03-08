@@ -16,6 +16,8 @@ class Producto extends Model
         'alto',
         'portada',
         'precio',
+        'stock',
+        'promocion',
         'anticipo',
         'activo',
         'visible',

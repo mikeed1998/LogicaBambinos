@@ -47,10 +47,6 @@ class SeccionController extends Controller
         return view($ruta, compact('seccion', 'config', 'elem_general', 'faqs', 'politicas', 'productos'));
     }
 
-    public function catalogo_detalle(Producto $producto) {
-        return view('config.secciones.catalogo_detalle', compact('producto'));
-    }
-
 }
 
 
