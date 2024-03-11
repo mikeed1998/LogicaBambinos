@@ -112,6 +112,7 @@
     Route::post('/switch_eliminar', 'AJAXController@switch_eliminar')->name('ajax.switch_eliminar');
     // Genear facturas
     Route::get('/pdf', 'PdfController@generatePdf');
-   /** rutas de los formularios de contacto */
+    Route::get('/pdf_factura', 'PdfController@generatePdf_factura');
+    /** rutas de los formularios de contacto */
     Route::post('/correo', 'CorreosController@correo')->name('correo');
 

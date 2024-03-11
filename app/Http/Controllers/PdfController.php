@@ -35,5 +35,23 @@ class PdfController extends Controller
 
         // Descarga el PDF
         $dompdf->stream('mi-pdf.pdf');
-      }
+    }
+
+    public function generatePdf_factura() {
+        $view = view('front.factura_uno');
+
+        // Crea una instancia de Dompdf
+        $dompdf = new Dompdf();
+
+        // GENERAR MAS INSTRANCIAS DE DOMPDF DENTRO DE UN CICLO POR PRODUCTO Y UNA ULTIMA INSTANCIA PARA LAS HOJAS FINALES
+
+        // Carga la vista Blade en Dompdf
+        $dompdf->loadHtml($view->render());
+
+        // Renderiza el PDF
+        $dompdf->render();
+
+        // Descarga el PDF
+        $dompdf->stream('factura_uno.pdf');
+    }
 }

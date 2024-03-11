@@ -254,7 +254,7 @@
                                         @foreach($pedidos as $ped)
                                             <div class="row mt-md-0 mt-5">
                                                 <div class="col-md-6 py-2 col-12 border border-dark fs-5 fw-bolder">{{ $ped->uid }}</div>
-                                                <div class="col-md-2 py-2 col-12 border border-dark fs-5">{{ $fechaActual }}</div>
+                                                <div class="col-md-2 py-2 col-12 border border-dark fs-5">{{ $ped->created_at }}</div>
                                                 <div class="col-md-2 py-2 col-12 border border-dark fs-5 no-select text-center text-white fw-bolder text-uppercase boton-{{ $status_list[$ped->estatus] }} px-0">{{ $status_list[$ped->estatus] }}</div>
                                                 <div class="col-md-2 py-2 col-12 border border-dark fs-5">
                                                     <div class="row">
@@ -263,16 +263,19 @@
                                                                 <small><i class="bi bi-eye text-white"></i></small>
                                                             </button>
                                                         </div>
-                                                        {{-- <div class="col-4 text-center">
-                                                            <button class="btn btn-sm btn-info rounded-circle">
-                                                                <small><i class="bi bi-pencil-square text-white"></i></small>
-                                                            </button>
-                                                        </div> --}}
-                                                        <div class="col-4 text-center">
-                                                            <button class="btn btn-sm btn-danger rounded-circle btn-delete" data-id="{{ $ped->id }}">
-                                                                <small><i class="bi bi-trash text-white"></i></small>
-                                                            </button>
-                                                        </div>
+                                                        @if ($ped->estatus == 2 or $ped->estatus == 3)
+                                                            <div class="col-4 text-center">
+                                                                <button disabled class="btn btn-sm btn-secondary rounded-circle btn-delete" data-id="{{ $ped->id }}">
+                                                                    <small><i class="bi bi-trash text-white"></i></small>
+                                                                </button>
+                                                            </div>
+                                                        @else
+                                                            <div class="col-4 text-center">
+                                                                <button class="btn btn-sm btn-danger rounded-circle btn-delete" data-id="{{ $ped->id }}">
+                                                                    <small><i class="bi bi-trash text-white"></i></small>
+                                                                </button>
+                                                            </div>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -296,6 +299,12 @@
                                                                         <li>{{ $car->price }}</li>
                                                                         <li>{{ $car->quantity }}</li>
                                                                     @endforeach
+                                                                    <li>subtotal</li>
+                                                                    <li>precio por unidad</li>
+                                                                    <li>descargar cotizacion (PDF)</li>
+                                                                    <li>envio</li>
+                                                                    <li>IVA</li>
+                                                                    <li>Total</li>
                                                                 </div>
                                                             </div>
                                                         </div>
