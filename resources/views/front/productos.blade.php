@@ -19,6 +19,13 @@
                                     Agregar al carrito
                                 </a>
                             </p>
+                            <p>
+                                @foreach ($producto_caracteristicas as $pc)
+                                    @if ($pc->producto == $product->id)
+                                        <div>{{ $pc->caracteristica }}</div>
+                                    @endif
+                                @endforeach
+                            </p>
                         </div>
                     </div>
                 </div>

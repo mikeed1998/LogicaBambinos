@@ -14,11 +14,34 @@ use App\User;
 use App\Domicilio;
 use App\DatosEnvio;
 use App\Pedido;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
+
 
 class PasarelaPagoCLIPController extends Controller
 {
     public function index()
     {
+        $userId = Auth::id();
+        $usuario = User::find($userId);
+        $domicilio = Domicilio::where('usuario', $usuario->id)->first();
+        $nombres = $usuario->name;
+        $apellidos = $usuario->lastname;
+
+        $name = $nombres . " " . $apellidos;
+        $email = $usuario->email;
+        $phone = $usuario->telefono;
+        $zip_code = $domicilio->codigo_postal;
+        $locality = $domicilio->colonia;
+        $city = $domicilio->ciudad;
+        $state = $domicilio->estado;
+        $country = $domicilio->pais;
+        $street = $domicilio->calle;
+        $outdoor_number = $domicilio->numero_exterior;
+        $interior_number = $domicilio->numero_interior;
+        $reference = $domicilio->alias;
+
+        // session()->put('ordenCompra', '');
         $cart = session()->get('cart');
         $totalCompra = session()->get('cartTotal');
         $cantidad_productos = session()->get('cartTotalUnits');
@@ -26,6 +49,8 @@ class PasarelaPagoCLIPController extends Controller
         $totalGRNL = session()->get('cartTotalGNRL');
         $envio = session()->get('cartEnvio');
         $cliente = new Client();
+        $random = Carbon::now()->format('d-m-Y H:i:s');
+        $reference_id = "REF_" . $random;
 
         // "amount": '.$totalCompra.',
 
@@ -34,7 +59,7 @@ class PasarelaPagoCLIPController extends Controller
             {
                 "amount": 1.0,
                 "currency":"MXN",
-                "purchase_description":"ejemplo de compra laravel",
+                "purchase_description":"Brincolines Bambinos",
                 "redirection_url":
                 {
                     "success":"'.url('clip_success').'",
@@ -43,26 +68,26 @@ class PasarelaPagoCLIPController extends Controller
                 },
                 "expires_at":"",
                 "metadata":{
-                    "me_reference_id": "OID123456789",
+                    "me_reference_id":"'.$reference_id.'",
                     "customer_info":
                     {
-                        "name": "Michael Eduardo",
-                        "email": "mikeed1998@gmail.com",
-                        "phone": "3322932239"
+                        "name": "'.$name.'",
+                        "email": "'.$email.'",
+                        "phone": "'.$phone.'"
                     },
                     "billing_address":
                     {
-                        "zip_code": "03800A",
-                        "locality": "Villas de San Juan",
-                        "city": "Guadalajara",
-                        "State": "Jalisco",
-                        "country": "Mexico",
-                        "street": "Av. Normalistas",
-                        "outdoor_number": "C9",
-                        "interior_number": "9",
-                        "reference": "Manzana I",
-                        "between_streets": "Av. Noramlistas y Monte Olivete",
-                        "floor": "4"
+                        "zip_code": "'.$zip_code.'",
+                        "locality": "'.$locality.'",
+                        "city": "'.$city.'",
+                        "State": "'.$state.'",
+                        "country": "'.$country.'",
+                        "street": "'.$street.'",
+                        "outdoor_number": "'.$outdoor_number.'",
+                        "interior_number": "'.$interior_number.'",
+                        "reference": "'.$reference.'",
+                        "between_streets": "",
+                        "floor": "0"
                     }
                 },
                 "webhook_url": "https://webhook.site/2c408bb6-7792-4833-8294-66fe59b091b6"
@@ -79,23 +104,100 @@ class PasarelaPagoCLIPController extends Controller
         $paymentRequestId = $responseData['payment_request_id'];
 
         // dd($cart, $T);
+        // session()->put('ordenCompra', $paymentRequestId);
 
         return view('pagos.CLIP.index', compact('paymentRequestId', 'totalCompra', 'cantidad_productos', 'iva', 'totalGRNL', 'envio'));
     }
 
+
     public function clip_success() {
-        // El pago funciono
-        $tipo = 'success';
-        $titulo = '¡Pago exitoso!';
-        $mensaje = 'Tu pago se ha realizado con éxito.';
-        $rutaRedireccion = '/home';
+        /*  En esta función el pago ya fue depositado a la cuenta de CLIP
+            0 = CANCELADO 	-----> Cliente y Vendedor (no se puede revertir)
+            1 = ASIGNADO	-----> Vendedor (El cliente y vendedor lo pueden cancelar)
+            2 = PAGADO   	-----> Cliente (Pagar sin necesidad de un vendedor y en caso de estar ASIGNADO)
+            3 = ENVIADO	    -----> Vendedor (Una vez que haya comprobado que se pago)
+        */// Los pedidos cancelados no se borrarán, solo se archivarán
 
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//                              CASOS
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+/*
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █
+    Si el vendedor ya le asigno una cotización, recuperar el pedido pendiente
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █
+*/
+
+
+
+/*
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █
+*/
+
+
+
+/*
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █
+    Si el cliente hizo la compra sin ayuda de un asesor, crear el pedido desde cero
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █
+*/
         // Crear pedido
+        $pedido = new Pedido;
 
+        $userId = Auth::id();
+        $usuario = User::find($userId);
+        $domicilio = Domicilio::where('usuario', $usuario->id)->first();
+        $cantidad = session()->get('cartTotalUnits');
+        $importe = session()->get('cartTotal');
+        $iva = session()->get('cartIVA');
+        $total = session()->get('cartTotalGNRL');
+        $envio = session()->get('cartEnvio');
+        $vendedor = session()->get('asesor');
 
-        return view('pagos.CLIP.success', compact('tipo', 'titulo', 'mensaje', 'rutaRedireccion'));
+        // Generar un identificador único para el pedido = UID
+        $fecha = date('ymd'); // Formato de fecha YYMMDD
+        $prefijo = 'PED';
+        $ultimoPedidoHoy = Pedido::whereDate('created_at', '=', date('Y-m-d'))->orderBy('created_at', 'desc')->first();
+
+        $secuencia = 1; // Valor por defecto si no hay pedidos ese día
+        if ($ultimoPedidoHoy && preg_match('/PED(\d{6})(\d+)/', $ultimoPedidoHoy->uid, $matches)) {
+            $secuencia = intval($matches[2]) + 1; // Sumar uno a la última secuencia de hoy
+        }
+
+        $uid = sprintf("%s%s%04d", $prefijo, $fecha, $secuencia);
+
+        $pedido->domicilio = $domicilio->id;
+        $pedido->usuario = $usuario->id;
+        if($vendedor != null){
+            $pedido->vendedor = session()->get('asesor');
+        } else {
+            $pedido->vendedor = null;
+        }
+
+        $pedido->uid = $uid;
+        $pedido->estatus = 2;
+        $pedido->guia = '';
+        $pedido->linkguia = '';
+        $pedido->factura = '';
+        $pedido->cantidad = $cantidad;
+        $pedido->importe = $importe;
+        $pedido->iva = $iva;
+        $pedido->total = $total;
+        $pedido->envio = $envio;
+        $pedido->comprobante = '';
+        $pedido->cupon = '';
+        $pedido->cancelado = 0;
+        $carrito = session()->get('cart');
+        $pedido->data = json_encode($carrito);
+
+        $pedido->save();
+
+        return view('pagos.CLIP.success');
+/*
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █
+*/
     }
 
+    // NO APLICA PARA LA PASARELA DE CLIP
     public function clip_error() {
          // Lógica opcional, CLIP por defecto solo te pide volver a intentar el pago en lugar de utilizar una vista de error
         $tipo = 'error';
@@ -107,3 +209,4 @@ class PasarelaPagoCLIPController extends Controller
     }
 
 }
+

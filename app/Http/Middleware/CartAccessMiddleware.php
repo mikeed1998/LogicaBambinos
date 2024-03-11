@@ -18,6 +18,8 @@ class CartAccessMiddleware
         session()->put('cartIVA', 0);
         session()->put('cartTotalGNRL', 0);
         session()->put('cartEnvio', 0);
+        session()->put('asesor', 0);
+        session()->put('cartID', 0);
 
         return redirect('/login')->with('status', '¡Acceso denegado! Tienes que iniciar sesión');
     }

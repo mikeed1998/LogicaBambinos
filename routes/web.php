@@ -20,7 +20,8 @@
     Route::get('/', 'FrontController@home')->name('front.home');
     Route::get('/nosotros', 'FrontController@aboutus')->name('front.aboutus');
     Route::get('/contacto', 'FrontController@contact')->name('front.contact');
-    Route::get('/productos', 'FrontController@catalogo')->name('front.catalogo');
+    Route::get('/tienda', 'FrontController@tienda')->name('front.tienda');
+    Route::get('/factura_design', 'FrontController@factura_design')->name('front.factura_design');
     // Login cutomizado para el admin, redirigir en caso de estar logeado con privilegios de admin
     Route::get('/admin', 'FrontController@admin')->name('front.admin')->middleware('checkAdminAccess');
 

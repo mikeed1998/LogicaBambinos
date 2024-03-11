@@ -129,7 +129,7 @@
                     <div class="col-md-8 col-11 mx-auto">
                         <div class="row">
                             <div class="col-md-4 col-12">
-                                <a href="{{ route('front.catalogo') }}" class="btn w-100 py-2 fs-5 btn-white border"><i class=""></i>Volver a la tienda</a>
+                                <a href="{{ route('front.tienda') }}" class="btn w-100 py-2 fs-5 btn-white border"><i class=""></i>Volver a la tienda</a>
                             </div>
                             <div class="col-md-4 col-12">
                                 <a href="javascript:void(0)" id="clearCartBtn" class="btn w-100 py-2 fs-5 btn-white border"><i class="bi bi-trash"></i> Vaciar carrito</a>
@@ -156,7 +156,7 @@
                                 <div class="col-md-3 col-12">
                                     <div class="card carta-producto">
                                         <div class="imagen-producto" style="
-                                            background-image: url('{{ asset('img/productos/20231229160623.png') }}');
+                                            background-image: url('{{ asset('img/productos/'.$details['photo']) }}');
                                         "></div>
                                         <div class="card-body">
                                             {{ $details['product_name'] }}

@@ -214,14 +214,14 @@
                                             Swal.fire({
                                                 title:
                                                     (check == 1) ?
-                                                        "¿Deseas deshabilitar el producto?"
+                                                        "¿Deseas habilitar el producto?"
                                                     :
-                                                        "¿Deseas habilitar el producto?",
+                                                        "¿Deseas deshabilitar el producto?",
                                                 text:
                                                     (check == 1) ?
-                                                        "Esta acción eliminará parcialmente el producto. Los usuarios cuyos carritos hayan guardado este producto lo perderán, esta acción se puede revertir en el futuro"
+                                                        "El producto volverá a estar disponible en la tienda."
                                                     :
-                                                        "El producto volverá a estar disponible en la tienda.",
+                                                        "Esta acción eliminará parcialmente el producto. Los usuarios cuyos carritos hayan guardado este producto lo perderán, esta acción se puede revertir en el futuro",
                                                 icon: "warning",
                                                 showCancelButton: true,
                                                 confirmButtonColor: "#d33",

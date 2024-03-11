@@ -71,6 +71,7 @@ class LoginController extends Controller
         Session::forget('cart'); // Limpiar la sesión del carrito
         Session::forget('cartTotal');
         Session::forget('cartTotalUnits');
+        Session::forget('cartID');
         \Toastr::success('Has salido de tu cuenta');
         return redirect('/'); // Redirigir a la página de inicio de sesión u otra página según tus necesidades
     }

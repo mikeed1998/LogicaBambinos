@@ -9,6 +9,7 @@ use App\User;
 use Auth;
 use Carbon\Carbon;
 use App\Domicilio;
+use App\Pedido;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,8 @@ class HomeController extends Controller
         $usuario = User::find($userId);
         $fechaActual = Carbon::now()->toDateString();
         $domicilio = Domicilio::where('usuario', $userId)->first();
+        $pedidos = Pedido::where('usuario', $usuario->id)->get()->toBase();
 
-        return view('user.index', compact('usuario', 'fechaActual', 'domicilio'));
+        return view('user.index', compact('usuario', 'fechaActual', 'domicilio', 'pedidos'));
     }
 }

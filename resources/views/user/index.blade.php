@@ -6,24 +6,16 @@
         :root {
             --blanco: #FFFFFF;
             --negro: #000000;
-            --status-pendiente: #FFA500;
-            --status-confirmado: #ADD8E6;
-            --status-procesado: #007BFF;
-            --status-enviado: #008000;
-            --status-entregado: #006400;
             --status-cancelado: #FF0000;
-            --status-devuelto: #800080;
-            --status-reembolsado: #B0C4DE;
+            --status-asignado: #FFA500;
+            --status-pagado: #006400;
+            --status-enviado: #007BFF;
         }
 
-        .boton-pendiente { background-color: var(--status-pendiente); }
-        .boton-confirmado { background-color: var(--status-confirmado); }
-        .boton-procesado { background-color: var(--status-procesado); }
-        .boton-enviado { background-color: var(--status-enviado); }
-        .boton-entregado { background-color: var(--status-entregado); }
         .boton-cancelado { background-color: var(--status-cancelado); }
-        .boton-devuelto { background-color: var(--status-devuelto); }
-        .boton-reembolsado { background-color: var(--status-reembolsado); }
+        .boton-asignado { background-color: var(--status-asignado); }
+        .boton-pagado { background-color: var(--status-pagado); }
+        .boton-enviado { background-color: var(--status-enviado); }
 
         body {
             background-color: var(--morado-fondo);
@@ -253,25 +245,21 @@
                                         </div>
                                         @php
                                             $status_list = array(
-                                                "pendiente",
-                                                "confirmado",
-                                                "procesado",
-                                                "enviado",
-                                                "entregado",
                                                 "cancelado",
-                                                "devuelto",
-                                                "reembolsado"
+                                                "asignado",
+                                                "pagado",
+                                                "enviado",
                                             );
                                         @endphp
-                                        @for($i = 0; $i < 8; $i++)
+                                        @foreach($pedidos as $ped)
                                             <div class="row mt-md-0 mt-5">
-                                                <div class="col-md-6 py-2 col-12 border border-dark fs-5 fw-bolder">FKJ3H34J3KJ43J43H4J3</div>
+                                                <div class="col-md-6 py-2 col-12 border border-dark fs-5 fw-bolder">{{ $ped->uid }}</div>
                                                 <div class="col-md-2 py-2 col-12 border border-dark fs-5">{{ $fechaActual }}</div>
-                                                <div class="col-md-2 py-2 col-12 border border-dark fs-5 no-select text-center text-white fw-bolder text-uppercase boton-{{ $status_list[$i] }} px-0">{{ $status_list[$i] }}</div>
+                                                <div class="col-md-2 py-2 col-12 border border-dark fs-5 no-select text-center text-white fw-bolder text-uppercase boton-{{ $status_list[$ped->estatus] }} px-0">{{ $status_list[$ped->estatus] }}</div>
                                                 <div class="col-md-2 py-2 col-12 border border-dark fs-5">
                                                     <div class="row">
                                                         <div class="col-4 text-center">
-                                                            <button class="btn btn-sm btn-dark rounded-circle" data-bs-toggle="modal" data-bs-target="#modal-pedido-{{ $i }}">
+                                                            <button class="btn btn-sm btn-dark rounded-circle" data-bs-toggle="modal" data-bs-target="#modal-pedido-{{ $ped->id }}">
                                                                 <small><i class="bi bi-eye text-white"></i></small>
                                                             </button>
                                                         </div>
@@ -281,7 +269,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="col-4 text-center">
-                                                            <button class="btn btn-sm btn-danger rounded-circle btn-delete" data-id="{{ $i }}">
+                                                            <button class="btn btn-sm btn-danger rounded-circle btn-delete" data-id="{{ $ped->id }}">
                                                                 <small><i class="bi bi-trash text-white"></i></small>
                                                             </button>
                                                         </div>
@@ -289,11 +277,11 @@
                                                 </div>
                                             </div>
                                             <!-- Modal -->
-                                            <div class="modal fade" id="modal-pedido-{{ $i }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal fade" id="modal-pedido-{{ $ped->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title {{ $i + 1 }}</h1>
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Detalles del pedido</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
@@ -305,7 +293,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endfor
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

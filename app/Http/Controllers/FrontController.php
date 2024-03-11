@@ -11,7 +11,11 @@ use Carbon\Carbon;
 use App\Configuracion;
 use App\Seccion;
 use App\Elemento;
+use App\Categoria;
 use App\Producto;
+use App\ProductoGaleria;
+use App\ProductoCaracteristica;
+
 
 class FrontController extends Controller
 {
@@ -30,14 +34,21 @@ class FrontController extends Controller
         return view('front.index');
     }
 
-    public function catalogo() {
+    public function tienda() {
+        $categorias = Categoria::all();
         $productos = Producto::where('activo', 1)->where('visible', 1)->get();
-        return view('front.productos', compact('productos'));
+        $producto_caracteristicas = ProductoCaracteristica::all();
+
+        return view('front.productos', compact('productos', 'categorias', 'producto_caracteristicas'));
     }
 
 	public function admin()
     {
         return view('front.admin');
+    }
+
+    public function factura_design() {
+        return view('front.factura_uno');
     }
 
 

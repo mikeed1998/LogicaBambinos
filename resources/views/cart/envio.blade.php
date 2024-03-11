@@ -127,25 +127,25 @@
                                 <div class="row form-group">
                                     <div class="col text-start">
                                         <label for="nombre" class="form-control-label">Nombre</label>
-                                        <input type="text" name="nombre" id="nombre" class="form-control shadow-none editarajax" value="{{ $usuario->name }}">
+                                        <input required readonly type="text" name="nombre" id="nombre" class="form-control shadow-none" value="{{ $usuario->name }} {{ $usuario->lastname }}">
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col text-start">
                                         <label for="email" class="form-control-label">Email</label>
-                                        <input readonly type="text" name="email" id="email" class="form-control shadow-none" value="{{ $usuario->email }}">
+                                        <input required readonly type="text" name="email" id="email" class="form-control shadow-none" value="{{ $usuario->email }}">
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col text-start">
                                         <label for="telefono" class="form-control-label">Telefono (10 digitos)</label>
-                                        <input type="text" name="telefono" id="telefono" class="form-control shadow-none">
+                                        <input required type="text" name="telefono" id="telefono" class="form-control shadow-none editarajax" data-model="User" data-field="telefono" data-id="{{$usuario->id}}" value="{{ $usuario->telefono }}">
                                     </div>
                                 </div>
                                 <div class="row form-group">
                                     <div class="col text-start">
                                         <label for="rfc" class="form-control-label">RFC</label>
-                                        <input type="text" name="rfc" id="rfc" class="form-control shadow-none">
+                                        <input required type="text" name="rfc" id="rfc" class="form-control shadow-none editarajax" data-model="User" data-field="RFC" data-id="{{$usuario->id}}" value="{{ $usuario->RFC }}">
                                     </div>
                                 </div>
                             </div>
@@ -167,25 +167,25 @@
                                         <div class="row mt-2">
                                             <div class="col text-start">
                                                 <label for="calle" class="form-control-label">Calle</label>
-                                                <input type="text" name="calle" id="calle" class="form-control">
+                                                <input required type="text" name="calle" id="calle" class="form-control fw-bolder editarajax" data-model="Domicilio" data-field="calle" data-id="{{$domicilio->id}}" value="{{ $domicilio->calle }}">
                                             </div>
                                         </div>
                                         <div class="row mt-2">
                                             <div class="col text-start">
                                                 <label for="numero_interior" class="form-control-label">Número Interior (Opcional)</label>
-                                                <input type="text" name="numero_interior" id="numero_interior" class="form-control">
+                                                <input required type="text" name="numero_interior" id="numero_interior" class="form-control fw-bolder editarajax" data-model="Domicilio" data-field="numero_interior" data-id="{{$domicilio->id}}" value="{{ $domicilio->numero_interior }}">
                                             </div>
                                         </div>
                                         <div class="row mt-2">
                                             <div class="col text-start">
                                                 <label for="estado" class="form-control-label">Estado</label>
-                                                <input type="text" name="estado" id="estado" class="form-control">
+                                                <input required type="text" name="estado" id="estado" class="form-control fw-bolder editarajax" data-model="Domicilio" data-field="estado" data-id="{{$domicilio->id}}" value="{{ $domicilio->estado }}">
                                             </div>
                                         </div>
                                         <div class="row mt-2">
                                             <div class="col text-start">
                                                 <label for="colonia" class="form-control-label">Colonia</label>
-                                                <input type="text" name="colonia" id="colonia" class="form-control">
+                                                <input required type="text" name="colonia" id="colonia" class="form-control fw-bolder editarajax" data-model="Domicilio" data-field="colonia" data-id="{{$domicilio->id}}" value="{{ $domicilio->colonia }}">
                                             </div>
                                         </div>
                                     </div>
@@ -193,25 +193,25 @@
                                         <div class="row mt-2">
                                             <div class="col text-start">
                                                 <label for="numero_exterior" class="form-control-label">Número Exterior</label>
-                                                <input type="text" name="numero_exterior" id="numero_exterior" class="form-control">
+                                                <input required type="text" name="numero_exterior" id="numero_exterior" class="form-control fw-bolder editarajax" data-model="Domicilio" data-field="numero_exterior" data-id="{{$domicilio->id}}" value="{{ $domicilio->numero_exterior }}">
                                             </div>
                                         </div>
                                         <div class="row mt-2">
                                             <div class="col text-start">
                                                 <label for="pais" class="form-control-label">País</label>
-                                                <input type="text" name="pais" id="pais" class="form-control">
+                                                <input required readonly type="text" name="pais" id="pais" class="form-control fw-bolder" value="{{ $domicilio->pais }}">
                                             </div>
                                         </div>
                                         <div class="row mt-2">
                                             <div class="col text-start">
                                                 <label for="municipio" class="form-control-label">Municipio</label>
-                                                <input type="text" name="municipio" id="municipio" class="form-control">
+                                                <input required type="text" name="municipio" id="municipio" class="form-control fw-bolder editarajax" data-model="Domicilio" data-field="municipio" data-id="{{$domicilio->id}}" value="{{ $domicilio->municipio }}">
                                             </div>
                                         </div>
                                         <div class="row mt-2">
                                             <div class="col text-start">
                                                 <label for="codigo_postal" class="form-control-label">Código Postal</label>
-                                                <input type="text" name="codigo_postal" id="codigo_postal" class="form-control">
+                                                <input required type="text" name="codigo_postal" id="codigo_postal" class="form-control fw-bolder editarajax" data-model="Domicilio" data-field="codigo_postal" data-id="{{$domicilio->id}}" value="{{ $domicilio->codigo_postal }}">
                                             </div>
                                         </div>
                                     </div>
