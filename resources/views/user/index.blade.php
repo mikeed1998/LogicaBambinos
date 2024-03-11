@@ -263,11 +263,11 @@
                                                                 <small><i class="bi bi-eye text-white"></i></small>
                                                             </button>
                                                         </div>
-                                                        <div class="col-4 text-center">
+                                                        {{-- <div class="col-4 text-center">
                                                             <button class="btn btn-sm btn-info rounded-circle">
                                                                 <small><i class="bi bi-pencil-square text-white"></i></small>
                                                             </button>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="col-4 text-center">
                                                             <button class="btn btn-sm btn-danger rounded-circle btn-delete" data-id="{{ $ped->id }}">
                                                                 <small><i class="bi bi-trash text-white"></i></small>
@@ -285,7 +285,19 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            ...
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    @php
+                                                                        $carrito = json_decode($ped->data)
+                                                                    @endphp
+                                                                    @foreach ($carrito as $car)
+                                                                        <li>{{ $car->product_name }}</li>
+                                                                        <li>{{ $car->photo }}</li>
+                                                                        <li>{{ $car->price }}</li>
+                                                                        <li>{{ $car->quantity }}</li>
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cerrar detalles</button>
