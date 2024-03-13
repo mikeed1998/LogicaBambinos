@@ -60,21 +60,25 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col mx-auto">
+                                        <div class="form-group row" id="productos-container">
+                                            <div class="col-9 mx-auto">
                                                 <label for="producto_cliente_orden" class="form-control-label fs-5">Producto que deseas cotizar a tu cliente</label>
-                                                <select name="producto_cliente_orden" id="producto_cliente_orden" class="form-select fs-5">
+                                                <select name="producto_cliente_orden[]" class="form-select fs-5">
                                                     @foreach ($productos as $p)
-                                                        <option value="producto-{{ $p->id }}" class="fs-5">{{ $p->nombre }}</option>
+                                                        <option value="{{ $p->id }}" class="fs-5">{{ $p->nombre }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col mx-auto">
+                                            <div class="col-3 mx-auto">
                                                 <label for="cantidad_cotizacion" class="form-control-label text-start fs-5">Cantidad</label>
-                                                <input type="number" id="cantidad_cotizacion" name="cantidad_cotizacion" class="form-control fs-5">
+                                                <input type="number" name="cantidad_cotizacion[]" class="form-control fs-5" min="0">
                                             </div>
+                                            <div class="col-12 py-2">
+                                                <button type="button" class="btn btn-danger rounded-0 eliminar-producto" style="display: none;">Eliminar</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 py-2">
+                                            <button type="button" id="agregar-producto" class="btn btn-dark rounded-0 w-100">Agregar otro producto</button>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col mt-2">
@@ -140,43 +144,6 @@
         </div>
     </div>
 
-    {{-- <script>
-        var usuarioSeleccionado = "";  // Variable global para almacenar el usuario seleccionado
-        var vendedorSeleccionado = "";
-        var productoSeleccionado = "";
-        var cantidadSeleccionada = "";
-
-        function guardarUsuario() {
-            var usuarioSelect = $('#usuario_orden');
-            usuarioSeleccionado = usuarioSelect.val();
-            console.log(usuarioSeleccionado);
-        }
-        function guardarYEnviar() {
-            guardarUsuario();  // Guarda el usuario seleccionado antes de enviar los datos
-
-            var productoClienteOrden = $('#producto_cliente_orden').val();
-            var cantidadCotizacion = $('#cantidad_cotizacion').val();
-
-            $.ajax({
-                url: '{{ route('storeCotizacion') }}',
-                method: 'POST',
-                data: {
-                    usuario_orden: usuarioSeleccionado,
-                    producto_cliente_orden: productoClienteOrden,
-                    cantidad_cotizacion: cantidadCotizacion,
-                    _token: $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (data) {
-                    console.log('Respuesta del servidor:', data);
-                    toastr.success(data.message);
-                },
-                error: function (error) {
-                    console.error('Hubo un error');
-                }
-            });
-        }
-    </script> --}}
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Obtener referencias a los elementos relevantes
@@ -214,6 +181,47 @@
 
             // Llamar a la función inicialmente para establecer el estado inicial
             gestionarEstadoElementos();
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var contador = 1;
+
+            document.getElementById('agregar-producto').addEventListener('click', function() {
+                var container = document.getElementById('productos-container');
+                var clone = container.cloneNode(true);
+
+                contador++;
+                clone.id = 'productos-container-' + contador;
+
+                // Limpiamos los valores de los campos clonados
+                clone.querySelectorAll('select[name="producto_cliente_orden[]"]').forEach(function(select) {
+                    select.selectedIndex = 0;
+                });
+                clone.querySelectorAll('input[name="cantidad_cotizacion[]"]').forEach(function(input) {
+                    // Establecemos el valor mínimo de 0
+                    input.setAttribute('min', '0');
+                    // Si el input está vacío, establecemos su valor en 0
+                    if (!input.value.trim()) {
+                        input.value = '0';
+                    }
+                });
+
+                // Mostramos el botón "Eliminar" solo si hay más de un conjunto de campos
+                if (contador > 1) {
+                    clone.querySelector('.eliminar-producto').style.display = 'block';
+                }
+
+                container.parentNode.insertBefore(clone, container.nextSibling);
+            });
+
+            // Agregamos el evento de clic para eliminar el conjunto clonado
+            document.addEventListener('click', function(event) {
+                if (event.target.classList.contains('eliminar-producto')) {
+                    event.target.closest('.form-group').remove();
+                    contador--;
+                }
+            });
         });
     </script>
 

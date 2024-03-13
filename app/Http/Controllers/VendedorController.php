@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use App\Producto;
 use App\Http\Controllers\CorreosController;
 use Illuminate\Support\Facades\Hash;
+use App\CarritoPersistente;
 
 class VendedorController extends Controller
 {
@@ -120,60 +121,36 @@ class VendedorController extends Controller
     }
 
     public function storeCotizacion(Request $request) {
-        dd($request);
+        $cart = new CarritoPersistente;
+        $campos_tam = count($request->producto_cliente_orden);
 
-        $usuario = User::find($request->usuario_orden);
-        $contra = '';
+        $carrito = [];
+        for ($i = 0; $i < $campos_tam; $i++) {
+            $producto_aux = Producto::find($request->producto_cliente_orden[$i]);
+            $carrito[$i + 1] = [
+                'product_name' => $producto_aux->nombre,
+                'photo' => $producto_aux->portada,
+                'price' => $producto_aux->precio,
+                'quantity' => $request->cantidad_cotizacion[$i]
+            ];
+        }
 
-        $data = array(
-			'tipoForm' => 'VendedorCreaCliente',
-			'nombre' => $usuario->nombre_cliente_orden,
-			'correo' => $usuario->email_cliente_orden,
-			'telefono' => $usuario->telefono_cliente_orden,
-			'asunto' => 'Tu cotización esta lista',
-			'mensaje' => 'Para finalizar tu comra debes ingresar a tu cuenta y realizar el pago',
-			'hoy' => Carbon::now()->format('d-m-Y')
-		);
+        $carrito_json = json_encode($carrito);
 
-        $html = view('correos.vendedor_genera_cliente', compact('data'));
+        $cart->usuario = $request->usuario_orden;
+        $cart->carrito = $carrito_json;
+        $cart->cotizado = 1;
 
-        $config = Configuracion::first();
+        // $cart->save();
 
-		$mail = new PHPMailer;
+        dd($cart);
 
-		try {
-			$mail->isSMTP();
-			// $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-			// $mail->SMTPDebug = 2;
-			$mail->Host = $config->remitentehost;
-			$mail->SMTPAuth = true;
-			$mail->Username = $config->remitente;
-			$mail->Password = $config->remitentepass;
-			$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-			$mail->Port = $config->remitenteport;
+        // datos para los pdfs
 
-			$mail->SetFrom($config->remitente, 'Brincolines Bambinos - Cotización');
-			$mail->isHTML(true);
+        // PDF 1
+        // PDF 2 iterar productos
+        // PDF 3 estatico
 
-			$mail->addAddress($request->email_cliente_orden,'Cotización asignada');
-
-			$mail->msgHTML($html);
-
-			if($mail->send()){
-			    \Toastr::success('¡El cliente ya fue notificado!');
-				return redirect()->back();
-			}else{
-				\Toastr::error('Error al enviar el correo');
-				return redirect()->back();
-			}
-
-		} catch (phpmailerException $e) {
-			\Toastr::error($e->errorMessage());
-			return redirect()->back();
-		} catch (Exception $e) {
-			\Toastr::error($e->getMessage());
-			return redirect()->back();
-		}
     }
 
 }

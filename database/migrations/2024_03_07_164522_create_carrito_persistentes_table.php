@@ -17,6 +17,7 @@ class CreateCarritoPersistentesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('usuario')->nullable();
             $table->text('carrito')->nullable();
+            $table->integer('cotizado')->default(0);
             $table->foreign('usuario')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
