@@ -38,7 +38,8 @@ class PdfController extends Controller
     }
 
     public function generatePdf_factura() {
-        $view = view('front.factura_uno');
+        // $view = view('front.factura_uno');
+        $view = view('front.factura_dos');
 
         // Crea una instancia de Dompdf
         $dompdf = new Dompdf();

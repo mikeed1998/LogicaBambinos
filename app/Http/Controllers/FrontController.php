@@ -51,6 +51,9 @@ class FrontController extends Controller
         return view('front.factura_uno');
     }
 
+    public function factura_design2() {
+        return view('front.factura_dos');
+    }
 
 
 }

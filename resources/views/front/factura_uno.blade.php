@@ -239,20 +239,20 @@
     </tr>
     <tr>
         <td colspan="3" style="font-size: 12px; width: 80px; font-weight: 700; text-align: center;border-top: 0; border-top: 0; color: #9DA1A5;">Tu pedido incluye</td>
-        <td style="font-size: 12px; width: 100px; text-align: center; border-bottom: 0;"></td>
+        <td style="font-size: 12px; width: 100px; text-align: center; border: 0;"></td>
         <td style="font-size: 12px; width: border-bottom: 0; 80px; text-align: center; border-bottom: 0; border-top: 0; color: #9DA1A5;">Precio paquete</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">$ 0.00</td>
+        <td style="background-color: #F1F4FF; border-bottom: 0; font-size: 12px; width: 100px; text-align: center;">$ 0.00</td>
     </tr>
     <tr>
-        <td rowspan="6" colspan="3">
-        </td>
+        <td rowspan="6" colspan="3" style="background-color: #F1F4FF;"></td>
+    </tr>
+
+    <tr>
+        <td rowspan="5" style=" border: 0;"></td>
+        <td style="border-top: 0; border-bottom: 0; font-size: 12px; padding-top: 0;  text-align: center; color: #9DA1A5;">Deducción</td>
+        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px; "></td>
     </tr>
     <tr>
-        <td rowspan="5"></td>
-        <td style="border-top: 0; border-bottom: 0; font-size: 12px; padding-top: 0; text-align: center; color: #9DA1A5;">Deducción</td>
-        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;"></td>
-    </tr>
-    <tr sty>
         <td style="border-top: 0; border-bottom: 0; font-size: 12px; padding-top: 0; text-align: center; color: #9DA1A5;">I.V.A.</td>
         <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;"></td>
      </tr>
@@ -268,13 +268,12 @@
         <td style="border-top: 0; font-size: 12px; text-align: center; color: #9DA1A5;">Saldo</td>
         <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;">$ 0.00</td>
     </tr>
-
     <tr>
         <td colspan="3" style="font-size: 12px; width: 80px; font-weight: 700; text-align: center; border-top: 0; border-top: 0; color: #9DA1A5;">Tu pedido incluye</td>
         <td colspan="3" rowspan="2" style="font-weight: 700; font-size: 12px; width: 100px; text-align: center; border-bottom: 0;">Para comenzar la producción de su pedido se requiere un anticipo de</td>
     </tr>
     <tr>
-        <td rowspan="6" colspan="3" style="background-color: #F1F4FF;"></td>
+        <td rowspan="4" colspan="3" style="background-color: #F1F4FF;"></td>
     </tr>
     <tr>
         <td colspan="3" rowspan="1" style="text-align: center; font-size: 12px; background-color: #F1F4FF;">
@@ -285,14 +284,18 @@
         <td colspan="3" rowspan="1" style="text-align: center; font-size: 12px; font-weight: 700;">
             Tiempo de entrega aproximado
         </td>
-     </tr>
-    <tr>
-        <td colspan="3" rowspan="1" style="text-align: center; font-size: 12px; background-color: #F1F4FF;">
-            00/00/00
-        </td>
     </tr>
-
-
-
+    <tr>
+        <td colspan="3" rowspan="1" style="color: #F1609B; font-weight: bold; text-align: center; font-size: 12px; background-color: #F1F4FF;">
+            4 a 7 semanas
+        </td> 
+    </tr>
+    
+    <tr>
+        <td colspan="6" style="font-size: 12px; border: 0;"><br>Te recomendamos revisar nuestras políticas comerciales al final de tu orden de compra.</td>
+    </tr>
 </table>
 
+
+
+{{-- <td colspan="6">Te recomendamos revisar nuestras políticas comerciales al final de tu órden de compra.</td> --}}
