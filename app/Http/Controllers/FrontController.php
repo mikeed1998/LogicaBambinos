@@ -48,12 +48,19 @@ class FrontController extends Controller
     }
 
     public function factura_design() {
-        return view('front.factura_uno');
+        return view('facturas.factura_uno');
     }
 
     public function factura_design2() {
-        return view('front.factura_dos');
+        return view('facturas.factura_dos');
     }
 
+    public function factura_design3() {
+        return view('facturas.factura_tres');
+    }
+
+    public function factura_design4() {
+        return view('facturas.factura_cuatro');
+    }
 
 }
