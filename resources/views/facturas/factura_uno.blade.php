@@ -1,13 +1,19 @@
 <style>
 
+    @font-face {
+        font-family: 'Mairy Bold';
+        src: url('vendor/fonts/Mairy_Bold.otf') format('opentype');
+    }
+
     table {
+        font-family: Arial, Helvetica, sans-serif;
         border: 1px solid transparent;
         border-collapse: collapse;
     }
 
     tr {
-        padding: 0; /* Elimina el espacio interno (padding) de las celdas */
-        margin: 0; /* Elimina el espacio externo (margin) de las celdas */
+        padding: 0;
+        margin: 0;
     }
 
     td {
@@ -27,7 +33,9 @@
         <td style="font-weight: 800; font-size: 10px; border: 0; padding-top: 0;">Brincolines Bambinos S.A. de C.V.</td>
         <td rowspan="5" style="padding-left: 50px; padding-right: 50px; border: 0;"></td>
         <td rowspan="3" style="padding-left: 10px; padding-right: 10px; text-align: center; font-weight: 700; font-size: 28px; text-align: center; border-bottom: 0;">Pedido</td>
-        <td rowspan="3" style="padding-left: 70px; padding-right: 70px; text-align: center; font-weight: 700; font-size: 32px; background-color: #F1F4FF; color: #F15F90;">-W</td>
+        <td rowspan="3" style="width: 10px; padding-left: 8px; padding-right: 8px; text-align: center; font-weight: 700; font-size: 16px; background-color: #F1F4FF; color: #F15F90;">
+            PED2403110001
+        </td>
     </tr>
     <tr>
         <td style="font-size: 10px; border: 0; padding-top: 0;">Bosque de la Primavera 13, Puerta del </td>
@@ -38,7 +46,7 @@
     <tr>
         <td style="font-size: 10px; border: 0; padding-top: 0;">Tel. (33) 1654 5229</td>
         <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; border-top: 0;">Fecha</td>
-        <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; background-color: #F1F4FF;">Fecha</td>
+        <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; background-color: #F1F4FF;">01-01-2024</td>
     </tr>
     <tr>
         <td style="font-size: 10px; border: 0;">Tel. (33) 1991 0883 / (33) 2078 7337</td>
@@ -57,41 +65,41 @@
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center; border-bottom: 0;">Nombre</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, exercitationem.</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-bottom: 0;">No. Cliente</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">1</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-bottom: 0;">Teléfono</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">3322932239</td>
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Domicilio</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Colonia</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">Bonita</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Código Postal</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">44299</td>
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center;border-top: 0; border-bottom: 0;">Ciudad</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">Guadalajara</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Estado</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">Jalisco</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">País</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">México</td>
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">RFC</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">SAPM980701JU7</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Correo</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;" colspan="3"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;" colspan="3">mikeed1998@gmail.com</td>
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;">Paquetería</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">FEDEX</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0;">Tipo de envió</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">NACIONAL</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0;">Asesor</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;"></td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">ASESOR</td>
     </tr>
     <tr>
         <td colspan="6" style="text-align: center; font-size: 16px; font-weight: 700;">Pedido</td>
@@ -105,18 +113,18 @@
     </tr>
     <!-- Ciclo for con cada producto //-->
     <tr style="color: #000000;">
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;"></td>
-        <td colspan="2" style="background-color: #F1F4FF; font-size: 12px; width: 305px; text-align: center;"></td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;"></td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center; border-top: 0;"></td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">$ 0.00</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;">2</td>
+        <td colspan="2" style="background-color: #F1F4FF; font-size: 12px; width: 305px; text-align: center;">BRINCOLIN 1</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">10x10x10</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center; border-top: 0;">300.45</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">$ 600.90</td>
     </tr>
     <tr style="color: #000000;">
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;"></td>
-        <td colspan="2" style="background-color: #F1F4FF; font-size: 12px; width: 305px; text-align: center;"></td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;"></td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center; border-top: 0;"></td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">$ 0.00</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;">1</td>
+        <td colspan="2" style="background-color: #F1F4FF; font-size: 12px; width: 305px; text-align: center;">JUEGO NUMERO 2</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">5x10x10</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center; border-top: 0;">300.00</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">$ 300.00</td>
     </tr>
     <tr style="color: #000000;">
         <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;"></td>
@@ -241,7 +249,7 @@
         <td colspan="3" style="font-size: 12px; width: 80px; font-weight: 700; text-align: center;border-top: 0; border-top: 0; color: #9DA1A5;">Tu pedido incluye</td>
         <td style="font-size: 12px; width: 100px; text-align: center; border: 0;"></td>
         <td style="font-size: 12px; width: border-bottom: 0; 80px; text-align: center; border-bottom: 0; border-top: 0; color: #9DA1A5;">Precio paquete</td>
-        <td style="background-color: #F1F4FF; border-bottom: 0; font-size: 12px; width: 100px; text-align: center;">$ 0.00</td>
+        <td style="background-color: #F1F4FF; border-bottom: 0; font-size: 12px; width: 100px; text-align: center;">$ 100.00</td>
     </tr>
     <tr>
         <td rowspan="6" colspan="3" style="background-color: #F1F4FF;"></td>
@@ -250,19 +258,19 @@
     <tr>
         <td rowspan="5" style=" border: 0;"></td>
         <td style="border-top: 0; border-bottom: 0; font-size: 12px; padding-top: 0;  text-align: center; color: #9DA1A5;">Deducción</td>
-        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px; "></td>
+        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px; ">$ 900.90</td>
     </tr>
     <tr>
         <td style="border-top: 0; border-bottom: 0; font-size: 12px; padding-top: 0; text-align: center; color: #9DA1A5;">I.V.A.</td>
-        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;"></td>
+        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;">$ 144.14</td>
      </tr>
     <tr>
         <td style="border-top: 0; font-size: 12px; padding-top: 0; text-align: center; color: #9DA1A5;">Total</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; text-align: center;">$ 0.00</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; text-align: center;">$ 1044.14</td>
     </tr>
     <tr>
         <td style="border-top: 0; border-bottom: 0; font-size: 12px; padding-top: 0; text-align: center; color: #9DA1A5;">Anticipo</td>
-        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;"></td>
+        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;">$ 522.7</td>
     </tr>
     <tr>
         <td style="border-top: 0; font-size: 12px; text-align: center; color: #9DA1A5;">Saldo</td>
@@ -277,7 +285,7 @@
     </tr>
     <tr>
         <td colspan="3" rowspan="1" style="text-align: center; font-size: 12px; background-color: #F1F4FF;">
-            $ 0.00
+            $ 522.7
         </td>
     </tr>
     <tr>
@@ -288,9 +296,8 @@
     <tr>
         <td colspan="3" rowspan="1" style="color: #F1609B; font-weight: bold; text-align: center; font-size: 12px; background-color: #F1F4FF;">
             4 a 7 semanas
-        </td> 
+        </td>
     </tr>
-    
     <tr>
         <td colspan="6" style="font-size: 12px; border: 0;"><br>Te recomendamos revisar nuestras políticas comerciales al final de tu orden de compra.</td>
     </tr>
@@ -298,4 +305,3 @@
 
 
 
-{{-- <td colspan="6">Te recomendamos revisar nuestras políticas comerciales al final de tu órden de compra.</td> --}}
