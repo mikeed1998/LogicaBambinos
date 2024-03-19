@@ -12,9 +12,9 @@
 </head>
 <body>
 
-    <h1>Nombre: MICHAEL3 </h1>
-	<h5>El vendedor @ asignado ha generado una cotización, por favor inicia sesión para finalizar tu pago</h5>
-
+    <h4>{{ $data['asunto'] }}</h4>
+    <p>{{ $data['mensaje'] }}</p>
+	
 </body>
 </html>
 

@@ -8,6 +8,7 @@ use Auth;
 use App\User;
 use App\CarritoPersistente;
 use App\Domicilio;
+use App\ListaCliente;
 
 class CarritoController extends Controller
 {
@@ -28,6 +29,15 @@ class CarritoController extends Controller
         if ($carritoPersistente) {
             // Recuperar carrito persistente
             $carritoPersistente->update(['carrito' => json_encode($cart)]);
+           
+            $carr = json_decode($carritoPersistente->carrito);
+
+            $total = 0;
+            foreach ($carr as $item) {
+                $total += $item->price * $item->quantity;
+            }
+            
+            session()->put('cartTotal', $total);
             session()->put('cartID', $carritoPersistente->id);
         } else {
             // Crear carrito persistente
@@ -158,6 +168,7 @@ class CarritoController extends Controller
 
     public function datosEnvio() {
         $cart = session()->get('cart');
+        
         $total = session()->get('cartTotal');
 
         session(['cartEnvio' => 100.00]);
@@ -173,13 +184,10 @@ class CarritoController extends Controller
         $usuario = User::find($userId);
 
         $domicilio = Domicilio::where('usuario', $usuario->id)->first();
-
-        // dd($cart, $total, $IVA, $envio, $totalGNRL);
-
+        
         if($total == 0.0) {
-            return redirect()->back()->with('error', 'El carrito esta vacio, no puedes continuar.');
+            return redirect()->back()->with('error', 'El carrito o los datos de envio estan mal');
         } else {
-            // \Toastr::success('Operation successful!');
             return view('cart.envio', compact('cart', 'total', 'IVA', 'envio', 'totalGNRL', 'usuario', 'domicilio'));
         }
     }

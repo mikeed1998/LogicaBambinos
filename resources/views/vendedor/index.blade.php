@@ -4,26 +4,18 @@
 
 <style>
     :root {
-            --blanco: #FFFFFF;
-            --negro: #000000;
-            --status-pendiente: #FFA500;
-            --status-confirmado: #ADD8E6;
-            --status-procesado: #007BFF;
-            --status-enviado: #008000;
-            --status-entregado: #006400;
-            --status-cancelado: #FF0000;
-            --status-devuelto: #800080;
-            --status-reembolsado: #B0C4DE;
-        }
+        --blanco: #FFFFFF;
+        --negro: #000000;
+        --status-cancelado: #FF0000;
+        --status-asignado: #FFA500;
+        --status-pagado: #006400;
+        --status-enviado: #007BFF;
+    }
 
-    .boton-pendiente { background-color: var(--status-pendiente); }
-    .boton-confirmado { background-color: var(--status-confirmado); }
-    .boton-procesado { background-color: var(--status-procesado); }
-    .boton-enviado { background-color: var(--status-enviado); }
-    .boton-entregado { background-color: var(--status-entregado); }
     .boton-cancelado { background-color: var(--status-cancelado); }
-    .boton-devuelto { background-color: var(--status-devuelto); }
-    .boton-reembolsado { background-color: var(--status-reembolsado); }
+    .boton-asignado { background-color: var(--status-asignado); }
+    .boton-pagado { background-color: var(--status-pagado); }
+    .boton-enviado { background-color: var(--status-enviado); }
 
     body {
         background-color: var(--morado-fondo);
@@ -181,23 +173,21 @@
                                     @php
                                         $status_list = array(
                                             "",
-                                            "pendiente",
-                                            "confirmado",
-                                            "procesado",
-                                            "enviado",
-                                            "entregado",
                                             "cancelado",
-                                            "devuelto",
-                                            "reembolsado"
+                                            "asignado",
+                                            "pagado",
+                                            "enviado",
                                         );
                                     @endphp
                                     <li class="list-group-item">
-                                        @for ($i = 1; $i < 5; $i++)
+                                        @foreach ($lista_cotizaciones as $item)
+                                            
+                                        
                                             <div class="row border border-dark">
-                                                <div class="col-md-5 col-12 fs-5 py-1">Cotización {{ $i }}</div>
+                                                <div class="col-md-5 col-12 fs-5 py-1">Cotización {{ $item->uid }}</div>
                                                 <div class="col-md-3 col-12 boder-end border-start border-dark fs-5">mikeed1998@gmail.com</div>
-                                                <div id="contadorBtn-{{ $i }}" class="col-md-2 col-12 border-start border-end border-dark contadorBtn boton-pendiente text-center text-uppercase text-white fs-5" onclick="cambiarEstado('contadorBtn-{{ $i }}')">
-                                                    pendiente
+                                                <div id="contadorBtn-{{ $item->id }}" class="col-md-2 col-12 border-start border-end border-dark contadorBtn boton-asignado text-center text-uppercase text-white fs-5" data-estatus="{{ $item->estatus }}" onclick="cambiarEstado('contadorBtn-{{ $item->estatus }}')">
+                                                    Asignado
                                                 </div>
                                                 <div class="col-md-2 col-12">
                                                     <div class="row">
@@ -207,7 +197,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="col-md-6 col-12 py-1">
-                                                            <button class="btn btn-danger btn-delete w-100" data-id="{{ $i }}">
+                                                            <button class="btn btn-danger btn-delete w-100" data-id="{{ $item->id }}">
                                                                 <i class="bi bi-trash text-white w-100"></i>
                                                             </button>
                                                         </div>
@@ -230,7 +220,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endfor
+                                        @endforeach
                                     </li>
                                 </ul>
                                 <div class="card-body">
@@ -252,79 +242,82 @@
 
 @section('jqueryExtra')
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const botones = document.querySelectorAll('.contadorBtn');
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Definir el número total de botones
-            const totalBotones = 8;
+            // Función para cambiar el estado de un botón según el estado actual del item
+            function actualizarEstadoBoton(boton, estado) {
+                // Remueve todas las clases de estado
+                boton.classList.remove('boton-cancelado', 'boton-asignado', 'boton-pagado', 'boton-enviado');
 
-            // Función para cambiar el estado de un botón
-            function cambiarEstado(id) {
-                const contadorBtn = document.getElementById(id);
-                let estadoActual = 1;
+                // Cambia el estado y el texto del botón según el estado del item
+                switch (estado) {
+                    case 0:
+                        boton.textContent = 'Cancelado';
+                        boton.classList.add('boton-cancelado');
+                        toastr.warning('Cancelado');
+                        break;
+                    case 1:
+                        boton.textContent = 'Asignado';
+                        boton.classList.add('boton-asignado');
+                        toastr.warning('Producto asignado');
+                        break;
+                    case 2:
+                        boton.textContent = 'Pagado';
+                        boton.classList.add('boton-pagado');
+                        toastr.warning('Producto pagado');
+                        break;
+                    case 3:
+                        boton.textContent = 'Enviado';
+                        boton.classList.add('boton-enviado');
+                        toastr.warning('Producto enviado');
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-                function actualizarEstado() {
-                    contadorBtn.classList.remove(
-                        'boton-pendiente', 'boton-confirmado', 'boton-procesado', 'boton-enviado',
-                        'boton-entregado', 'boton-cancelado', 'boton-devuelto', 'boton-reembolsado'
-                    );
+            // Itera sobre todos los botones y actualiza su estado inicial
+            botones.forEach(function (boton) {
+                // Extrae el ID del botón para obtener el estado del item
+                const id = boton.id.split('-')[1]; // Suponiendo que el ID del botón es de la forma "contadorBtn-N"
+                const estadoItem = obtenerEstadoItem(id); // Función para obtener el estado del item según su ID (debes implementarla)
 
-                    switch (estadoActual) {
-                        case 1:
-                            contadorBtn.textContent = 'Pendiente';
-                            contadorBtn.classList.add('boton-pendiente');
-                            toastr.success('Cotización pendiente', 'Estatus - Pendiente');
-                            break;
-                        case 2:
-                            contadorBtn.textContent = 'Confirmado';
-                            contadorBtn.classList.add('boton-confirmado');
-                            toastr.success('Cotización confirmada', 'Estatus - Confirmado');
-                            break;
-                        case 3:
-                            contadorBtn.textContent = 'Procesado';
-                            contadorBtn.classList.add('boton-procesado');
-                            toastr.success('Cotización procesada', 'Estatus - Procesado');
-                            break;
-                        case 4:
-                            contadorBtn.textContent = 'Enviado';
-                            contadorBtn.classList.add('boton-enviado');
-                            toastr.success('Cotización enviada', 'Estatus - Enviado');
-                            break;
-                        case 5:
-                            contadorBtn.textContent = 'Entregado';
-                            contadorBtn.classList.add('boton-entregado');
-                            toastr.success('Cotización entregada', 'Estatus - Entregado');
-                            break;
-                        case 6:
-                            contadorBtn.textContent = 'Cancelado';
-                            contadorBtn.classList.add('boton-cancelado');
-                            toastr.success('Cotización cancelada', 'Estatus - Cancelado');
-                            break;
-                        case 7:
-                            contadorBtn.textContent = 'Devuelto';
-                            contadorBtn.classList.add('boton-devuelto');
-                            toastr.success('Cotización devuelta', 'Estatus - Devuelto');
-                            break;
-                        case 8:
-                            contadorBtn.textContent = 'Reembolsado';
-                            contadorBtn.classList.add('boton-reembolsado');
-                            toastr.success('Cotización reembolsada', 'Estatus - Reembolsado');
-                            break;
-                        default:
-                            break;
-                    }
+                // Actualiza el estado del botón
+                actualizarEstadoBoton(boton, estadoItem);
+
+                // Si el estado es 0 o 1, bloquea el botón
+                if (estadoItem === 0 || estadoItem === 1) {
+                    boton.disabled = true;
                 }
 
-                contadorBtn.addEventListener('click', function() {
-                    estadoActual = (estadoActual % 8) + 1;
-                    actualizarEstado();
-                });
-            }
+                // Agrega un event listener para cambiar el estado del botón al hacer clic en él
+                boton.addEventListener('click', function () {
+                    // Verifica si el estado es 0 o 1, en cuyo caso no se hace nada
+                    if (estadoItem === 0 || estadoItem === 1) {
+                        return;
+                    }
 
-            // Llamar a cambiarEstado para cada botón
-            for (let i = 1; i <= totalBotones; i++) {
-                cambiarEstado(`contadorBtn-${i}`);
-            }
-        });
+                    // Obtiene el nuevo estado (incrementando el estado actual o reiniciándolo si llega a 3)
+                    const nuevoEstado = (estadoItem + 1) % 4;
+                    // Actualiza el estado del botón
+                    actualizarEstadoBoton(boton, nuevoEstado);
+                    // Aquí puedes realizar otras acciones según el nuevo estado, como enviar una solicitud al servidor para actualizar la base de datos, etc.
+                    console.log('Botón ID:', id, 'Estado cambiado a:', nuevoEstado);
+                });
+            });
+
+            // Función para simular la obtención del estado del item según su ID
+            function obtenerEstadoItem(id) {
+            // Aquí debes obtener el estado del ítem con el ID correspondiente
+            // Puedes hacerlo utilizando el atributo "data-estatus" en el botón, por ejemplo
+            const boton = document.getElementById('contadorBtn-' + id);
+            const estatus = boton.getAttribute('data-estatus');
+
+            // Retorna el estado obtenido
+            return parseInt(estatus);
+        }
+    });
 
     </script>
     <script>
