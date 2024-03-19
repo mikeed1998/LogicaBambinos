@@ -34,7 +34,7 @@
         <td rowspan="5" style="padding-left: 50px; padding-right: 50px; border: 0;"></td>
         <td rowspan="3" style="padding-left: 10px; padding-right: 10px; text-align: center; font-weight: 700; font-size: 28px; text-align: center; border-bottom: 0;">Pedido</td>
         <td rowspan="3" style="width: 10px; padding-left: 8px; padding-right: 8px; text-align: center; font-weight: 700; font-size: 16px; background-color: #F1F4FF; color: #F15F90;">
-            PED2403110001
+            {{ $pedido }}
         </td>
     </tr>
     <tr>
@@ -46,7 +46,7 @@
     <tr>
         <td style="font-size: 10px; border: 0; padding-top: 0;">Tel. (33) 1654 5229</td>
         <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; border-top: 0;">Fecha</td>
-        <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; background-color: #F1F4FF;">01-01-2024</td>
+        <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; background-color: #F1F4FF;">{{ $fechaActualFormateada }}</td>
     </tr>
     <tr>
         <td style="font-size: 10px; border: 0;">Tel. (33) 1991 0883 / (33) 2078 7337</td>
@@ -65,41 +65,41 @@
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center; border-bottom: 0;">Nombre</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, exercitationem.</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $nombre }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-bottom: 0;">No. Cliente</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">1</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $numero_cliente }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-bottom: 0;">Teléfono</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">3322932239</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $telefono }}</td>
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Domicilio</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $domicilio_cliente }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Colonia</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">Bonita</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $colonia_cliente }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Código Postal</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">44299</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $codigo_postal_cliente }}</td>
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center;border-top: 0; border-bottom: 0;">Ciudad</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">Guadalajara</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $ciudad_cliente }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Estado</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">Jalisco</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $estado_cliente }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">País</td>
         <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">México</td>
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">RFC</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">SAPM980701JU7</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $rfc_cliente }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Correo</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;" colspan="3">mikeed1998@gmail.com</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;" colspan="3">{{ $correo_cliente }}</td>
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;">Paquetería</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">FEDEX</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $paqueteria }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0;">Tipo de envió</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">NACIONAL</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $tipo_envio }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0;">Asesor</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">ASESOR</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $asesor }}</td>
     </tr>
     <tr>
         <td colspan="6" style="text-align: center; font-size: 16px; font-weight: 700;">Pedido</td>
@@ -112,7 +112,7 @@
         <td style="border-left: 0; font-size: 12px; width: 100px; text-align: center;">Importe</td>
     </tr>
     <!-- Ciclo for con cada producto //-->
-    <tr style="color: #000000;">
+    {{-- <tr style="color: #000000;">
         <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;">2</td>
         <td colspan="2" style="background-color: #F1F4FF; font-size: 12px; width: 305px; text-align: center;">BRINCOLIN 1</td>
         <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">10x10x10</td>
@@ -125,7 +125,19 @@
         <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">5x10x10</td>
         <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center; border-top: 0;">300.00</td>
         <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">$ 300.00</td>
-    </tr>
+    </tr> --}}
+    @php
+        $carrito = json_decode($cart_productos);
+    @endphp
+    @foreach ($carrito as $car)
+        <tr style="color: #000000;">
+            <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;">{{ $car->quantity }}</td>
+            <td colspan="2" style="background-color: #F1F4FF; font-size: 12px; width: 305px; text-align: center;">{{ $car->product_name }}</td>
+            <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">{{ $car->product_frente }}x{{ $car->product_fondo }}x{{ $car->product_alto }}</td>
+            <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center; border-top: 0;">$ {{ $car->price / $car->quantity }}</td>
+            <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">$ {{ $car->price }}</td>
+        </tr>
+    @endforeach    
     <tr style="color: #000000;">
         <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;"></td>
         <td colspan="2" style="background-color: #F1F4FF; font-size: 12px; width: 305px; text-align: center;"></td>
@@ -249,7 +261,7 @@
         <td colspan="3" style="font-size: 12px; width: 80px; font-weight: 700; text-align: center;border-top: 0; border-top: 0; color: #9DA1A5;">Tu pedido incluye</td>
         <td style="font-size: 12px; width: 100px; text-align: center; border: 0;"></td>
         <td style="font-size: 12px; width: border-bottom: 0; 80px; text-align: center; border-bottom: 0; border-top: 0; color: #9DA1A5;">Precio paquete</td>
-        <td style="background-color: #F1F4FF; border-bottom: 0; font-size: 12px; width: 100px; text-align: center;">$ 100.00</td>
+        <td style="background-color: #F1F4FF; border-bottom: 0; font-size: 12px; width: 100px; text-align: center;">$ {{ $envio }}</td>
     </tr>
     <tr>
         <td rowspan="6" colspan="3" style="background-color: #F1F4FF;"></td>
@@ -258,19 +270,19 @@
     <tr>
         <td rowspan="5" style=" border: 0;"></td>
         <td style="border-top: 0; border-bottom: 0; font-size: 12px; padding-top: 0;  text-align: center; color: #9DA1A5;">Deducción</td>
-        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px; ">$ 900.90</td>
+        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px; ">$ {{ $subtotal }}</td>
     </tr>
     <tr>
         <td style="border-top: 0; border-bottom: 0; font-size: 12px; padding-top: 0; text-align: center; color: #9DA1A5;">I.V.A.</td>
-        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;">$ 144.14</td>
+        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;">$ {{ $iva }}</td>
      </tr>
     <tr>
         <td style="border-top: 0; font-size: 12px; padding-top: 0; text-align: center; color: #9DA1A5;">Total</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; text-align: center;">$ 1044.14</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; text-align: center;">$ {{ $total }}</td>
     </tr>
     <tr>
         <td style="border-top: 0; border-bottom: 0; font-size: 12px; padding-top: 0; text-align: center; color: #9DA1A5;">Anticipo</td>
-        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;">$ 522.7</td>
+        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;">$ {{ $total / 2 }}</td>
     </tr>
     <tr>
         <td style="border-top: 0; font-size: 12px; text-align: center; color: #9DA1A5;">Saldo</td>
@@ -285,7 +297,7 @@
     </tr>
     <tr>
         <td colspan="3" rowspan="1" style="text-align: center; font-size: 12px; background-color: #F1F4FF;">
-            $ 522.7
+            $ {{ $total / 2 }}
         </td>
     </tr>
     <tr>

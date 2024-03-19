@@ -52,7 +52,11 @@ class CarritoController extends Controller
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
+                "product_id" => $product->id,
                 "product_name" => $product->nombre,
+                "product_frente" => $product->frente,
+                "product_fondo" => $product->fondo,
+                "product_alto" => $product->alto,
                 "photo" => $product->portada,
                 "price" => $product->precio,
                 "quantity" => 1

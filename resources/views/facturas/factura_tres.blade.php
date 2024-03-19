@@ -27,7 +27,7 @@
         <td style="font-weight: 800; font-size: 10px; border: 0; padding-top: 0;">Brincolines Bambinos S.A. de C.V.</td>
         <td rowspan="5" style="padding-left: 50px; padding-right: 50px; border: 0;"></td>
         <td rowspan="3" style="padding-left: 10px; padding-right: 10px; text-align: center; font-weight: 700; font-size: 28px; text-align: center; border-bottom: 0;">Pedido</td>
-        <td rowspan="3" style="padding-left: 70px; padding-right: 70px; text-align: center; font-weight: 700; font-size: 32px; background-color: #F1F4FF; color: #F15F90;">-W</td>
+        <td rowspan="3" style="padding-left: 10px; padding-right: 10px; text-align: center; font-weight: 700; font-size: 22px; background-color: #F1F4FF; width: 50px; color: #F15F90;">{{ $pedido }}</td>
     </tr>
     <tr>
         <td style="font-size: 10px; border: 0; padding-top: 0;">Bosque de la Primavera 13, Puerta del </td>
@@ -38,7 +38,7 @@
     <tr>
         <td style="font-size: 10px; border: 0; padding-top: 0;">Tel. (33) 1654 5229</td>
         <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; border-top: 0;">Fecha</td>
-        <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; background-color: #F1F4FF;">Fecha</td>
+        <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; background-color: #F1F4FF;">{{ $fechaActualFormateada }}</td>
     </tr>
     <tr>
         <td style="font-size: 10px; border: 0;">Tel. (33) 1991 0883 / (33) 2078 7337</td>
@@ -53,12 +53,12 @@
     </tr>
     <tr>
         <td style="font-size: 11px; border: 0;">Estimado cliente</td>
-        <td colspan="4" style="background-color: #F1F4FF; border: 0;"></td>
+        <td colspan="4" style="font-size: 11px; background-color: #F1F4FF; border: 0;">{{ $nombre }}</td>
         <td style="border: 0;"></td>
     </tr>
     <tr>
         <td style="font-size: 11px; border: 0;">con número de cliente</td>
-        <td colspan="2" style="background-color: #F1F4FF; border: 0; border: 0;"></td>
+        <td colspan="2" style="font-size: 11px; background-color: #F1F4FF; border: 0; border: 0;">{{ $numero_cliente }}</td>
         <td style="border: 0;"></td>
         <td style="border: 0;"></td>
     </tr>
