@@ -113,6 +113,7 @@
     Route::post('/switch_inicio', 'AJAXController@switch_inicio')->name('ajax.switch_inicio');
     Route::post('/switch_ocultar', 'AJAXController@switch_ocultar')->name('ajax.switch_ocultar');
     Route::post('/switch_eliminar', 'AJAXController@switch_eliminar')->name('ajax.switch_eliminar');
+    Route::post('/cancelar_cotizacion', 'AJAXController@cancelar_cotizacion')->name('ajax.cancelar_cotizacion');
     // Genear facturas
     Route::get('/pdf', 'PdfController@generatePdf');
     Route::get('/pdf_factura', 'PdfController@generatePdf_factura');

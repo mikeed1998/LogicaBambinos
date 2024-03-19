@@ -197,7 +197,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="col-md-6 col-12 py-1">
-                                                            <button class="btn btn-danger btn-delete w-100" data-id="{{ $item->id }}">
+                                                            <button class="btn btn-danger btn-delete w-100" data-id="{{ $item->id }}" @if ($item->estatus == 0) disabled @endif>
                                                                 <i class="bi bi-trash text-white w-100"></i>
                                                             </button>
                                                         </div>
@@ -297,13 +297,33 @@
                     if (estadoItem === 0 || estadoItem === 1) {
                         return;
                     }
-
-                    // Obtiene el nuevo estado (incrementando el estado actual o reiniciándolo si llega a 3)
-                    const nuevoEstado = (estadoItem + 1) % 4;
-                    // Actualiza el estado del botón
-                    actualizarEstadoBoton(boton, nuevoEstado);
-                    // Aquí puedes realizar otras acciones según el nuevo estado, como enviar una solicitud al servidor para actualizar la base de datos, etc.
-                    console.log('Botón ID:', id, 'Estado cambiado a:', nuevoEstado);
+                    
+                    // Si el estado es "Pagado" (2), muestra una confirmación con SweetAlert
+                    if (estadoItem === 2) {
+                        Swal.fire({
+                            title: '¿Deseas cambiar el estatus de este pedido a Enviado?',
+                            text: "Antes de hacerlo confirma que el pedido ya esta preparado y fue enviado por la fabrica, así como haber confirmado que el pago se realizo exitosamente. Una vez confirmado no se podrá revertir.",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sí, cambiar!',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // El usuario confirmó, cambiar el estado a "Enviado" (3)
+                                const nuevoEstado = 3; // Estado "Enviado"
+                                actualizarEstadoBoton(boton, nuevoEstado);
+                                // Realizar acciones adicionales aquí, como actualizar en la base de datos
+                                console.log('Botón ID:', boton.getAttribute('data-id'), 'Estado cambiado a:', nuevoEstado);
+                            }
+                        });
+                    } else {
+                        // Para otros estados, maneja el cambio de estado aquí sin confirmación
+                        const nuevoEstado = (estadoItem + 1) % 4;
+                        actualizarEstadoBoton(boton, nuevoEstado);
+                        console.log('Botón ID:', boton.getAttribute('data-id'), 'Estado cambiado a:', nuevoEstado);
+                    }
                 });
             });
 
@@ -344,39 +364,51 @@
             $('.mi-cuenta-container').show();
         });
     </script>
+    
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const deleteButtons = document.querySelectorAll('.btn-delete');
-            deleteButtons.forEach(function (deleteButton) {
-                deleteButton.addEventListener('click', function () {
-                    Swal.fire({
-                        title: '¿Eliminar cotización?',
-                        text: 'Esta acción no se puede deshacer.',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Sí, eliminar',
-                        cancelButtonText: 'Volver a mi panel'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            const targetId = deleteButton.getAttribute('data-id');
-                            // Lógica para eliminar el elemento (puedes enviar una solicitud al servidor, etc.)
-                            console.log('Eliminar elemento con ID:', targetId);
-                            // Ocultar el modal si todo fue exitoso
-                            const targetModal = document.getElementById('modal-pedido-' + targetId);
-                            if (targetModal) {
-                                targetModal.style.display = 'none';
+        $(document).ready(function () {
+            $('.btn-delete').on('click', function () {
+                const targetId = $(this).data('id'); // Obtiene el ID del elemento a eliminar
+                const csrfToken = $('meta[name="csrf-token"]').attr('content'); // Obtiene el token CSRF
+
+                Swal.fire({
+                    title: '¿Eliminar cotización?',
+                    text: 'Esta acción no se puede deshacer.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Realiza la petición AJAX para cambiar el estado del ítem a cancelado
+                        $.ajax({
+                            url: '{{ route("ajax.cancelar_cotizacion") }}', // Asegúrate de reemplazar esto por tu URL correcta
+                            type: 'POST',
+                            data: {
+                                _token: csrfToken, // Incluye el token CSRF en la data de la solicitud
+                                id: targetId,
+                                estado: 0
+                            },
+                            success: function (data) {
+                                Swal.fire(
+                                    'Eliminado!',
+                                    'La cotización ha sido eliminada.',
+                                    'success'
+                                );
+                                
+                                // actualizar boton
+                                location.reload();
+                            },
+                            error: function (xhr, status, error) {
+                                console.error('Error al cambiar el estado:', error);
                             }
-                            Swal.fire(
-                                'Cotización eliminada',
-                                'La cotización fue eliminada exitosamente',
-                                'success'
-                            );
-                        }
-                    });
+                        });
+                    }
                 });
             });
         });
+
     </script>
 @endsection

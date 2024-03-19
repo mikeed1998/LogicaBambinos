@@ -142,6 +142,13 @@ class VendedorController extends Controller
 
         $cliente = User::find($request->usuario_orden);
 
+        $existente_cart = CarritoPersistente::where('usuario', $cliente->id)->first();
+        
+        if($existente_cart) {
+            \Toastr::error('Error: El ususario ya cuenta con una cotización activa.');
+            return redirect()->back();
+        }
+
         $cart = new CarritoPersistente;
         $campos_tam = count($request->producto_cliente_orden);
 

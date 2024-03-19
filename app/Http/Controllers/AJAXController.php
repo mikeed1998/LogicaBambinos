@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\User;
 use App\Producto;
 use ProductoGaleria;
+use App\Pedido;
 
 class AJAXController extends Controller
 {
@@ -125,6 +126,19 @@ class AJAXController extends Controller
             else
                 return response()->json(['success'=>false, 'mensaje'=>'Error al habilitar']);
         }
+    }
+
+    public function cancelar_cotizacion(Request $request) {
+        $pedido = Pedido::find($request->id);
+
+        if (!$pedido) {
+            return response()->json(['error' => 'Cotización no encontrada.'], 404);
+        }
+
+        $pedido->estatus = 0;
+        $pedido->save();
+
+        return response()->json(['success' => 'Cotización cancelada con éxito.']);
     }
 
 }
