@@ -118,3 +118,6 @@ class PdfController extends Controller
         $factura->stream('factura.pdf');
     }
 }
+
+
+

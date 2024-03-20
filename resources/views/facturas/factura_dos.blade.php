@@ -28,22 +28,22 @@
         <td style="text-align: center; font-size: 12px; border-bottom: 0;">
             Pedido
         </td>
-        <td colspan="2" style="text-align: center; font-size: 22px; padding-left: 10px; padding-right: 10px; font-weight: bold; color: #F15F90; background-color: #F1F4FF; width: 50px;">{{ $pedido }}</td>
+        <td colspan="2" style="text-align: center; font-size: 22px; padding-left: 10px; padding-right: 10px; font-weight: bold; color: #F15F90; background-color: #F1F4FF; width: 50px;">{{ $pdf_pedido }}</td>
     </tr>
     <tr>
         <td colspan="3" style="font-size: 12px; font-weight: 800; border-left: 0; border-top: 0; border-bottom: 0;">Brincolines Bambinos S.A. de C.V.</td>
         <td style="text-align: center; font-size: 12px; border-bottom: 0; border-top: 0;">Fecha</td>
-        <td colspan="2" style="font-size: 12px; background-color: #F1F4FF;">{{ $fechaActualFormateada }}</td>
+        <td colspan="2" style="font-size: 12px; background-color: #F1F4FF;">{{ $pdf_fecha }}</td>
     </tr>
     <tr>
         <td colspan="3" style="font-size: 12px; border-left: 0; border-top: 0; border-bottom: 0;">Bosque de la Primavera 13, Puerta del bosque</td>
         <td style="text-align: center; font-size: 12px; border-bottom: 0; border-top: 0;">Cliente</td>
-        <td colspan="2" style="font-size: 12px; width: 50px; background-color: #F1F4FF;">{{ $nombre }}</td>
+        <td colspan="2" style="font-size: 12px; width: 50px; background-color: #F1F4FF;">{{ $pdf_nombre }}</td>
     </tr>
     <tr>
         <td colspan="3" style="font-size: 12px; border-left: 0; border-top: 0; border-bottom: 0;">Tel. (33) 1654 5229</td>
         <td style="text-align: center; font-size: 12px; border-bottom: 0; border-top: 0;">No. Cliente</td>
-        <td colspan="2" style="font-size: 12px; background-color: #F1F4FF;">{{ $numero_cliente }}</td>
+        <td colspan="2" style="font-size: 12px; background-color: #F1F4FF;">{{ $pdf_numero_cliente }}</td>
     </tr>
     <tr>
         <td colspan="3" style="font-size: 12px; border-left: 0; border-top: 0; border-bottom: 0;">Tel. (33) 1991 0883 / (33) 2078 7337</td>
@@ -53,7 +53,7 @@
     <tr>
         <td colspan="3" style="font-size: 12px; border-left: 0; border-top: 0; border-bottom: 0;"></td>
         <td style="text-align: center; font-size: 12px; border-top: 0;">Asesor</td>
-        <td colspan="2" style="font-size: 12px; background-color: #F1F4FF;">{{ $asesor }}</td>
+        <td colspan="2" style="font-size: 12px; background-color: #F1F4FF;">{{ $pdf_asesor }}</td>
     </tr>
     <tr>
         <td colspan="6" style="border: 0;">&nbsp;</td>
@@ -63,8 +63,8 @@
         <td colspan="3" style="text-align: center;">Medidas</td>
     </tr>
     <tr>
-        <td colspan="3" style="text-align: center; width: 50px; font-size: 12px; height: 42px; background-color: #F1F4FF;">{{ $product['product_name'] }}</td>
-        <td colspan="3" style="text-align: center; width: 50px; font-size: 12px; height: 42px; background-color: #F1F4FF;">{{ $product['product_frente'] }} x {{ $product['product_fondo'] }} x {{ $product['product_alto'] }}</td>
+        <td colspan="3" style="text-align: center; width: 50px; font-size: 12px; height: 42px; background-color: #F1F4FF;">{{ $product->product_name }}</td>
+        <td colspan="3" style="text-align: center; width: 50px; font-size: 12px; height: 42px; background-color: #F1F4FF;">{{ $product->product_frente }} x {{ $product->product_fondo }} x {{ $product->product_alto }}</td>
     </tr>
     <tr>
         <td colspan="6" style="border: 0; padding-top: 5px;"></td>

@@ -27,7 +27,7 @@
         <td style="font-weight: 800; font-size: 10px; border: 0; padding-top: 0;">Brincolines Bambinos S.A. de C.V.</td>
         <td rowspan="5" style="padding-left: 50px; padding-right: 50px; border: 0;"></td>
         <td rowspan="3" style="padding-left: 10px; padding-right: 10px; text-align: center; font-weight: 700; font-size: 28px; text-align: center; border-bottom: 0;">Pedido</td>
-        <td rowspan="3" style="padding-left: 10px; padding-right: 10px; text-align: center; font-weight: 700; font-size: 22px; background-color: #F1F4FF; width: 50px; color: #F15F90;">{{ $pedido }}</td>
+        <td rowspan="3" style="padding-left: 10px; padding-right: 10px; text-align: center; font-weight: 700; font-size: 22px; background-color: #F1F4FF; width: 50px; color: #F15F90;">{{ $pdf_pedido }}</td>
     </tr>
     <tr>
         <td style="font-size: 10px; border: 0; padding-top: 0;">Bosque de la Primavera 13, Puerta del </td>
@@ -38,7 +38,7 @@
     <tr>
         <td style="font-size: 10px; border: 0; padding-top: 0;">Tel. (33) 1654 5229</td>
         <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; border-top: 0;">Fecha</td>
-        <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; background-color: #F1F4FF;">{{ $fechaActualFormateada }}</td>
+        <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; background-color: #F1F4FF;">{{ $pdf_fecha }}</td>
     </tr>
     <tr>
         <td style="font-size: 10px; border: 0;">Tel. (33) 1991 0883 / (33) 2078 7337</td>
@@ -53,12 +53,12 @@
     </tr>
     <tr>
         <td style="font-size: 11px; border: 0;">Estimado cliente</td>
-        <td colspan="4" style="font-size: 11px; background-color: #F1F4FF; border: 0;">{{ $nombre }}</td>
+        <td colspan="4" style="font-size: 11px; background-color: #F1F4FF; border: 0;">{{ $pdf_nombre }}</td>
         <td style="border: 0;"></td>
     </tr>
     <tr>
         <td style="font-size: 11px; border: 0;">con número de cliente</td>
-        <td colspan="2" style="font-size: 11px; background-color: #F1F4FF; border: 0; border: 0;">{{ $numero_cliente }}</td>
+        <td colspan="2" style="font-size: 11px; background-color: #F1F4FF; border: 0; border: 0;">{{ $pdf_numero_cliente }}</td>
         <td style="border: 0;"></td>
         <td style="border: 0;"></td>
     </tr>
@@ -134,7 +134,7 @@
     </tr>
     <tr>
         <td colspan="6" style="font-size: 11px; width: 50px; padding: 3px 0; border: 0;">
-            Transcurrido este primer periodo, el cliente cuenta con hasta 365 (trescientos sesenta y cinco) días naturales para hacer uso del anticipo, realizando un nuevo pedido y liquidando la totalidad de este, mas un cargo extra de $800 (Ochocientos Pesos 00 MN) por Brincolín, a causa de manejo y re-acondicionamiento de estos equipos para venta.
+            Transcurrido este primer periodo, el cliente cuenta con hasta 365 (trescientos sesenta y cinco) días naturales para hacer uso del anticipo, realizando un nuevo pedido y liquidando la totalidad de este, mas un cargo extra de $pdf_800 (Ochocientos Pesos 00 MN) por Brincolín, a causa de manejo y re-acondicionamiento de estos equipos para venta.
         </td>
     </tr>
     <tr>
@@ -149,7 +149,7 @@
     </tr>
     <tr>
         <td colspan="6" style="font-size: 11px; width: 50px; padding: 3px 0; border: 0;">
-            Algunas paqueterías podrían generan un cargo de embalaje extra, el cuál deberá ser cubierto por el cliente para poder realizar el envío de sus equipos. Esto de manera independiente al costo del servicio de envío de sus equipos. En caso de requerir factura todos nuestros precios son más IVA y deberá ser solicitada con su asesor durante el mes de la compra rellenando  el formato proporcionado, revisando que todos sus datos sean correctos ya que una vez realizada la factura no se realizan cancelaciones de ésta. En caso de cancelación se realizará una cuota de recuperación de $500 (Quinientos Pesos MXN) por concepto de cancelación y/o re-facturación.
+            Algunas paqueterías podrían generan un cargo de embalaje extra, el cuál deberá ser cubierto por el cliente para poder realizar el envío de sus equipos. Esto de manera independiente al costo del servicio de envío de sus equipos. En caso de requerir factura todos nuestros precios son más IVA y deberá ser solicitada con su asesor durante el mes de la compra rellenando  el formato proporcionado, revisando que todos sus datos sean correctos ya que una vez realizada la factura no se realizan cancelaciones de ésta. En caso de cancelación se realizará una cuota de recuperación de $pdf_500 (Quinientos Pesos MXN) por concepto de cancelación y/o re-facturación.
         </td>
     </tr>
 </table>

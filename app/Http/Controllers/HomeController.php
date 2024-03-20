@@ -24,8 +24,9 @@ class HomeController extends Controller
         $usuario = User::find($userId);
         $fechaActual = Carbon::now()->toDateString();
         $domicilio = Domicilio::where('usuario', $userId)->first();
+        $vendedores = User::where('role_as', 2)->get()->toBase();
         $pedidos = Pedido::where('usuario', $usuario->id)->get()->toBase();
 
-        return view('user.index', compact('usuario', 'fechaActual', 'domicilio', 'pedidos'));
+        return view('user.index', compact('usuario', 'fechaActual', 'domicilio', 'pedidos', 'vendedores'));
     }
 }

@@ -24,31 +24,35 @@ class CarritoController extends Controller
 
     private function guardarCarritoPersistente($userId, $cart)
     {
-        $carritoPersistente = CarritoPersistente::where('usuario', $userId)->first();
+        // Primero, verifica si el carrito existe y no está vacío
+        if ($cart && count($cart) > 0) {
+            $carritoPersistente = CarritoPersistente::where('usuario', $userId)->first();
 
-        if ($carritoPersistente) {
-            // Recuperar carrito persistente
-            $carritoPersistente->update(['carrito' => json_encode($cart)]);
-           
-            $carr = json_decode($carritoPersistente->carrito);
+            if ($carritoPersistente) {
+                // Recuperar carrito persistente
+                $carritoPersistente->update(['carrito' => json_encode($cart)]);
+                
+                $carr = json_decode($carritoPersistente->carrito);
 
-            $total = 0;
-            foreach ($carr as $item) {
-                $total += $item->price * $item->quantity;
+                $total = 0;
+                foreach ($carr as $item) {
+                    $total += $item->price * $item->quantity;
+                }
+                
+                session()->put('cartTotal', $total);
+                session()->put('cartID', $carritoPersistente->id);
+            } else {
+                // Crear carrito persistente solo si el carrito no está vacío
+                $carritoPersistente = CarritoPersistente::create([
+                    'usuario' => $userId,
+                    'carrito' => json_encode($cart),
+                ]);
+
+                $carritoPersistenteId = $carritoPersistente->id;
+                session()->put('cartID', $carritoPersistenteId);
             }
-            
-            session()->put('cartTotal', $total);
-            session()->put('cartID', $carritoPersistente->id);
-        } else {
-            // Crear carrito persistente
-            $carritoPersistente = CarritoPersistente::create([
-                'usuario' => $userId,
-                'carrito' => json_encode($cart),
-            ]);
-
-            $carritoPersistenteId = $carritoPersistente->id;
-            session()->put('cartID', $carritoPersistenteId);
         }
+        // Si el carrito está vacío o no existe, no haces nada
     }
 
     // Cambia el método addToCart en ProductsController
@@ -160,9 +164,14 @@ class CarritoController extends Controller
 
     public function clearCart()
     {
+        $userId = Auth::id();
+        $carritoPersistente = CarritoPersistente::where('usuario', $userId)->first();
+
         session()->forget('cart');
         session()->forget('cartTotal');
 
+        $carritoPersistente->delete();
+        
         return response()->json(['success' => true, 'message' => 'Carrito vaciado exitosamente!']);
     }
 

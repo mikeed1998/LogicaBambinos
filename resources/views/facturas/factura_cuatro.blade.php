@@ -27,7 +27,7 @@
         <td style="font-weight: 800; font-size: 10px; border: 0; padding-top: 0;">Brincolines Bambinos S.A. de C.V.</td>
         <td rowspan="5" style="padding-left: 50px; padding-right: 50px; border: 0;"></td>
         <td rowspan="3" style="padding-left: 10px; padding-right: 10px; text-align: center; font-weight: 700; font-size: 28px; text-align: center; border-bottom: 0;">Pedido</td>
-        <td rowspan="3" style="padding-left: 10px; padding-right: 10px; text-align: center; font-weight: 700; font-size: 22px; background-color: #F1F4FF; color: #F15F90;">{{ $pedido }}</td>
+        <td rowspan="3" style="padding-left: 10px; padding-right: 10px; text-align: center; font-weight: 700; font-size: 22px; background-color: #F1F4FF; color: #F15F90;">{{ $pdf_pedido }}</td>
     </tr>
     <tr>
         <td style="font-size: 10px; border: 0; padding-top: 0;">Bosque de la Primavera 13, Puerta del </td>
@@ -38,7 +38,7 @@
     <tr>
         <td style="font-size: 10px; border: 0; padding-top: 0;">Tel. (33) 1654 5229</td>
         <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; border-top: 0;">Fecha</td>
-        <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; background-color: #F1F4FF;">{{ $fechaActualFormateada }}</td>
+        <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; background-color: #F1F4FF;">{{ $pdf_fecha }}</td>
     </tr>
     <tr>
         <td style="font-size: 10px; border: 0;">Tel. (33) 1991 0883 / (33) 2078 7337</td>

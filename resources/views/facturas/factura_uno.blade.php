@@ -34,7 +34,7 @@
         <td rowspan="5" style="padding-left: 50px; padding-right: 50px; border: 0;"></td>
         <td rowspan="3" style="padding-left: 10px; padding-right: 10px; text-align: center; font-weight: 700; font-size: 28px; text-align: center; border-bottom: 0;">Pedido</td>
         <td rowspan="3" style="width: 10px; padding-left: 8px; padding-right: 8px; text-align: center; font-weight: 700; font-size: 16px; background-color: #F1F4FF; color: #F15F90;">
-            {{ $pedido }}
+            {{ $pdf_pedido }}
         </td>
     </tr>
     <tr>
@@ -46,7 +46,7 @@
     <tr>
         <td style="font-size: 10px; border: 0; padding-top: 0;">Tel. (33) 1654 5229</td>
         <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; border-top: 0;">Fecha</td>
-        <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; background-color: #F1F4FF;">{{ $fechaActualFormateada }}</td>
+        <td rowspan="2" style="padding-left: 20px; padding-right: 20px; text-align: center; font-size: 10px; background-color: #F1F4FF;">{{ $pdf_fecha }}</td>
     </tr>
     <tr>
         <td style="font-size: 10px; border: 0;">Tel. (33) 1991 0883 / (33) 2078 7337</td>
@@ -65,41 +65,41 @@
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center; border-bottom: 0;">Nombre</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $nombre }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $pdf_nombre }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-bottom: 0;">No. Cliente</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $numero_cliente }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $pdf_numero_cliente }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-bottom: 0;">Teléfono</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $telefono }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $pdf_telefono }}</td>
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Domicilio</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $domicilio_cliente }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $pdf_domicilio_cliente }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Colonia</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $colonia_cliente }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $pdf_colonia_cliente }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Código Postal</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $codigo_postal_cliente }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $pdf_codigo_postal_cliente }}</td>
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center;border-top: 0; border-bottom: 0;">Ciudad</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $ciudad_cliente }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $pdf_ciudad_cliente }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Estado</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $estado_cliente }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $pdf_estado_cliente }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">País</td>
         <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">México</td>
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">RFC</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $rfc_cliente }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $pdf_rfc_cliente }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0; border-bottom: 0;">Correo</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;" colspan="3">{{ $correo_cliente }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;" colspan="3">{{ $pdf_correo_cliente }}</td>
     </tr>
     <tr style="color: #9DA1A5;">
         <td style="font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;">Paquetería</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $paqueteria }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 225px; text-align: left;">{{ $pdf_paqueteria }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0;">Tipo de envió</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $tipo_envio }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $pdf_tipo_envio }}</td>
         <td style="font-size: 12px; width: 80px; text-align: center; border-top: 0;">Asesor</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $asesor }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: left;">{{ $pdf_asesor }}</td>
     </tr>
     <tr>
         <td colspan="6" style="text-align: center; font-size: 16px; font-weight: 700;">Pedido</td>
@@ -127,18 +127,18 @@
         <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">$ 300.00</td>
     </tr> --}}
     @php
-        $carrito = json_decode($cart_productos);
+        $pdf_carrito = json_decode($pdf_productose);
     @endphp
-    @foreach ($carrito as $car)
+    @foreach ($pdf_carrito as $pdf_car)
         <tr style="color: #000000;">
-            <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;">{{ $car->quantity }}</td>
-            <td colspan="2" style="background-color: #F1F4FF; font-size: 12px; width: 305px; text-align: center;">{{ $car->product_name }}</td>
-            <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">{{ $car->product_frente }}x{{ $car->product_fondo }}x{{ $car->product_alto }}</td>
-            <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center; border-top: 0;">$ {{ $car->price / $car->quantity }}</td>
-            <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">$ {{ $car->price }}</td>
+            <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;">{{ $pdf_car->quantity }}</td>
+            <td colspan="2" style="background-color: #F1F4FF; font-size: 12px; width: 305px; text-align: center;">{{ $pdf_car->product_name }}</td>
+            <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">{{ $pdf_car->product_frente }}x{{ $pdf_car->product_fondo }}x{{ $pdf_car->product_alto }}</td>
+            <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center; border-top: 0;">$ {{ $pdf_car->price / $pdf_car->quantity }}</td>
+            <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">$ {{ $pdf_car->price }}</td>
         </tr>
     @endforeach    
-    <tr style="color: #000000;">
+    {{-- <tr style="color: #000000;">
         <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center;border-top: 0; border-top: 0;"></td>
         <td colspan="2" style="background-color: #F1F4FF; font-size: 12px; width: 305px; text-align: center;"></td>
         <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;"></td>
@@ -256,12 +256,12 @@
         <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;"></td>
         <td style="background-color: #F1F4FF; font-size: 12px; width: 80px; text-align: center; border-top: 0;"></td>
         <td style="background-color: #F1F4FF; font-size: 12px; width: 100px; text-align: center;">$ 0.00</td>
-    </tr>
+    </tr> --}}
     <tr>
         <td colspan="3" style="font-size: 12px; width: 80px; font-weight: 700; text-align: center;border-top: 0; border-top: 0; color: #9DA1A5;">Tu pedido incluye</td>
         <td style="font-size: 12px; width: 100px; text-align: center; border: 0;"></td>
         <td style="font-size: 12px; width: border-bottom: 0; 80px; text-align: center; border-bottom: 0; border-top: 0; color: #9DA1A5;">Precio paquete</td>
-        <td style="background-color: #F1F4FF; border-bottom: 0; font-size: 12px; width: 100px; text-align: center;">$ {{ $envio }}</td>
+        <td style="background-color: #F1F4FF; border-bottom: 0; font-size: 12px; width: 100px; text-align: center;">$ {{ $pdf_envio }}</td>
     </tr>
     <tr>
         <td rowspan="6" colspan="3" style="background-color: #F1F4FF;"></td>
@@ -270,19 +270,19 @@
     <tr>
         <td rowspan="5" style=" border: 0;"></td>
         <td style="border-top: 0; border-bottom: 0; font-size: 12px; padding-top: 0;  text-align: center; color: #9DA1A5;">Deducción</td>
-        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px; ">$ {{ $subtotal }}</td>
+        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px; ">$ {{ $pdf_subtotal }}</td>
     </tr>
     <tr>
         <td style="border-top: 0; border-bottom: 0; font-size: 12px; padding-top: 0; text-align: center; color: #9DA1A5;">I.V.A.</td>
-        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;">$ {{ $iva }}</td>
+        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;">$ {{ $pdf_iva }}</td>
      </tr>
     <tr>
         <td style="border-top: 0; font-size: 12px; padding-top: 0; text-align: center; color: #9DA1A5;">Total</td>
-        <td style="background-color: #F1F4FF; font-size: 12px; text-align: center;">$ {{ $total }}</td>
+        <td style="background-color: #F1F4FF; font-size: 12px; text-align: center;">$ {{ $pdf_total }}</td>
     </tr>
     <tr>
         <td style="border-top: 0; border-bottom: 0; font-size: 12px; padding-top: 0; text-align: center; color: #9DA1A5;">Anticipo</td>
-        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;">$ {{ $total / 2 }}</td>
+        <td style="background-color: #F1F4FF; text-align: center; font-size: 12px;">$ {{ $pdf_total / 2 }}</td>
     </tr>
     <tr>
         <td style="border-top: 0; font-size: 12px; text-align: center; color: #9DA1A5;">Saldo</td>
@@ -297,7 +297,7 @@
     </tr>
     <tr>
         <td colspan="3" rowspan="1" style="text-align: center; font-size: 12px; background-color: #F1F4FF;">
-            $ {{ $total / 2 }}
+            $ {{ $pdf_total / 2 }}
         </td>
     </tr>
     <tr>

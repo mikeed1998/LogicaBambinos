@@ -197,7 +197,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="col-md-6 col-12 py-1">
-                                                            <button class="btn btn-danger btn-delete w-100" data-id="{{ $item->id }}" @if ($item->estatus == 0) disabled @endif>
+                                                            <button class="btn btn-danger btn-delete w-100" data-id="{{ $item->id }}" @if ($item->estatus != 1) disabled @endif>
                                                                 <i class="bi bi-trash text-white w-100"></i>
                                                             </button>
                                                         </div>

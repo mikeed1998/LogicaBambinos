@@ -281,7 +281,7 @@
                                             </div>
                                             <!-- Modal -->
                                             <div class="modal fade" id="modal-pedido-{{ $ped->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-dialog modal-xl modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-5" id="staticBackdropLabel">Detalles del pedido</h1>
@@ -289,27 +289,52 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="row">
-                                                                <div class="col">
+                                                                <div class="col border">
+                                                                    <div class="row text-center">
+                                                                        <div class="col-3"></div>
+                                                                        <div class="col-3 border fs-5 fw-bolder">Nombre del producto</div>
+                                                                        <div class="col-2 border fs-5 fw-bolder">Costo total</div>
+                                                                        <div class="col-2 border fs-5 fw-bolder">Unidades</div>
+                                                                        <div class="col-2 border fs-5 fw-bolder">Precio c/u</div>
+                                                                    </div>
                                                                     @php
                                                                         $carrito = json_decode($ped->data)
                                                                     @endphp
                                                                     @foreach ($carrito as $car)
-                                                                        <li>{{ $car->product_name }}</li>
-                                                                        <li>{{ $car->photo }}</li>
-                                                                        <li>{{ $car->price }}</li>
-                                                                        <li>{{ $car->quantity }}</li>
+                                                                        <div class="row border d-flex align-items-center justify-content-center text-center">
+                                                                            <div class="col-3 fs-5"><img src="{{ asset('img/productos/'.$car->photo) }}" alt="" style="width: 100px; height: 100px;"></div>
+                                                                            <div class="col-3 fs-5">{{ $car->product_name }}</div>
+                                                                            <div class="col-2 fs-5">$ {{ $car->price }}</div>
+                                                                            <div class="col-2 fs-5">{{ $car->quantity }}</div>
+                                                                            <div class="col-2 fs-5">$ {{ $car->price / $car->quantity }}</div>
+                                                                        </div>
                                                                     @endforeach
-                                                                    <li>subtotal</li>
-                                                                    <li>precio por unidad</li>
-                                                                    <li>descargar cotizacion (PDF)</li>
-                                                                    <li>envio</li>
-                                                                    <li>IVA</li>
-                                                                    <li>Total</li>
+                                                                    
+                                                                    <div class="row">
+                                                                        <div class="col-12 fs-5">
+                                                                            Asesorado por: 
+                                                                            @foreach ($vendedores as $vend)
+                                                                                @if ($vend->id == $ped->vendedor)
+                                                                                    {{ $vend->name }} {{ $vend->lastname }}
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </div>
+                                                                        <div class="col-12 fs-5">Subtotal: $ {{ $ped->importe }}</div>
+                                                                        <div class="col-12 fs-5">Envio: $ {{ $ped->envio }}</div>
+                                                                        <div class="col-12 fs-5">IVA: $ {{ $ped->iva }}</div>
+                                                                        <div class="col-12 fs-5">Total: $ {{ $ped->total }}</div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-6 mx-auto text-center">
+                                                                            {{-- <button class="btn btn-dark fs-5 w-100 rounded-0">descargar cotizacion (PDF)</button> --}}
+                                                                            <a href="{{ asset('img/ordenes/Orden_'.$ped->uid.'_brincolines_bambinos.pdf') }}" class="btn btn-dark fs-5 w-100 rounded-0" download="Orden_{{ $ped->uid }}_brincolines_bambinos.pdf">Descargar cotización (PDF)</a>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cerrar detalles</button>
+                                                            <button type="button" class="btn btn-danger w-100" data-bs-dismiss="modal">Cerrar detalles</button>
                                                         </div>
                                                     </div>
                                                 </div>

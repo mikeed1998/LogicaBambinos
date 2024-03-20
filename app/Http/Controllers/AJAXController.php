@@ -10,6 +10,7 @@ use App\User;
 use App\Producto;
 use ProductoGaleria;
 use App\Pedido;
+use App\CarritoPersistente;
 
 class AJAXController extends Controller
 {
@@ -135,6 +136,9 @@ class AJAXController extends Controller
             return response()->json(['error' => 'Cotización no encontrada.'], 404);
         }
 
+        $eliminar_carrito = CarritoPersistente::where('usuario', $pedido->usuario)->first();
+        $eliminar_carrito->delete();
+        
         $pedido->estatus = 0;
         $pedido->save();
 
