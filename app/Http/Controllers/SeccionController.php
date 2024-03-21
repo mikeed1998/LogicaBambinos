@@ -9,6 +9,8 @@ use App\Configuracion;
 use App\Faq;
 use App\Politica;
 use App\Producto;
+use App\User;
+use App\Pedido;
 
 class SeccionController extends Controller
 {
@@ -33,6 +35,8 @@ class SeccionController extends Controller
         $faqs = Faq::all();
         $politicas = Politica::all();
         $productos = Producto::all();
+        $usuarios = User::all();
+        $pedidos = Pedido::all();
 
         if($seccion->seccion == 'configuracion') {
             $ruta = 'config.general.contacto';
@@ -44,7 +48,7 @@ class SeccionController extends Controller
             $ruta = 'config.secciones.'.$seccion->seccion;
         }
 
-        return view($ruta, compact('seccion', 'config', 'elem_general', 'faqs', 'politicas', 'productos'));
+        return view($ruta, compact('seccion', 'config', 'elem_general', 'faqs', 'politicas', 'productos', 'usuarios', 'pedidos'));
     }
 
 }
