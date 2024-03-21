@@ -155,6 +155,32 @@
                                     <input type="text" name="dash_rfc_usuario" id="dash_rfc_usuario" class="form-control fs-5 editarajax" data-model="User" data-field="RFC" data-id="{{$usuario->id}}"  value="{{ $usuario->RFC }}">
                                 </div>
                             </div>
+                            <div class="row mt-5">
+                                <div class="col-11 border mx-auto">
+                                    <form action="{{ route('vendedor.change_password', ['vendedor' => $usuario->id]) }}" method="POST" id="change_passwordv">
+                                        @csrf
+                                        @method('put')
+                                        <div class="row">
+                                            <div class="col text-center fs-3 py-3">Cambiar contraseña</div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-md-6 col-12 py-2">
+                                                <label for="dash_nueva_password" class="fs-5">Nueva contraseña</label>
+                                                <input required type="password" name="dash_nueva_password" id="dash_nueva_password" class="form-control fs-5">
+                                            </div>
+                                            <div class="col-md-6 col-12 py-2">
+                                                <label for="dash_nueva_password_confirm" class="fs-5">Confirmar contraseña</label>
+                                                <input required type="password" name="dash_nueva_password_confirm" id="dash_nueva_password_confirm" class="form-control fs-5">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-6 mx-auto text-center">
+                                                <input type="submit" class="btn btn-dark fs-5 w-100 rounded-0" value="Cambiar contraseña">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-12 py-3 mis-cotizaciones-container">
                             <div class="card">
@@ -255,22 +281,22 @@
                     case 0:
                         boton.textContent = 'Cancelado';
                         boton.classList.add('boton-cancelado');
-                        toastr.warning('Cancelado');
+                        // toastr.warning('Cancelado');
                         break;
                     case 1:
                         boton.textContent = 'Asignado';
                         boton.classList.add('boton-asignado');
-                        toastr.warning('Producto asignado');
+                        // toastr.warning('Producto asignado');
                         break;
                     case 2:
                         boton.textContent = 'Pagado';
                         boton.classList.add('boton-pagado');
-                        toastr.warning('Producto pagado');
+                        // toastr.warning('Producto pagado');
                         break;
                     case 3:
                         boton.textContent = 'Enviado';
                         boton.classList.add('boton-enviado');
-                        toastr.warning('Producto enviado');
+                        // toastr.warning('Producto enviado');
                         break;
                     default:
                         break;

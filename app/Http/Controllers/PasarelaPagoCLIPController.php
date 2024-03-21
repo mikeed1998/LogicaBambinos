@@ -269,8 +269,16 @@ class PasarelaPagoCLIPController extends Controller
             
             // dd($pdf_fecha, $pdf_productose, $pdf_envio, $pdf_subtotal, $pdf_iva, $pdf_total, $pdf_pedido, $pdf_nombre, $pdf_numero_cliente, $pdf_telefono, $pdf_domicilio_cliente, $pdf_colonia_cliente, $pdf_codigo_postal_cliente, $pdf_ciudad_cliente, $pdf_estado_cliente, $pdf_pais_cliente, $pdf_rfc_cliente, $pdf_correo_cliente, $pdf_paqueteria, $pdf_tipo_envio, $pdf_asesor);
             
+             // Limpiar sesion de carrito y el carrito persistente
+             $cotizado->delete();
+             session()->put('cart', []);
+             session()->put('cartTotal', 0);
+             session()->put('cartIVA', 0);
+             session()->put('cartTotalGNRL', 0);
+
             return view('pagos.CLIP.success');
         } else {
+
             $pedido = new Pedido;
 
             $domicilio = Domicilio::where('usuario', $usuario->id)->first();
@@ -318,6 +326,8 @@ class PasarelaPagoCLIPController extends Controller
             $pedido->data = json_encode($carrito);
 
             $pedido->save();
+            
+
 
             $pdf_domicilio = Domicilio::where('usuario', $usuario->id)->first();
             $pdf_envio = $pedido->envio;
@@ -424,9 +434,19 @@ class PasarelaPagoCLIPController extends Controller
             $mail->msgHTML($html);
     
             $mail->send();
+
+            // Limpiar sesion de carrito y el carrito persistente
+            $cotizado->delete();
+            session()->put('cart', []);
+            session()->put('cartTotal', 0);
+            session()->put('cartIVA', 0);
+            session()->put('cartTotalGNRL', 0);
             
             // dd($pdf_fecha, $pdf_productose, $pdf_envio, $pdf_subtotal, $pdf_iva, $pdf_total, $pdf_pedido, $pdf_nombre, $pdf_numero_cliente, $pdf_telefono, $pdf_domicilio_cliente, $pdf_colonia_cliente, $pdf_codigo_postal_cliente, $pdf_ciudad_cliente, $pdf_estado_cliente, $pdf_pais_cliente, $pdf_rfc_cliente, $pdf_correo_cliente, $pdf_paqueteria, $pdf_tipo_envio, $pdf_asesor);
+            // dd("ver si se duplica");
+
             
+
             return view('pagos.CLIP.success');
             
         }

@@ -173,6 +173,32 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row mt-5">
+                                    <div class="col-11 border mx-auto">
+                                        <form action="{{ route('user.change_password', ['user' => $usuario->id]) }}" method="POST" id="change_password">
+                                            @csrf
+                                            @method('PATCH')
+                                            <div class="row">
+                                                <div class="col text-center fs-3 py-3">Cambiar contraseña</div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-md-6 col-12 py-2">
+                                                    <label for="dash_nueva_password" class="fs-5">Nueva contraseña</label>
+                                                    <input type="password" name="dash_nueva_password" id="dash_nueva_password" class="form-control fs-5">
+                                                </div>
+                                                <div class="col-md-6 col-12 py-2">
+                                                    <label for="dash_nueva_password_confirm" class="fs-5">Confirmar contraseña</label>
+                                                    <input type="password" name="dash_nueva_password_confirm" id="dash_nueva_password_confirm" class="form-control fs-5">
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-6 mx-auto text-center">
+                                                    <input type="submit" class="btn btn-dark fs-5 w-100 rounded-0" value="Cambiar contraseña">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-12 mis-datos-container">
                                 <div class="row">
@@ -217,7 +243,7 @@
                                                 <label for="dash_codigo_postal_usuario" class="fs-5">Código Postal</label>
                                                 <input type="text" name="dash_codigo_postal_usuario" id="dash_codigo_postal_usuario" class="form-control fs-5 editarajax" data-model="Domicilio" data-field="codigo_postal" data-id="{{$domicilio->id}}"  value="{{ $domicilio->codigo_postal }}">
                                             </div>
-                                        </div>
+                                        </div>                                        
                                     </div>
                                 </div>
                             </div>
@@ -327,7 +353,9 @@
                                                                     <div class="row">
                                                                         <div class="col-6 mx-auto text-center">
                                                                             {{-- <button class="btn btn-dark fs-5 w-100 rounded-0">descargar cotizacion (PDF)</button> --}}
-                                                                            <a href="{{ asset('img/ordenes/Orden_'.$ped->uid.'_brincolines_bambinos.pdf') }}" class="btn btn-dark fs-5 w-100 rounded-0" download="Orden_{{ $ped->uid }}_brincolines_bambinos.pdf">Descargar cotización (PDF)</a>
+                                                                            @if($ped->estatus == 2 or $ped->estatus == 3)
+                                                                                <a href="{{ asset('img/ordenes/Orden_'.$ped->uid.'_brincolines_bambinos.pdf') }}" class="btn btn-dark fs-5 w-100 rounded-0" download="Orden_{{ $ped->uid }}_brincolines_bambinos.pdf">Descargar cotización (PDF)</a>
+                                                                            @endif
                                                                         </div>
                                                                     </div>
                                                                 </div>

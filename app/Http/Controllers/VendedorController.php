@@ -265,4 +265,15 @@ class VendedorController extends Controller
 
     }
 
+    public function change_password(Request $request, User $vendedor) {
+        $new_password = Hash::make($request->dash_nueva_password);
+
+        $vendedor->password = $new_password;
+
+        $vendedor->update();
+
+        \Toastr::success('Contraseña actualizada');
+        return redirect()->back();
+    }
+
 }

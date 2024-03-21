@@ -10,6 +10,8 @@ use Auth;
 use Carbon\Carbon;
 use App\Domicilio;
 use App\Pedido;
+use Illuminate\Support\Facades\Hash;
+use Brian2694\Toastr\Facades\Toastr;
 
 class HomeController extends Controller
 {
@@ -18,8 +20,7 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
-    {
+    public function index() {
         $userId = Auth::user()->id;
         $usuario = User::find($userId);
         $fechaActual = Carbon::now()->toDateString();
@@ -29,4 +30,16 @@ class HomeController extends Controller
 
         return view('user.index', compact('usuario', 'fechaActual', 'domicilio', 'pedidos', 'vendedores'));
     }
+
+    public function change_password(Request $request, User $user) {
+        $new_password = Hash::make($request->dash_nueva_password);
+
+        $user->password = $new_password;
+
+        $user->update();
+
+        \Toastr::success('Contraseña actualizada');
+        return redirect()->back();
+    }
+
 }

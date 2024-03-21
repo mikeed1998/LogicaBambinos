@@ -35,6 +35,7 @@
     // Rutas exclusivas del ususario tipo cliente
     Route::group(['middleware' => ['auth', 'isClient']], function() {
         Route::get('home', 'HomeController@index')->name('user.home');  // Dashboard cliente
+        Route::patch('change_password/{user}', 'HomeController@change_password')->name('user.change_password');
     });
 
     // Rutas exclusivas del usuario tipo asesor/vendedor
@@ -43,6 +44,7 @@
         Route::get('crearOrden', 'VendedorController@create')->name('vendedor.create');
         Route::post('storeCliente', 'VendedorController@storeCliente')->name('storeCliente');
         Route::post('storeCotizacion', 'VendedorController@storeCotizacion')->name('storeCotizacion');
+        Route::put('change_password/{vendedor}', 'VendedorController@change_password')->name('vendedor.change_password');
     });
 
     // Rutas exclusivas del administrador / aquí van los subrutas auto administrables
