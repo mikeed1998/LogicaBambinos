@@ -90,14 +90,14 @@ class VendedorController extends Controller
 			'correo' => $request->email_cliente_orden,
 			'telefono' => $request->telefono_cliente_orden,
             'password' => $contra,
-			'asunto' => 'Asunto',
+			'asunto' => 'Se ha generado tu cuenta',
 			'mensaje' => 'Ahora podrás ser asignado a mas cotizacines o tu mismo comprar desde nuestra tienda',
 			'hoy' => Carbon::now()->format('d-m-Y')
 		);
 
-        $html = view('correos.vendedor_genera_cliente', compact('data'));
-
         $config = Configuracion::first();
+
+        $html = view('correos.vendedor_genera_cliente', compact('data', 'config'));
 
 		$mail = new PHPMailer;
 
@@ -112,8 +112,9 @@ class VendedorController extends Controller
 			$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 			$mail->Port = $config->remitenteport;
 
-			$mail->SetFrom($config->remitente, 'Brincolines Bambinos - Cuenta nueva');
+			$mail->SetFrom($config->remitente, 'Brincolines Bambinos. La Fábrica.');
 			$mail->isHTML(true);
+            $mail->Subject = $data['asunto'];
 
 			$mail->addAddress($request->email_cliente_orden,'Nueva Cuenta');
 
@@ -218,14 +219,14 @@ class VendedorController extends Controller
 
         $data = array(
 			'tipoForm' => 'VendedorCreaCliente',
-			'asunto' => 'Nueva Cotización',
-			'mensaje' => 'Un asesor asigno productos a tu carrito, ya puedes finalizar tu pago.',
+			'asunto' => 'Nueva cotización asignada',
+			'mensaje' => 'Un asesor asigno productos a tu carrito, por favor inicia sesión para finalizar tu pago.',
 			'hoy' => Carbon::now()->format('d-m-Y')
 		);
 
-        $html = view('correos.vendedor_genera_cotizacion', compact('data'));
-
         $config = Configuracion::first();
+
+        $html = view('correos.vendedor_genera_cotizacion', compact('data', 'config'));
 
 		$mail = new PHPMailer;
 
@@ -240,8 +241,9 @@ class VendedorController extends Controller
 			$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 			$mail->Port = $config->remitenteport;
 
-			$mail->SetFrom($config->remitente, 'Brincolines Bambinos - Nueva cotización');
+			$mail->SetFrom($config->remitente, 'Brincolines Bambinos. La Fábrica.');
 			$mail->isHTML(true);
+            $mail->Subject = $data['asunto'];
 
 			$mail->addAddress($cliente->email,'Nueva Cotización');
 
@@ -274,6 +276,17 @@ class VendedorController extends Controller
 
         \Toastr::success('Contraseña actualizada');
         return redirect()->back();
+    }
+
+    public function detalle_vendedor($id) {
+        $vendedor = User::find($id);
+        return view('config.secciones.vendedores.detalle', compact('vendedor'));
+    }
+
+    public function cotizaciones_vendedor($id) {
+        $vendedor = User::find($id);
+        $cotizaciones = Pedido::where('vendedor', $vendedor->id)->get()->toBase();
+        return view('config.secciones.vendedores.cotizaciones', compact('vendedor', 'cotizaciones'));
     }
 
 }

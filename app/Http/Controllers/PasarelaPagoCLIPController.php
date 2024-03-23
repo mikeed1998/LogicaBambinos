@@ -236,13 +236,13 @@ class PasarelaPagoCLIPController extends Controller
                 'telefono' => $pdf_telefono,
                 'correo' => $pdf_correo_cliente,
                 'asunto' => 'Tu compra ha sido exitosa',
-                'mensaje' => 'Tu pago en Brincolines Bambinos ha sido procesado, gracias por usar nuestro servicio.',
+                'mensaje' => 'Tu pago en Brincolines Bambinos ha sido procesado, gracias por usar nuestro servicio, en la parte inferior de este mensaje podrás descargar tu orden de cotización (PDF).',
                 'hoy' => Carbon::now()->format('d-m-Y')
             );
-    
-            $html = view('correos.enviar_factura', compact('data'));
-    
+
             $config = Configuracion::first();
+    
+            $html = view('correos.enviar_factura', compact('data', 'config', 'pdf_pedido'));
     
             $mail = new PHPMailer;
     
@@ -256,8 +256,9 @@ class PasarelaPagoCLIPController extends Controller
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = $config->remitenteport;
     
-            $mail->SetFrom($config->remitente, 'Brincolines Bambinos - Confirmación de compra');
+            $mail->SetFrom($config->remitente, 'Brincolines Bambinos. La Fábrica.');
             $mail->isHTML(true);
+            $mail->Subject = $data['asunto'];
     
             $mail->addAddress($pdf_correo_cliente,'Compra exitosa');
     
@@ -404,13 +405,13 @@ class PasarelaPagoCLIPController extends Controller
                 'telefono' => $pdf_telefono,
                 'correo' => $pdf_correo_cliente,
                 'asunto' => 'Tu compra ha sido exitosa',
-                'mensaje' => 'Tu pago en Brincolines Bambinos ha sido procesado, gracias por usar nuestro servicio.',
+                'mensaje' => 'Tu pago en Brincolines Bambinos ha sido procesado, gracias por usar nuestro servicio, en la parte inferior de este mensaje podrás descargar tu orden de cotización (PDF).',
                 'hoy' => Carbon::now()->format('d-m-Y')
             );
-    
-            $html = view('correos.enviar_factura', compact('data'));
-    
+
             $config = Configuracion::first();
+
+            $html = view('correos.enviar_factura', compact('data', 'config', 'pdf_pedido'));
     
             $mail = new PHPMailer;
     
@@ -424,8 +425,9 @@ class PasarelaPagoCLIPController extends Controller
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = $config->remitenteport;
     
-            $mail->SetFrom($config->remitente, 'Brincolines Bambinos - Confirmación de compra');
+            $mail->SetFrom($config->remitente, 'Brincolines Bambinos. La Fábrica.');
             $mail->isHTML(true);
+            $mail->Subject = $data['asunto'];
     
             $mail->addAddress($pdf_correo_cliente,'Compra exitosa');
     

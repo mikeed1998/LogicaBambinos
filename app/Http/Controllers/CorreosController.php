@@ -112,4 +112,20 @@ class CorreosController extends Controller
 			return redirect()->back();
 		}
 	}
+
+	public function mailtest() {
+		$data = array(
+			"nombre" => "Michael Eduardo Sandoval Pérez",
+			'correo' => 'michaelwozial@gmail.com',
+			'telefono' => 332233233,
+			'asunto' => 'Compra exitosa',
+			'mensaje' => 'blablabla'
+		);
+
+		$pdf_pedido = 'PED2403210004';
+
+		$config = Configuracion::first();
+
+		return view('correos.mailtest', compact('data', 'config', 'pdf_pedido'));
+	}
 }

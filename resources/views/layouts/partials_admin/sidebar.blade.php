@@ -42,6 +42,15 @@
             <div class="col-9 py-2 mx-auto">
                 <a href="{{ route('seccion.show', ['slug' => 'catalogo'])}}" class="link-sider-admin" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-shop"></i> Catalogo</a>
             </div>
+            <div class="col-9 py-2 mx-auto">
+                <a href="{{ route('seccion.show', ['slug' => 'usuarios'])}}" class="link-sider-admin" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-people-fill"></i> Usuarios</a>
+            </div>
+            <div class="col-9 py-2 mx-auto">
+                <a href="{{ route('seccion.show', ['slug' => 'estadisticas'])}}" class="link-sider-admin" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-graph-up"></i> Estadísticas</a>
+            </div>
+            <div class="col-9 py-2 mx-auto">
+                <a href="{{ route('seccion.show', ['slug' => 'cotizaciones'])}}" class="link-sider-admin" style="border-radius: 16px; text-decoration: none; " ><i class="bi bi-coin"></i> Cotizaciones</a>
+            </div>
         </div>
     </div>
 </div>

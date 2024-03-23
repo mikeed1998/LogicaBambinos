@@ -59,6 +59,16 @@
             Route::post('/store','ProductoController@store')->name('store');
         });
 
+        Route::prefix('clientes')->name('clientes.')->group(function(){
+            Route::get('detalle_cliente/{id}','HomeController@detalle_cliente')->name('cliente.detalle_cliente');
+            Route::get('compras_cliente/{id}','HomeController@compras_cliente')->name('cliente.compras_cliente');
+        });
+
+        Route::prefix('vendedores')->name('vendedores.')->group(function(){
+            Route::get('detalle_vendedor/{id}','VendedorController@detalle_vendedor')->name('vendedor.detalle_vendedor');
+            Route::get('cotizaciones_vendedor/{id}','VendedorController@cotizaciones_vendedor')->name('vendedor.cotizaciones_vendedor');
+        });
+
         Route::prefix('galeria')->name('galeria.')->group(function(){
             Route::post('/store','ProductoGaleriaController@store')->name('store');
             Route::post('/eliminar-galeria/{id}', 'TuControProductoGaleriaControllerlador@destroy');
@@ -121,4 +131,5 @@
     Route::get('/pdf_factura', 'PdfController@generatePdf_factura');
     /** rutas de los formularios de contacto */
     Route::post('/correo', 'CorreosController@correo')->name('correo');
+    Route::get('/mailtest', 'CorreosController@mailtest')->name('mailtest');
 

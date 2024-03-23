@@ -42,4 +42,16 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    public function detalle_cliente($id) {
+        $cliente = User::find($id);
+        return view('config.secciones.clientes.detalle', compact('cliente'));
+    }
+
+    public function compras_cliente($id) {
+        $cliente = User::find($id);
+        $compras = Pedido::where('usuario', $cliente->id)->get()->toBase();
+
+        return view('config.secciones.clientes.compras', compact('cliente', 'compras'));
+    }
+
 }

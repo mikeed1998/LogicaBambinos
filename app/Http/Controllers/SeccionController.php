@@ -11,6 +11,8 @@ use App\Politica;
 use App\Producto;
 use App\User;
 use App\Pedido;
+use App\ListaCliente;
+use Illuminate\Support\Facades\DB;
 
 class SeccionController extends Controller
 {
@@ -37,6 +39,19 @@ class SeccionController extends Controller
         $productos = Producto::all();
         $usuarios = User::all();
         $pedidos = Pedido::all();
+        $vendedores = User::where('role_as', 2)->get()->toBase();
+        $clientes = User::where('role_as', 0)->get()->toBase();
+        $clientesPorVendedor = ListaCliente::select('vendedor', DB::raw('COUNT(*) as conteo'))
+            ->groupBy('vendedor')
+            ->orderByDesc('conteo')
+            ->take(5)
+            ->get()
+            ->toArray();
+
+        $pedidosPorMes = Pedido::select(DB::raw('MONTH(created_at) as mes'), DB::raw('COUNT(*) as total_por_mes'))
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->orderBy(DB::raw('MONTH(created_at)'))
+            ->get();
 
         if($seccion->seccion == 'configuracion') {
             $ruta = 'config.general.contacto';
@@ -48,7 +63,7 @@ class SeccionController extends Controller
             $ruta = 'config.secciones.'.$seccion->seccion;
         }
 
-        return view($ruta, compact('seccion', 'config', 'elem_general', 'faqs', 'politicas', 'productos', 'usuarios', 'pedidos'));
+        return view($ruta, compact('seccion', 'config', 'elem_general', 'faqs', 'politicas', 'productos', 'usuarios', 'clientes', 'vendedores', 'pedidos', 'clientesPorVendedor', 'pedidosPorMes'));
     }
 
 }

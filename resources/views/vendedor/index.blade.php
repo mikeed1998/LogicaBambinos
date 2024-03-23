@@ -185,6 +185,19 @@
                         <div class="col-12 py-3 mis-cotizaciones-container">
                             <div class="card">
                                 <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <!-- Botón para abrir el modal -->
+<button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#filtroFechaModal">
+    Filtrar por Fecha
+  </button>
+  
+  <!-- Botón para limpiar el filtro -->
+  <button type="button" class="btn btn-danger ml-2" id="limpiarFiltro">Limpiar Filtro</button>
+  
+                                              
+                                        </div>
+                                    </div>
                                     <div class="card-title text-center fs-1">Lista de cotizaciones</div>
                                 </div>
                                 <ul class="list-group list-group-flush">
@@ -205,10 +218,10 @@
                                             "enviado",
                                         );
                                     @endphp
-                                    <li class="list-group-item">
+                                    {{-- <li class="list-group-item"> --}}
                                         @foreach ($lista_cotizaciones as $item)
                                             
-                                        
+                                        <div class="list-group-item cotizacion-item" data-fecha-creacion="{{ $item->created_at->format('Y-m-d') }}">
                                             <div class="row border border-dark">
                                                 <div class="col-md-5 col-12 fs-5 py-1">Cotización {{ $item->uid }}</div>
                                                 <div class="col-md-3 col-12 boder-end border-start border-dark fs-5">mikeed1998@gmail.com</div>
@@ -218,7 +231,7 @@
                                                 <div class="col-md-2 col-12">
                                                     <div class="row">
                                                         <div class="col-md-6 col-12 py-1">
-                                                            <button class="btn btn-info w-100" data-bs-toggle="modal" data-bs-target="#cotizacion-detalle">
+                                                            <button class="btn btn-info w-100" data-bs-toggle="modal" data-bs-target="#cotizacion-detalle-{{ $item->id }}">
                                                                 <i class="bi bi-pencil-square text-white w-100"></i>
                                                             </button>
                                                         </div>
@@ -230,11 +243,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="modal fade" id="cotizacion-detalle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cotizacion-detalle-label" aria-hidden="true">
+                                            <div class="modal fade" id="cotizacion-detalle-{{ $item->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cotizacion-detalle-label-{{ $item->id }}" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered modal-xl">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="cotizacion-detalle-label">Detalle de la cotización</h1>
+                                                            <h1 class="modal-title fs-5" id="cotizacion-detalle-label-{{ $item->id }}">Detalle de la cotización</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
@@ -246,8 +259,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                         @endforeach
-                                    </li>
+                                    {{-- </li> --}}
                                 </ul>
                                 <div class="card-body">
                                     <a href="{{ route('vendedor.create') }}" class="btn btn-dark">Agregar nueva cotización</a>
@@ -262,7 +276,30 @@
 </div>
 
 
-
+<div class="modal fade" id="filtroFechaModal" tabindex="-1" aria-labelledby="filtroFechaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="filtroFechaModalLabel">Filtrar por Fecha</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="filtroFechaForm">
+            <div class="mb-3">
+              <label for="fechaFiltro" class="form-label">Selecciona una fecha:</label>
+              <input type="date" class="form-control" id="fechaFiltro">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="aplicarFiltro" data-bs-dismiss="modal">Aplicar Filtro</button>
+          {{-- <button type="button" class="btn btn-danger" id="limpiarFiltro">Limpiar Filtro</button> --}}
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
 @endsection
 
@@ -435,6 +472,38 @@
                 });
             });
         });
+
+    </script>
+    <script>
+        $(document).ready(function() {
+  $('#aplicarFiltro').on('click', function() {
+    // Obtiene la fecha seleccionada
+    var fechaSeleccionada = $('#fechaFiltro').val();
+
+    // Itera sobre cada elemento de la lista de cotizaciones
+    $('.cotizacion-item').each(function() {
+      // Obtiene la fecha de creación del elemento
+      var fechaCreacion = $(this).data('fecha-creacion');
+
+      // Compara la fecha de creación con la fecha seleccionada
+      if (fechaCreacion === fechaSeleccionada) {
+        // Muestra el elemento si las fechas coinciden
+        $(this).show();
+      } else {
+        // Oculta el elemento si las fechas no coinciden
+        $(this).hide();
+      }
+    });
+
+    // Cierra el modal al aplicar el filtro
+    $('#filtroFechaModal').modal('hide');
+  });
+
+  $('#limpiarFiltro').on('click', function() {
+    // Muestra todos los elementos cuando se limpia el filtro
+    $('.cotizacion-item').show();
+  });
+});
 
     </script>
 @endsection

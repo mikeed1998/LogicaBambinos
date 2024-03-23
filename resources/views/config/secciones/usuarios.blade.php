@@ -58,19 +58,16 @@
                             height: 6rem;
                         "></div>
                     </div>
-                    <div class="col-3 border">
+                    <div class="col-5 border">
                         {{ $cliente->name }} {{ $cliente->lastname }}
                     </div>
-                    <div class="col-3">
-
-                    </div>
-                    <div class="col-5 border">
+                    <div class="col-6 border">
                         <div class="row">
                             <div class="col">
-                                <a href="#/" class="btn w-100 rounded-0 btn-outline-dark">Historial de compras</a>
+                                <a href="{{ route('clientes.cliente.compras_cliente', ['id' => $cliente->id]) }}" class="btn w-100 rounded-0 btn-outline-dark">Historial de compras</a>
                             </div>
                             <div class="col">
-                                <a href="#/" class="btn w-100 rounded-0 btn-outline-dark">Detalles de la cuenta</a>
+                                <a href="{{ route('clientes.cliente.detalle_cliente', ['id' => $cliente->id]) }}" class="btn w-100 rounded-0 btn-outline-dark">Detalles de la cuenta</a>
                             </div>
                             <div class="col">
                                 <a href="#/" class="btn w-100 rounded-0 btn-outline-dark">Modificar</a>
@@ -88,12 +85,12 @@
                 Lista de vendedores
             </div>
         </div>
-        @foreach ($usuarios as $cliente)
-            @if ($cliente->role_as == 2)
+        @foreach ($usuarios as $vendedor)
+            @if ($vendedor->role_as == 2)
                 <div class="row d-flex align-items-center justify-content-center border shadow">
                     <div class="col-1">
                         <div style="
-                            background-image: url('{{ asset('img/photos/usuarios/'.$cliente->imagen) }}');
+                            background-image: url('{{ asset('img/photos/usuarios/'.$vendedor->imagen) }}');
                             background-position: center center;
                             background-repeat: no-repeat;
                             background-size: contain;
@@ -101,22 +98,16 @@
                             height: 6rem;
                         "></div>
                     </div>
-                    <div class="col-3 border">
-                        {{ $cliente->name }} {{ $cliente->lastname }}
-                    </div>
-                    <div class="col-3">
-
-                    </div>
                     <div class="col-5 border">
+                        {{ $vendedor->name }} {{ $vendedor->lastname }}
+                    </div>
+                    <div class="col-6 border">
                         <div class="row">
                             <div class="col">
-                                <a href="#/" class="btn w-100 rounded-0 btn-outline-dark">Historial de pagos</a>
+                                <a href="{{ route('vendedores.vendedor.detalle_vendedor', ['id' => $vendedor->id]) }}" class="btn w-100 rounded-0 btn-outline-dark">Detalles cuenta</a>
                             </div>
                             <div class="col">
-                                <a href="#/" class="btn w-100 rounded-0 btn-outline-dark">Cotizaciones</a>
-                            </div>
-                            <div class="col">
-                                <a href="#/" class="btn w-100 rounded-0 btn-outline-dark">Modificar</a>
+                                <a href="{{ route('vendedores.vendedor.cotizaciones_vendedor', ['id' => $vendedor->id]) }}" class="btn w-100 rounded-0 btn-outline-dark">Cotizaciones</a>
                             </div>
                         </div>
                     </div>
